@@ -1,0 +1,31 @@
+﻿Build started 30.10.2015 22:03:03.
+     1>Project "C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt button_update.cpp
+         button_update.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.h(19): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>button_update.cpp(85): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>button_update.cpp(86): warning C4305: '+=' : truncation from 'double' to 'float'
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"c:\users\user\documents\visual studio 2012\Projects\minesweeper\Release\minesweeper.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"D:\SFML-2.3.1\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-audio-s.lib" "sfml-main.lib" opengl32.lib winmm.lib gdi32.lib freetype.lib jpeg.lib openal32.lib flac.lib vorbisenc.lib vorbisfile.lib vorbis.lib ogg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"c:\users\user\documents\visual studio 2012\Projects\minesweeper\Release\minesweeper.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"c:\users\user\documents\visual studio 2012\Projects\minesweeper\Release\minesweeper.lib" /MACHINE:X86 /SAFESEH Release\button_init.obj
+         Release\button_update.obj
+         Release\common_functions.obj
+         Release\func_pointers.obj
+         Release\Game.obj
+         Release\main.obj
+         Release\o_button.obj
+         Release\o_control.obj
+         Release\quad.obj
+         Release\read_write.obj
+         Release\save.obj
+         Release\some_structures.obj
+         Release\space.obj
+         Generating code
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\common_functions.cpp(30): warning C4715: 'get_command' : not all control paths return a value
+         Finished generating code
+         minesweeper.vcxproj -> c:\users\user\documents\visual studio 2012\Projects\minesweeper\Release\minesweeper.exe
+     1>Done Building Project "C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.01

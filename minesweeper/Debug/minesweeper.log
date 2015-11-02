@@ -1,0 +1,164 @@
+﻿Build started 23.10.2015 15:30:41.
+     1>Project "C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt common_functions.cpp func_pointers.cpp Game.cpp main.cpp o_button.cpp o_control.cpp quad.cpp read_write.cpp save.cpp some_structures.cpp space.cpp
+         space.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\space.cpp(11): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(233) : see declaration of 'freopen'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\space.cpp(19): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\space.cpp(28): warning C4101: 'num' : unreferenced local variable
+         some_structures.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.cpp(43): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.cpp(60): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.cpp(61): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.cpp(72): warning C4305: '*=' : truncation from 'double' to 'float'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.cpp(75): warning C4305: '*=' : truncation from 'double' to 'float'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.cpp(80): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.cpp(106): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.cpp(120): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.cpp(128): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.cpp(138): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
+         save.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\save.cpp(4): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\save.cpp(10): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
+         read_write.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\read_write.cpp(25): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : see declaration of 'scanf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\read_write.cpp(32): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : see declaration of 'scanf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\read_write.cpp(39): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : see declaration of 'scanf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\read_write.cpp(46): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : see declaration of 'scanf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\read_write.cpp(48): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : see declaration of 'scanf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\read_write.cpp(55): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : see declaration of 'scanf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\read_write.cpp(57): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : see declaration of 'scanf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\read_write.cpp(64): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : see declaration of 'scanf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\read_write.cpp(66): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(290) : see declaration of 'scanf'
+         quad.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\quad.cpp(10): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\quad.cpp(11): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\quad.cpp(12): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\quad.cpp(13): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\quad.cpp(14): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\quad.cpp(15): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\quad.cpp(16): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\quad.cpp(17): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         o_control.cpp
+         o_button.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.cpp(34): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.cpp(39): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : see declaration of 'sprintf'
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.cpp(61): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.cpp(62): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         main.cpp
+         Game.cpp
+         func_pointers.cpp
+         common_functions.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\common_functions.cpp(78): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         Generating Code...
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\common_functions.cpp(30): warning C4715: 'get_command' : not all control paths return a value
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"c:\users\user\documents\visual studio 2012\Projects\minesweeper\Debug\minesweeper.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\SFML-2.3.1\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-audio-s.lib" "sfml-main.lib" opengl32.lib winmm.lib gdi32.lib freetype.lib jpeg.lib openal32.lib flac.lib vorbisenc.lib vorbisfile.lib vorbis.lib ogg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"c:\users\user\documents\visual studio 2012\Projects\minesweeper\Debug\minesweeper.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"c:\users\user\documents\visual studio 2012\Projects\minesweeper\Debug\minesweeper.lib" /MACHINE:X86 Debug\common_functions.obj
+         Debug\func_pointers.obj
+         Debug\Game.obj
+         Debug\main.obj
+         Debug\o_button.obj
+         Debug\o_control.obj
+         Debug\quad.obj
+         Debug\read_write.obj
+         Debug\save.obj
+         Debug\some_structures.obj
+         Debug\space.obj
+     1>sfml-graphics-s.lib(RenderWindow.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(RenderWindow.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(Color.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(Color.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(RenderTarget.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(RenderTarget.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(Transformable.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(Transformable.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(Shape.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(Shape.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(Texture.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(Texture.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(Font.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(Font.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(RectangleShape.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(RectangleShape.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(Sprite.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(Sprite.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(Text.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(Text.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(RenderStates.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(RenderStates.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(VertexArray.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(VertexArray.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(Image.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(Image.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(Transform.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(Transform.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(View.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(View.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(Shader.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(Shader.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(GLExtensions.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(GLExtensions.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(GLLoader.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(GLLoader.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(TextureSaver.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(TextureSaver.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-graphics-s.lib(ImageLoader.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-graphics-s.lib(ImageLoader.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(Mouse.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(Mouse.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(VideoMode.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(VideoMode.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(Window.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(Window.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(InputImpl.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(InputImpl.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(VideoModeImpl.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(VideoModeImpl.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(GlContext.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(GlContext.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(WindowImpl.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(WindowImpl.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(WglContext.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(WglContext.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(JoystickManager.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(JoystickManager.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(SensorManager.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(SensorManager.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(WindowImplWin32.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(WindowImplWin32.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(WglExtensions.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(WglExtensions.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(Joystick.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(Joystick.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-window-s.lib(JoystickImpl.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-window-s.lib(JoystickImpl.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-system-s.lib(String.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-system-s.lib(String.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-system-s.lib(Err.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-system-s.lib(Err.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>sfml-system-s.lib(ThreadLocal.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in common_functions.obj
+     1>sfml-system-s.lib(ThreadLocal.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in common_functions.obj
+     1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>c:\users\user\documents\visual studio 2012\Projects\minesweeper\Debug\minesweeper.exe : fatal error LNK1319: 74 mismatches detected
+     1>Done Building Project "C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:07.64
