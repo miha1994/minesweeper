@@ -6,6 +6,15 @@
 
 char *button_load (char *parent_space) {
 	button *btn = new button;
+    
+    MY_WIND_WIDTH = 440;//f_modes[0].width;
+	MY_WIND_HEIGHT = 400;//f_modes[0].height;
+
+    window.close ();
+    window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Default);
+	window.setVerticalSyncEnabled (true);
+	window.setFramerateLimit (60);
+
     btn->font.loadFromFile ("assets/fonts/cg.ttf");
 	btn->mine.init ("assets/textures/mine.png", 25, 25);
 
@@ -19,7 +28,7 @@ char *button_load (char *parent_space) {
 
     btn->bg.setPosition (0,0);
     btn->bg.setSize (v2f(440,400));
-    btn->bg.setFillColor (my_clr_s[color_theme].unknown);
+	btn->bg.setFillColor (my_clr_s[color_theme].bg);
 
 	btn->cell.setFillColor (my_clr_s[color_theme].safe);
 	
@@ -36,6 +45,8 @@ char *button_load (char *parent_space) {
 
 	btn->play_active.init ("assets/textures/play_active.png", 30, 30);
 	btn->play_not_active.init ("assets/textures/play_not_active.png", 30, 30);
+    btn->del_active.init ("assets/textures/del_active.png", 30, 30);
+    btn->del_not_active.init ("assets/textures/del_not_active.png", 30, 30);
 
 	char c_str[100];
 	btn->x[0] = 5;
@@ -48,6 +59,9 @@ char *button_load (char *parent_space) {
 	btn->hwm[0].max_val = 30;
 	btn->hwm[1].max_val = 100;
 	btn->hwm[2].max_val = 999;
+    btn->hwm[0].min_val = 2;
+	btn->hwm[1].min_val = 8;
+	btn->hwm[2].min_val = 0;
 	FOR (i, 3) {
 		btn->hwm[i].active = false;
 		btn->hwm[i].txt.setFont (btn->font);

@@ -13,21 +13,19 @@ struct cell_s {
 	float time;
 	v2i pos;
 	int max_val;
+    int min_val;
 	void upd (int new_val) {
 		value = new_val > max_val ? max_val : new_val;
 		txt.setString(value > 0 ? Tstr (value) : "");
 		txt.setPosition (pos.x - txt.getGlobalBounds ().width, pos.y);
 	}
-};
-
-struct sq_button {
-	v2i pos;
-	bool pressed_lt;
-	sprite *spr;
-	sprite *act;
-	float alpha;
-	void draw (sf::RenderWindow *wind);
-	bool update (float dt, v2f mouse_pos);
+    void upd_min () {
+        if (value < min_val) {
+            value = min_val;
+            txt.setString(value > 0 ? Tstr (value) : "");
+		    txt.setPosition (pos.x - txt.getGlobalBounds ().width, pos.y);
+        }
+    }
 };
 
 class button {
@@ -39,7 +37,10 @@ public:
 	sprite play_not_active;
 	sprite add_na;
 	sprite add_a;
+    sprite del_active;
+    sprite del_not_active;
 	vec <sq_button> play_buttons;
+    vec <sq_button> del_buttons;
 	sq_button add;
     sf::Font font;
 	sf::Text height;

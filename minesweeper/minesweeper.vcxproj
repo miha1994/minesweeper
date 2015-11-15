@@ -84,12 +84,16 @@
   <ItemGroup>
     <ClCompile Include="button_init.cpp" />
     <ClCompile Include="button_update.cpp" />
+    <ClCompile Include="cell.cpp" />
     <ClCompile Include="common_functions.cpp" />
+    <ClCompile Include="field_utility.cpp" />
     <ClCompile Include="func_pointers.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="o_button.cpp" />
     <ClCompile Include="o_control.cpp" />
+    <ClCompile Include="o_field.cpp" />
     <ClCompile Include="quad.cpp" />
     <ClCompile Include="read_write.cpp" />
     <ClCompile Include="save.cpp" />
@@ -97,18 +101,27 @@
     <ClCompile Include="space.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cell.h" />
+    <ClInclude Include="field_utility.h" />
     <ClInclude Include="func_pointers.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="input.h" />
     <ClInclude Include="main_header.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="o_button.h" />
     <ClInclude Include="o_control.h" />
+    <ClInclude Include="o_field.h" />
     <ClInclude Include="quad.h" />
     <ClInclude Include="read_write.h" />
     <ClInclude Include="save.h" />
     <ClInclude Include="sfml.h" />
     <ClInclude Include="some_structures.h" />
     <ClInclude Include="space.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Release\assets\inf\L0.txt" />
+    <Text Include="..\Release\assets\inf\main.txt" />
+    <Text Include="..\Release\assets\inf\menu.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

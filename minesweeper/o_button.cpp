@@ -4,40 +4,6 @@
 #include "save.h"
 #include "quad.h"
 
-void sq_button::draw (sf::RenderWindow *wind) {
-	if (alpha < 254) {
-		spr->itself.setPosition (v2f(pos));
-		spr->draw (wind);
-	}
-	if (alpha > 1) {
-		act->itself.setPosition (v2f (pos));
-		act->itself.setColor (sf::Color (255,255,255, alpha));
-		act->draw (wind);
-	}
-}
-
-bool sq_button::update (float dt, v2f mouse_pos) {
-	bool ret = false;
-	spr->itself.setPosition (v2f(pos));
-	if (spr->itself.getGlobalBounds ().contains (mouse_pos)) {
-		alpha += dt * 1255;
-		alpha = Min (255, alpha);
-		if (sf::Mouse::isButtonPressed (sf::Mouse::Left)) {
-			if (!pressed_lt) {
-				ret = true;
-			}
-			pressed_lt = true;
-		} else {
-			pressed_lt = false;
-		}
-	} else {
-		alpha -= dt * 1255;
-		alpha = Max (0, alpha);
-		pressed_lt = false;
-	}
-	return ret;
-}
-
 void make_table (button *btn) {
 	sf::VertexArray *v_a = &btn->cells;
 	v_a->clear ();
@@ -77,6 +43,8 @@ void make_table (button *btn) {
 		t.setPosition (x[3] - t.getGlobalBounds ().width - 8, 32 * (j+1) + 4);
 		txt->push_back (t);
 	}
+    btn->play_buttons.clear ();
+    btn->del_buttons.clear ();
 	sq_button b;
 	b.alpha = 0;
 	b.spr = &btn->play_not_active;
@@ -86,6 +54,13 @@ void make_table (button *btn) {
 	FOR (j, btn->save.Num_of_templates + 3) {
 		b.pos = v2i (x[3], (j+1) * 32);
 		btn->play_buttons.push_back (b);
+	}
+    b.spr = &btn->del_not_active;
+	b.act = &btn->del_active;
+    b.pressed_lt = true;
+    FOR (j, btn->save.Num_of_templates) {
+		b.pos = v2i (x[3] + 32, (j+4) * 32);
+		btn->del_buttons.push_back (b);
 	}
 }
 
@@ -129,6 +104,9 @@ O_RENDER (button_render) {
 		window.draw (*p);
 	}
 	forvector (p, end, sq_button, btn->play_buttons) {
+		p->draw (&window);
+	}
+    forvector (p, end, sq_button, btn->del_buttons) {
 		p->draw (&window);
 	}
 	btn->add.draw (&window);

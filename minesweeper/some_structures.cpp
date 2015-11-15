@@ -1,5 +1,6 @@
 #include "some_structures.h"
 #include "main_header.h"
+#include "input.h"
 
 void sprite::init(char *file_name, int size_x, int size_y) {
 	texture.loadFromFile (file_name);
@@ -16,7 +17,7 @@ void sprite::draw (sf::RenderWindow *wnd, bool f, v2f xy) {
 }
 
 color_s my_clr_s[] = {
-    color_s (CLR (255,255,255,255), CLR(255,0,0,255), CLR(175,175,175,255), CLR(0,0,0,255))
+    color_s (CLR (175,175,175,255), CLR(255,0,0,255), CLR(225,225,225,225), CLR(0,0,0,255), CLR (255, 255, 255, 255))
 };
 
 change_real_time::change_real_time () {
@@ -162,3 +163,63 @@ change_real_time::~change_real_time() {
     }
     fclose (out);
 }
+
+void sq_button::draw (sf::RenderWindow *wind) {
+	if (alpha < 254) {
+		spr->itself.setPosition (v2f(pos));
+		spr->draw (wind);
+	}
+	if (alpha > 1) {
+		act->itself.setPosition (v2f (pos));
+		act->itself.setColor (sf::Color (255,255,255, alpha));
+		act->draw (wind);
+	}
+}
+
+bool sq_button::update (float dt, v2f mouse_pos) {
+	bool ret = false;
+	spr->itself.setPosition (v2f(pos));
+	if (spr->itself.getGlobalBounds ().contains (mouse_pos)) {
+		alpha += dt * 1255;
+		alpha = Min (255, alpha);
+		if (input.mbutton[MOUSE_LEFT].just_released) {
+			if (!pressed_lt) {
+				ret = true;
+			}
+			pressed_lt = true;
+		} else {
+			pressed_lt = false;
+		}
+	} else {
+		alpha -= dt * 1255;
+		alpha = Max (0, alpha);
+		pressed_lt = false;
+	}
+	return ret;
+}
+
+#define in_range(dd,minn,maxx)	if(dd < minn) {dd = minn;} else if (dd > maxx) {dd = maxx;}
+
+void clr_norm (CLR *col) {
+	in_range (col->a, 0, 255);
+	in_range (col->r, 0, 255);
+	in_range (col->g, 0, 255);
+	in_range (col->b, 0, 255);
+}
+
+CLR operator * (CLR col, float m) {
+	col.b *= m;
+	col.r *= m;
+	col.g *= m;
+	clr_norm (&col);
+	return col;
+}
+/*
+CLR operator + (CLR col1, CLR col2) {
+	col1.r += col2.r;
+	col1.g += col2.g;
+	col1.b += col2.b;
+	clr_norm (&col1);
+	return col1;
+}
+*/

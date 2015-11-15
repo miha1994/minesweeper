@@ -8,10 +8,6 @@ std::map <std::string, my_type_info> min_type_info;
 
 sf::RenderWindow window;
 
-int part = 0;
-int level = -1;
-int num_of_levels = 4;
-int num_of_parts = 0;
 bool mouse_left_pressed;
 
 O_LOAD (no_load) {
@@ -132,3 +128,9 @@ void del_list_push (std::list <int> *list, int new_element) {
 
 int color_theme;
 game_parameters global_game_parameters;
+
+int rand_n (int n) {
+	int o = RAND_MAX - (RAND_MAX % n), m;
+	while ((m = rand ()) >= o);
+	return m % n;
+}

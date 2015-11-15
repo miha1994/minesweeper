@@ -63,6 +63,8 @@ public:
 
 #define rand1	(rand() / float(RAND_MAX))
 
+int rand_n (int n);
+
 class sound {
 	int p;
 public:

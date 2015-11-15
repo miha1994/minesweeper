@@ -3,16 +3,17 @@
 #include "main_header.h"
 #include "space.h"
 #include "save.h"
+#include "input.h"
 
 bool Game::init (bool fullscreen) {
-	MY_WIND_WIDTH = 440;//f_modes[0].width;
-	MY_WIND_HEIGHT = 400;//f_modes[0].height;
+	MY_WIND_WIDTH = 10;//f_modes[0].width;
+	MY_WIND_HEIGHT = 10;//f_modes[0].height;
 
 	window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Default);
 	window.setVerticalSyncEnabled (true);
 	window.setFramerateLimit (60);
 	min_type_info["CONTROL"]	= my_type_info (0, 0);
-	//min_type_info["B_PICTURE"]	= my_type_info (1, 1);
+	min_type_info["FIELD"]		= my_type_info (1, 1);
 	min_type_info["BUTTON"]		= my_type_info (2, 2);
 
 	SV_info si;
@@ -47,8 +48,7 @@ void Game::update () {
 			break;
 		}
 	}
-
-	mouse_left_pressed = sf::Mouse::isButtonPressed (sf::Mouse::Left);
+	input.upd ();
 
 	float dt = (clock.restart ()).asSeconds ();
 	if (dt > 1) {

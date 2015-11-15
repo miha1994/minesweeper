@@ -38,28 +38,6 @@ space *load (const char *file_name) {
 
 bool space::update (float dt) {
 	CNTRL ("space_update");
-	if (need_reset) {
-		int new_part = part;
-		bool same_part = prev_part == part;
-		if (!same_part) {
-			part = prev_part;
-			forvector (p, end, v2i, p_types) {
-				if (all_types[p->x].functions->store) {
-					all_types[p->x].functions->store (all_types[p->x].objects.back(), all_types[p->y].objects[prev_part]);
-				}
-			}
-			prev_part = new_part;
-		}
-		part = new_part;
-		std_obj_functions *func;
-		forvector (p, end, v2i, p_types) {
-			func = all_types[p->x].functions;
-			if (func->reset && (!same_part || func->reset_same_part)) {
-				func->reset (all_types[p->x].objects.back(), all_types[p->y].objects[part],(char *) this);
-			}
-		}
-		need_reset = false;
-	}
 	int i = 0;
 	formap (p, end, int, type, all_types) {
 		if (p->second.functions->update) {
@@ -95,7 +73,7 @@ void space::render () {
 void space::del () {
 	forvector (p, end, v2i, p_types) {
 		if (all_types[p->x].functions->store) {
-			all_types[p->x].functions->store (all_types[p->x].objects.back(), all_types[p->y].objects[part]);
+			all_types[p->x].functions->store (all_types[p->x].objects.back(), all_types[p->y].objects[0]);
 		}
 	}
 	formap (p, end, int, type, all_types) {

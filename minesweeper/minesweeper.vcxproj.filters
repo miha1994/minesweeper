@@ -54,6 +54,18 @@
     <ClCompile Include="button_update.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="o_field.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="field_utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="func_pointers.h">
@@ -92,5 +104,28 @@
     <ClInclude Include="some_structures.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="o_field.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="field_utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Release\assets\inf\main.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\Release\assets\inf\menu.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\Release\assets\inf\L0.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
