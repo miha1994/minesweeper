@@ -22,6 +22,7 @@ bool Game::init (bool fullscreen) {
 	global_game_parameters = si.Last_mode;
 	all_spaces["MAIN"] = load ("assets/inf/main.txt");
 	running = true;
+	paused = false;
 	mouse_left_pressed = 0;
 	return true;
 }
@@ -44,18 +45,23 @@ void Game::update () {
 			break;
 		case sf::Event::KeyPressed:
 			Global_Bool_Key_Pressed = true;
+		case sf::Event::GainedFocus:
+			paused = false;
+			break;
+		case sf::Event::LostFocus:
+			paused = true;
+			break;
 		default:
 			break;
 		}
 	}
 	input.upd ();
 
-	float dt = (clock.restart ()).asSeconds ();
-	if (dt > 1) {
-		dt = 0;
-	}
-	if (all_spaces["MAIN"]->update (dt)) {
-		running = false;
+	if (!paused) {
+        float dt = (clock.restart ()).asSeconds ();
+		if (all_spaces["MAIN"]->update (dt > 1 ? 1 : dt)) {
+			running = false;
+		}
 	}
 	if (kb::isKeyPressed (kb::Escape)) {
 		running = false;

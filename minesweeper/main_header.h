@@ -14,8 +14,12 @@ extern bool Global_Bool_Key_Pressed;
 #define Min(a,b)	(((a)>(b))?(b):(a))
 #define Max(a,b)	(((a)>(b))?(a):(b))
 
-#define FOR(I_,N_)	for (int I_=0; I_<N_; ++I_)
-#define For(N_)		FOR (tmp_variable_for_loop__,N_)
+#define FOR(I_,N_)				for (int I_=0; I_<N_; ++I_)
+#define For(N_)					FOR (tmp_variable_for_loop__,N_)
+#define FOR_2D(v_, M_X, M_Y)	for (v2i v_ = v2i(0,0); v_.x < M_X; ++v_.x) \
+	for (v_.y = 0; v_.y < M_Y; ++v_.y)
+#define MK_C(c, point)			cell *c = &fld->a[point];
+#define POINT_IN_RECT(p, x0, y0, x1, y1)	(p.x >= x0 && p.y >= y0 && p.x < x1 && p.y < y1)
 
 #define forvector(p_,end_,type_,vector_)		for (std::vector<type_>::iterator (p_) = (vector_).begin(), (end_) = (vector_).end(); (p_) != (end_); ++(p_))
 #define formap(p_,end_,type1_,type2_,map_)		for (std::map<type1_,type2_>::iterator (p_) = (map_).begin(), (end_) = (map_).end(); (p_) != (end_); ++(p_))

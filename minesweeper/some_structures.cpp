@@ -2,7 +2,7 @@
 #include "main_header.h"
 #include "input.h"
 
-void sprite::init(char *file_name, int size_x, int size_y) {
+void sprite::init(const char *file_name, int size_x, int size_y) {
 	texture.loadFromFile (file_name);
 	texture.setSmooth (false);
 	itself.setTexture (texture);
@@ -17,8 +17,9 @@ void sprite::draw (sf::RenderWindow *wnd, bool f, v2f xy) {
 }
 
 color_s my_clr_s[] = {
-    color_s (CLR (175,175,175,255), CLR(255,0,0,255), CLR(225,225,225,225), CLR(0,0,0,255), CLR (255, 255, 255, 255))
+    color_s (CLR (175,175,175,255), CLR(255,0,0,255), CLR(225,225,225,225), CLR(0,0,0,255), CLR (255, 255, 255, 255), CLR(255,0,0,255))
 };
+CLR dig_colors[10];
 
 change_real_time::change_real_time () {
     cur = 0;
@@ -26,6 +27,7 @@ change_real_time::change_real_time () {
 	elements.clear ();
     out_file_name = "crt_output.txt";
     font.loadFromFile ("assets/fonts/cg.ttf");
+	col_cur_comp = 0;
     info.setFont (font);
     info.setColor (sf::Color::Black);
     info.setCharacterSize (20);
@@ -84,6 +86,56 @@ void change_real_time::update () {
                 }
             }
             break;
+		case CRT_TYPE_COLOR:
+			{
+				float dx = (m.x - mouse_pos.x);
+				CLR *c = (CLR *) e->ptr;
+				if (kb::isKeyPressed (kb::Q)) {
+					col_cur_comp = 0;
+					e->v0 = c->r;
+					e->delta = 0;
+				}
+				if (kb::isKeyPressed (kb::W)) {
+					col_cur_comp = 1;
+					e->v0 = c->g;
+					e->delta = 0;
+				}
+				if (kb::isKeyPressed (kb::E)) {
+					col_cur_comp = 2;
+					e->v0 = c->b;
+					e->delta = 0;
+				}
+				if (kb::isKeyPressed (kb::R)) {
+					col_cur_comp = 3;
+					e->v0 = c->a;
+					e->delta = 0;
+				}
+				if (kb::isKeyPressed (kb::T)) {
+					col_cur_comp = 4;
+					e->delta = 0;
+				}
+				e->delta += dx * 0.3f;
+				if (dx) {
+					float t;
+					t = e->v0 + e->delta;
+					in_range (t, 0, 255);
+					switch (col_cur_comp) {
+					case 0:
+						c->r = t;
+						break;
+					case 1:
+						c->g = t;
+						break;
+					case 2:
+						c->b = t;
+						break;
+					case 3:
+						c->a = t;
+						break;
+					}
+				}
+			}
+			break;
         case CRT_TYPE_SPRITE:
             {
                 sprite *spr = (sprite *)e->ptr;
@@ -114,6 +166,17 @@ void change_real_time::render () {
                 info.setString (std::to_string (res));
             }
             break;
+		case CRT_TYPE_COLOR:
+			{
+				CLR *c = (CLR *) e->ptr;
+				std::string res = "";
+				res += std::to_string (c->r) + " ";
+				res += std::to_string (c->g) + " ";
+				res += std::to_string (c->b) + " ";
+				res += std::to_string (c->a);
+				info.setString (res);
+			}
+			break;
         case CRT_TYPE_SPRITE:
             {
 				char str[40];
@@ -144,8 +207,14 @@ change_real_time::~change_real_time() {
 			fprintf(out, "%s%d%s\n", p->pref.c_str (), *((int *)p->ptr), p->postf.c_str ());
             break;
         case CRT_TYPE_FLOAT:
-			fprintf(out, "%s%g%s\n", p->pref.c_str (), *((float *)p->ptr), p->postf.c_str ());
+			fprintf (out, "%s%g%s\n", p->pref.c_str (), *((float *)p->ptr), p->postf.c_str ());
             break;
+		case CRT_TYPE_COLOR:
+			{
+				CLR *c = (CLR *) p->ptr;
+				fprintf (out, "%s = CLR(%d,%d,%d,%d);\n", p->pref.c_str (), c->r, c->g, c->b, c->a);
+			}
+			break;
         case CRT_TYPE_SPRITE:
             {
                 v2f c = ((sprite *)p->ptr)->itself.getPosition ();
@@ -198,8 +267,6 @@ bool sq_button::update (float dt, v2f mouse_pos) {
 	return ret;
 }
 
-#define in_range(dd,minn,maxx)	if(dd < minn) {dd = minn;} else if (dd > maxx) {dd = maxx;}
-
 void clr_norm (CLR *col) {
 	in_range (col->a, 0, 255);
 	in_range (col->r, 0, 255);
@@ -211,9 +278,23 @@ CLR operator * (CLR col, float m) {
 	col.b *= m;
 	col.r *= m;
 	col.g *= m;
+	col.a *= m;
 	clr_norm (&col);
 	return col;
 }
+CLR CLR_BLIND (CLR c) {
+	c.a = 0;
+	return c;
+}
+CLR CLR_ADD (CLR col1, CLR col2) {
+	col1.r += col2.r;
+	col1.g += col2.g;
+	col1.b += col2.b;
+	col1.a += col2.a;
+	clr_norm (&col1);
+	return col1;
+}
+
 /*
 CLR operator + (CLR col1, CLR col2) {
 	col1.r += col2.r;

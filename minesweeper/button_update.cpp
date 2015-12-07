@@ -106,8 +106,8 @@ O_UPDATE (button_update) {
 		FOR (i, 3) {
 			if (btn->hwm[i].active) {
 				btn->hwm[i].active = false;
-				if (!btn->hwm[i].value || (i < 2 && btn->hwm[i].value < 2)) {
-					btn->hwm[i].upd (10);
+				if (!btn->hwm[i].value || (i < 2 && btn->hwm[i].value < btn->hwm[i].min_val)) {
+					btn->hwm[i].upd (btn->hwm[i].min_val);
 				}
 				btn->hwm[2].max_val = Min (999, btn->hwm[0].value * btn->hwm[1].value - 1);
 				if (btn->hwm[2].max_val < 1) {

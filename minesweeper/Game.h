@@ -8,6 +8,7 @@ class Game {
 public:
 	sf::Clock clock;
 	bool running;
+	bool paused;
 
 	Game () : running (false) {}
 
