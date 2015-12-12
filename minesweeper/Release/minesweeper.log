@@ -1,13 +1,8 @@
-﻿Build started 06.12.2015 23:12:30.
-     1>Project "C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt field_utility.cpp
-         field_utility.cpp
-     1>field_utility.cpp(555): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>field_utility.cpp(555): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>field_utility.cpp(556): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"D:\SFML-2.3.1\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-audio-s.lib" "sfml-main.lib" opengl32.lib winmm.lib gdi32.lib freetype.lib jpeg.lib openal32.lib flac.lib vorbisenc.lib vorbisfile.lib vorbis.lib ogg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.lib" /MACHINE:X86 /SAFESEH Release\button_init.obj
+﻿Build started 12.12.2015 23:37:06.
+     1>Project "C:\Users\User\documents\visual studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\documents\visual studio 2012\Projects\minesweeper\Release\minesweeper.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"D:\SFML-2.3.1\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-audio-s.lib" "sfml-main.lib" opengl32.lib winmm.lib gdi32.lib freetype.lib jpeg.lib openal32.lib flac.lib vorbisenc.lib vorbisfile.lib vorbis.lib ogg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\User\documents\visual studio 2012\Projects\minesweeper\Release\minesweeper.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\documents\visual studio 2012\Projects\minesweeper\Release\minesweeper.lib" /MACHINE:X86 /SAFESEH Release\animation.obj
+         Release\button_init.obj
          Release\button_update.obj
          Release\cell.obj
          Release\common_functions.obj
@@ -25,11 +20,11 @@
          Release\some_structures.obj
          Release\space.obj
          Generating code
-     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\common_functions.cpp(26): warning C4715: 'get_command' : not all control paths return a value
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\common_functions.cpp(28): warning C4715: 'get_command' : not all control paths return a value
          Finished generating code
-         minesweeper.vcxproj -> C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.exe
-     1>Done Building Project "C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" (Build target(s)).
+         minesweeper.vcxproj -> C:\Users\User\documents\visual studio 2012\Projects\minesweeper\Release\minesweeper.exe
+     1>Done Building Project "C:\Users\User\documents\visual studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.80
+Time Elapsed 00:00:01.93

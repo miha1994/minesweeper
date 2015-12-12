@@ -6,6 +6,13 @@ void quad_set_pos (sf::Vertex *q, v2f pos, v2f origin) {
 	}
 }
 
+void quad_set_pos (sf::Vertex *q, v2f pos, v2f size, bool void_b) {
+	q[0].position = pos;
+	q[1].position = pos + v2f (size.x, 0);
+	q[2].position = pos + size;
+	q[3].position = pos + v2f (0, size.y);
+}
+
 void quad_set_tex_rect (sf::Vertex *q, int x, int y, int w, int h) {
 	q[0].texCoords.x = x;
 	q[0].texCoords.y = y;

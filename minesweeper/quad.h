@@ -22,6 +22,7 @@ struct matrix_2x2 {
 #define quad_get_pos(q)					(((q)[0].position + (q)[2].position) / float(2.0))
 
 void quad_set_pos (sf::Vertex *q, v2f pos, v2f origin);
+void quad_set_pos (sf::Vertex *q, v2f pos, v2f size, bool void_b);
 
 void quad_set_tex_rect (sf::Vertex *q, int x, int y, int w, int h);
 void quad_set_tex_rect (sf::Vertex *q, v2i pos, v2i size);

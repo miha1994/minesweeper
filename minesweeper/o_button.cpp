@@ -49,17 +49,17 @@ void make_table (button *btn) {
 	b.alpha = 0;
 	b.spr = &btn->play_not_active;
 	b.act = &btn->play_active;
-	b.pos = v2i (5, 96);
+	b.pos = v2f (5, 96);
 	btn->play_buttons.push_back (b);
 	FOR (j, btn->save.Num_of_templates + 3) {
-		b.pos = v2i (x[3], (j+1) * 32);
+		b.pos = v2f (x[3], (j+1) * 32);
 		btn->play_buttons.push_back (b);
 	}
     b.spr = &btn->del_not_active;
 	b.act = &btn->del_active;
     b.pressed_lt = true;
     FOR (j, btn->save.Num_of_templates) {
-		b.pos = v2i (x[3] + 32, (j+4) * 32);
+		b.pos = v2f (x[3] + 32, (j+4) * 32);
 		btn->del_buttons.push_back (b);
 	}
 }

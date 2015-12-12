@@ -5,7 +5,7 @@
 struct sprite {
 	sf::Texture texture;
 	sf::Sprite itself;
-	void init(const char *file_name, int size_x, int size_y);
+	void init(const char *file_name, int size_x, int size_y, bool smooth = false);
 	void draw (sf::RenderWindow *wnd, bool coords = false, v2f xy = v2f(0,0));
 };
 
@@ -66,7 +66,7 @@ public:
 };
 
 struct sq_button {
-	v2i pos;
+	v2f pos;
 	bool pressed_lt;
 	sprite *spr;
 	sprite *act;

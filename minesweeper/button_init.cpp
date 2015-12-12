@@ -11,7 +11,10 @@ char *button_load (char *parent_space) {
 	MY_WIND_HEIGHT = 400;//f_modes[0].height;
 
     window.close ();
-    window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Default);
+	window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Titlebar | sf::Style::Close);
+	sf::Image image;
+	image.loadFromFile( "assets/textures/icon.png" );
+	window.setIcon( image.getSize().x, image.getSize().y, image.getPixelsPtr() );
 	window.setVerticalSyncEnabled (true);
 	window.setFramerateLimit (60);
 
@@ -88,7 +91,7 @@ char *button_load (char *parent_space) {
 	btn->add_a.init ("assets/textures/add_a.png", 124, 30);
 	btn->add_na.init ("assets/textures/add_na.png", 124, 30);
 	btn->add.alpha = 0;
-	btn->add.pos = v2i(37, 96);
+	btn->add.pos = v2f(37, 96);
 	btn->add.act = &btn->add_a;
 	btn->add.spr = &btn->add_na;
 

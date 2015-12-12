@@ -24,11 +24,15 @@ extern bool Global_Bool_Key_Pressed;
 #define forvector(p_,end_,type_,vector_)		for (std::vector<type_>::iterator (p_) = (vector_).begin(), (end_) = (vector_).end(); (p_) != (end_); ++(p_))
 #define formap(p_,end_,type1_,type2_,map_)		for (std::map<type1_,type2_>::iterator (p_) = (map_).begin(), (end_) = (map_).end(); (p_) != (end_); ++(p_))
 #define forlist(p_,end_,type_,list_)			for (std::list<type_>::iterator (p_) = (list_).begin(), (end_) = (list_).end(); (p_) != (end_); ++(p_))
+#define forlist_no_inc(p_,end_,type_,list_)			for (std::list<type_>::iterator (p_) = (list_).begin(), (end_) = (list_).end(); (p_) != (end_); )
 
 extern int MY_WIND_WIDTH, MY_WIND_HEIGHT;
+extern int SC_WIDTH, SC_HEIGHT;
 extern int part;
 extern int level;
 extern bool mouse_left_pressed;
+
+#define SFRECTcv(Type_,X_,Y_,Size_)    sf::Rect <Type_> (X_, Y_, (Size_).x, (Size_).y)
 
 typedef unsigned int uint;
 #define vec		std::vector
@@ -123,3 +127,8 @@ struct game_parameters {
 
 extern int color_theme;
 extern game_parameters global_game_parameters;
+
+
+#define PIX  (float (fld->pix / 32.0))
+#define PX_1	(int(fld->pix > 48))
+#define PX_96	(fld->pix > 48 ? 96 : 48)

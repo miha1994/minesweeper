@@ -16,24 +16,29 @@
 #define SMILEY_GAME_OVER	3
 
 struct smiley {
-	sprite spr[4];
+	sprite spr[4][2];
 	int state;
 };
 
+#define FIELD_STATE_INTRO	0
+#define FIELD_STATE_IN_GAME 1
+
 class field {
 public:
+	int state;
 	smiley sm;
 	cell_ar<cell> a;
 	game_parameters gp;
     sf::RectangleShape bg;
 	std::list <force_cell> fc_l;
 	sq_button menu;
-	sprite menu_na;
-	sprite menu_a;
-	sf::Texture mine_text;
-	sf::Texture digits_text;
-	sf::Texture flag_text;
-	sf::Texture crs_text;
+	sprite menu_na[2];
+	sprite menu_a[2];
+	sf::Texture mine_text[2];
+	sf::Texture digits_text[2];
+	sf::Texture flag_text[2];
+	sf::Texture crs_text[2];
+	sf::Texture cell_text[2];
 	sf::VertexArray cells;
 	sf::VertexArray forced_cells;
 	sf::VertexArray flags;
@@ -44,6 +49,13 @@ public:
 	sf::Text mines_left;
 	sf::Text sec;
 	float time;
+	float pix;
+	float shift;
+	float vshift;
+	int r_wind_w;
+	int r_wind_h;
+	int intro_num;
+	int inside_w;
 	bool empty;
 	bool game_over;
 	bool win;

@@ -2,9 +2,9 @@
 #include "main_header.h"
 #include "input.h"
 
-void sprite::init(const char *file_name, int size_x, int size_y) {
+void sprite::init(const char *file_name, int size_x, int size_y, bool smooth) {
 	texture.loadFromFile (file_name);
-	texture.setSmooth (false);
+	texture.setSmooth (smooth);
 	itself.setTexture (texture);
 	itself.setTextureRect (sf::Rect<int> (0,0,size_x,size_y));
 }

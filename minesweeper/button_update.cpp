@@ -22,11 +22,15 @@ O_UPDATE (button_update) {
 				global_game_parameters = btn->save.templates[i-1];
 			}
 
-            MY_WIND_WIDTH = 12 + global_game_parameters.width * 32;//f_modes[0].width;
-			MY_WIND_HEIGHT = 49 + global_game_parameters.height * 32;//f_modes[0].height;
+            R_WIND_WIDTH = MY_WIND_WIDTH = 12 + global_game_parameters.width * 32;//f_modes[0].width;
+			R_WIND_HEIGHT = MY_WIND_HEIGHT = 49 + global_game_parameters.height * 32;//f_modes[0].height;
 
             window.close ();
             window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Default);
+			sf::Image image;
+			image.loadFromFile( "assets/textures/icon.png" );
+			window.setIcon( image.getSize().x, image.getSize().y, image.getPixelsPtr() );
+			
 	        window.setVerticalSyncEnabled (true);
 	        window.setFramerateLimit (60);
 

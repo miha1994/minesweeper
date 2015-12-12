@@ -3,6 +3,8 @@
 #include "main_header.h"
 
 int MY_WIND_WIDTH, MY_WIND_HEIGHT;
+int R_WIND_WIDTH, R_WIND_HEIGHT;
+int SC_WIDTH, SC_HEIGHT;
 bool Global_Bool_Key_Pressed;
 std::map <std::string, my_type_info> min_type_info;
 

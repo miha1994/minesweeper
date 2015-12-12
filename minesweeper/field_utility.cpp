@@ -333,8 +333,6 @@ void field_open_cell (field *fld, v2i choose) {
 				}
 			}
 
-
-
 			std::list <v2i> q;
 			FOR_2D (v, WWW, HHH) {
 				MK_C (c, v);
@@ -438,6 +436,7 @@ void field_open_cell (field *fld, v2i choose) {
 						}
 						last = mp;
 					}
+					
 					/*
 					sf::Event event;
 					while (window.pollEvent(event))
@@ -457,7 +456,7 @@ void field_open_cell (field *fld, v2i choose) {
 					*/
 
 					fld->a[choose].flags |= CELL_P_SAFE;
-					rec_solve (fld, q_p.begin (), &q_p, true, free_count, const_mines);
+					rec_solve (fld, q_p.begin (), &q_p, true, free_count, const_mines + new_mines);
 					forlist (p, end, q_point, q_p) {
 						if (!((p->flags & CELL_P_MINE) || (p->flags & CELL_P_SAFE))) {
 							fld->game_over = true;
@@ -490,7 +489,7 @@ void field_open_cell (field *fld, v2i choose) {
 			const_mines = 0;
 			FOR_2D (v, WWW, HHH) {
 				MK_C (c, v);
-				if ((c->flags & CELL_P_MINE) || (c->flags & CELL_Q) && (c->flags & CELL_FLAGS_MINE)) {
+				if ((c->flags & CELL_P_MINE) || ((c->flags & CELL_Q) && (c->flags & CELL_FLAGS_MINE))) {
 					++const_mines;
 				}
 			}
@@ -618,6 +617,17 @@ void field_count_mines_left (field *fld) {
 			++count;
 		}
 	}
+	int m_c = 0;
+	FOR_2D (v, WWW, HHH) {
+		MK_C (c, v);
+		if (c->flags & CELL_FLAGS_MINE) {
+			++m_c;
+		}
+	}
+	if (m_c != fld->gp.mines) {
+		//exit (0);
+	}
+	fld->mines_left.setCharacterSize(20 * PIX);
 	fld->mines_left.setString (std::to_string (fld->gp.mines - count));
-	fld->mines_left.setPosition (95 - fld->mines_left.getGlobalBounds ().width, 9);
+	fld->mines_left.setPosition (int(90*PIX - fld->mines_left.getGlobalBounds ().width) + fld->shift, int(7*PIX));
 }

@@ -45,6 +45,8 @@ cell_ar <T>::cell_ar (int h, int w) {
 	}
 }
 
+class field;
+
 class force_cell {
 public:
 	v2i pos;
@@ -54,7 +56,7 @@ public:
 	float duration;
 	float wait_time;
 	force_cell (v2i position, CLR c1, CLR c2, float dur, float wait = 0.0f) : pos (position), start(c1), fin (c2), time (0), duration (dur), wait_time(wait) {}
-	bool upd (sf::VertexArray *va, float dt, quad q);
+	bool upd (sf::VertexArray *va, float dt, quad q, int ptx, field *fld);
 };
 
 void field_cells_upd (char *o, float dt, v2i double_point);

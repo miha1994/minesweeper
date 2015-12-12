@@ -12,10 +12,13 @@ bool Game::init (bool fullscreen) {
 	window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Default);
 	window.setVerticalSyncEnabled (true);
 	window.setFramerateLimit (60);
+	
 	min_type_info["CONTROL"]	= my_type_info (0, 0);
 	min_type_info["FIELD"]		= my_type_info (1, 1);
 	min_type_info["BUTTON"]		= my_type_info (2, 2);
 
+	SC_WIDTH = sf::VideoMode::getDesktopMode ().width;
+	SC_HEIGHT = sf::VideoMode::getDesktopMode ().height;
 	SV_info si;
 	get_save_status (&si);
 	color_theme = si.Col_theme;
@@ -51,6 +54,12 @@ void Game::update () {
 		case sf::Event::LostFocus:
 			paused = true;
 			break;
+		case sf::Event::Resized:
+			R_WIND_WIDTH =
+			window.getSize ().x;
+			R_WIND_HEIGHT =
+			window.getSize ().y;
+			break;
 		default:
 			break;
 		}
@@ -62,20 +71,21 @@ void Game::update () {
 		if (all_spaces["MAIN"]->update (dt > 1 ? 1 : dt)) {
 			running = false;
 		}
-	}
-	if (kb::isKeyPressed (kb::Escape)) {
-		running = false;
+		if (kb::isKeyPressed (kb::Escape)) {
+			running = false;
+		}
 	}
 }
 
 #include "quad.h"
 
+#include "some_structures.h"
+
 void Game::render () {
 	CNTRL ("game_render");
-	window.clear ();
+	window.clear (my_clr_s[color_theme].safe);
 
 	all_spaces["MAIN"]->render ();
-
 	window.display ();
 }
 

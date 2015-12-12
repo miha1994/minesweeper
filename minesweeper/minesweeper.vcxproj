@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="animation.cpp" />
     <ClCompile Include="button_init.cpp" />
     <ClCompile Include="button_update.cpp" />
     <ClCompile Include="cell.cpp" />
@@ -101,6 +102,7 @@
     <ClCompile Include="space.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="animation.h" />
     <ClInclude Include="cell.h" />
     <ClInclude Include="field_utility.h" />
     <ClInclude Include="func_pointers.h" />

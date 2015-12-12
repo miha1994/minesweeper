@@ -18,9 +18,9 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 	fld->flags.clear ();
 	fld->crs.clear ();
 	quad q;
-	quad_set_tex_rect (q, sf::IntRect (0,0,30,30));
+	quad_set_tex_rect (q, SFRECTcv (int, 0,0,fld->pix > 48 ? v2f(96,96) : v2f (48, 48)));
 	FOR_2D (v, WWW, HHH) {
-		quad_set_pos (q, v2f(v2i(7, 44) + v*32), v2f(0,0));
+		quad_set_pos (q, v2f (fld->shift, fld->vshift) + v2f(v2i(6, 43) + v*32) * PIX, v2f(fld->pix,fld->pix),false);
 		MK_C (c, v);
 		if (c->flags & CELL_FLAGS_CLOSED) {
 			if (fld->game_over && (c->flags & CELL_FLAGS_MINE) && !(c->flags & CELL_FLAGS_MARK)) {
@@ -34,13 +34,13 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 				} else {
 					quad_set_color (q, my_clr_s[color_theme].mine);
 					quad_v_a (q, &fld->mines);
-					quad_set_color (q, CLR::Black);
+					quad_set_color (q, my_clr_s[color_theme].mine);
 					quad_v_a (q, &fld->crs);
 				}
 			}
 			if (kb::isKeyPressed (kb::S)) {
 				if (c->flags & CELL_FLAGS_MINE) {
-					quad_set_color (q, my_clr_s[color_theme].font);
+					quad_set_color (q, my_clr_s[color_theme].mine);
 					quad_v_a (q, &fld->mines);
 				}
 				if (c->flags & CELL_P_SAFE) {
@@ -67,29 +67,29 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 		}
 		if (! (c->flags & CELL_FLAGS_CLOSED) && c->val) {
 			quad_set_color (q, dig_colors[c->val]); //my_clr_s[color_theme].font);
-			quad_set_tex_rect (q, sf::Rect <int> (c->val * 30, 0, 30, 30));
+			quad_set_tex_rect (q, SFRECTcv (int, c->val * (fld->pix > 48 ? 96 : 48), 0, fld->pix > 48 ? v2f(96,96) : v2f (48, 48)));
 			quad_v_a (q, &fld->digits);
-			quad_set_tex_rect (q, sf::IntRect (0,0,30,30));
+			quad_set_tex_rect (q, SFRECTcv (int, 0, 0, fld->pix > 48 ? v2f(96,96) : v2f (48, 48)));
 		}
 	}
 	for (std::list<force_cell>::iterator p = (fld->fc_l).begin(); p != (fld->fc_l).end(); ) {
-		if (p->upd (&fld->forced_cells, dt, q) ){
+		if (p->upd (&fld->forced_cells, dt, q, fld->pix, fld) ){
 			p = fld->fc_l.erase (p);
 		} else {
 			++p;
 		}
 	}
-	quad_set_tex_rect (q, sf::IntRect (0, 0, MY_WIND_WIDTH - 14, 30));
-	quad_set_pos (q, v2f(7, 7), v2f(0,0));
+	quad_set_tex_rect (q, sf::IntRect (4, 4, 40, 40));
+	quad_set_pos (q, v2f(fld->shift ,0), v2f(MY_WIND_WIDTH, 37) * PIX, 0);
 	quad_set_color (q, my_clr_s[color_theme].unknown);
 	quad_v_a (q, &fld->cells);
 }
 
-bool force_cell::upd (sf::VertexArray *va, float dt, quad q) {
+bool force_cell::upd (sf::VertexArray *va, float dt, quad q, int pix, field *fld) {
 	if ((wait_time -= dt) < 0) {
 		time += -wait_time;
 		wait_time = 0;
-		quad_set_pos (q, v2f(7 + pos.x*32, 44 + pos.y*32), v2f(0,0));
+		quad_set_pos (q, v2f (fld->shift, fld->vshift) + v2f(6 + pos.x*32, 43 + pos.y*32) * float(PIX), v2f(pix, pix), 0);
 		if (time > duration) {
 			return true;
 		}
