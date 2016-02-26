@@ -9,6 +9,8 @@
 #define CELL_FLAGS_MARK			0x4
 */
 
+const float sv_ = 6, sv_sec_ = 3;
+
 void field_cells_upd (char *o, float dt, v2i double_point) {
 	O_DECL (field, fld);
 	fld->cells.clear ();
@@ -29,7 +31,12 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 			}
 			if (c->flags & CELL_FLAGS_MARK) {
 				if (!fld->game_over || (c->flags & CELL_FLAGS_MINE)) {
-					quad_set_color (q, my_clr_s[color_theme].flag);
+					if (fld->win && fld->win_time < sv_sec_) {
+						float mul = (cos (fld->win_time*sv_) + 1) / 2.0;
+						quad_set_color (q, CLR_ADD (my_clr_s[color_theme].flag * (mul), CLR::Green * (1-mul)));
+					} else {
+						quad_set_color (q, my_clr_s[color_theme].flag);
+					}
 					quad_v_a (q, &fld->flags);
 				} else {
 					quad_set_color (q, my_clr_s[color_theme].mine);
@@ -37,6 +44,13 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 					quad_set_color (q, my_clr_s[color_theme].mine);
 					quad_v_a (q, &fld->crs);
 				}
+			}
+			CLR unknown;
+			if (fld->win && fld->win_time < sv_sec_) {
+				float mul = (cos (fld->win_time*sv_) + 1) / 2.0;
+				unknown = CLR_ADD (my_clr_s[color_theme].unknown * (mul), CLR (0, 180, 0) * (1-mul));
+			} else {
+				unknown = my_clr_s[color_theme].unknown;
 			}
 			if (kb::isKeyPressed (kb::S)) {
 				if (c->flags & CELL_FLAGS_MINE) {
@@ -47,13 +61,13 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 					quad_set_color (q, CLR::Red);
 					quad_v_a (q, &fld->crs);
 				}
-				quad_set_color (q, (c->flags & CELL_Q) ? CLR::Blue : my_clr_s[color_theme].unknown);
+				quad_set_color (q, (c->flags & CELL_Q) ? CLR::Blue : unknown);
 			} else {
 				if (length (v2f(double_point - v)) > 1.7) {
-					quad_set_color (q, my_clr_s[color_theme].unknown);
+					quad_set_color (q, unknown);
 				} else {
 					if (c->flags & CELL_FLAGS_MARK) {
-						quad_set_color (q, my_clr_s[color_theme].unknown);
+						quad_set_color (q, unknown);
 					} else {
 						quad_set_color (q, my_clr_s[color_theme].safe);
 					}

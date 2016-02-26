@@ -52,6 +52,7 @@ public:
 	float pix;
 	float shift;
 	float vshift;
+	float win_time;
 	int r_wind_w;
 	int r_wind_h;
 	int intro_num;

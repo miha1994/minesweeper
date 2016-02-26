@@ -33,6 +33,9 @@ public:
 	~cell_ar () {delete []f; delete []tc;}
 	const tmp_cell <T>& operator[](size_t idx) const { return *(tc + idx + 1); };
 	T &operator[](v2i p) const { return *((tc + p.y + 1)->f + p.x + 1); };
+	void init (T init_val) { FOR (i, (W+2) * (H+2)) f[i] = init_val; }
+	cell_ar &operator = (const cell_ar&);
+	cell_ar (const cell_ar &);
 };
 template <class T>
 cell_ar <T>::cell_ar (int h, int w) {
@@ -43,6 +46,34 @@ cell_ar <T>::cell_ar (int h, int w) {
 	FOR (i, h+2) {
 		tc[i].f = f + i*(w+2);
 	}
+}
+
+template <class T>
+cell_ar<T> & cell_ar<T>::operator = (const cell_ar<T>& ca) {
+	if (H != ca.H || W != ca.W) {
+		delete []f;
+		delete []tc;
+		W = ca.W;
+		H = ca.H;
+		f = new T [(W+2) * (H+2)];
+		tc = new tmp_cell <T> [H+2];
+		FOR (i, H+2) {
+			tc[i].f = f + i*(W+2);
+		}
+	}
+	memcpy (f, ca.f, sizeof (T) * (W+2) * (H+2));
+}
+
+template <class T>
+cell_ar<T>::cell_ar (const cell_ar<T> &s) {
+	W = s.W;
+	H = s.H;
+	f = new T [(W+2) * (H+2)];
+	tc = new tmp_cell <T> [H+2];
+	FOR (i, H+2) {
+		tc[i].f = f + i*(W+2);
+	}
+	memcpy (f, s.f, sizeof (T) * (W+2) * (H+2));
 }
 
 class field;

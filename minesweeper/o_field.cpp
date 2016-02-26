@@ -133,7 +133,7 @@ O_UPDATE (field_update) {
 		int old_h = R_WIND_HEIGHT;
 		if (R_WIND_WIDTH > SC_WIDTH - 20 && R_WIND_HEIGHT > SC_HEIGHT - 120) {
 			if (float (R_WIND_WIDTH) / R_WIND_HEIGHT > float (MY_WIND_WIDTH) / MY_WIND_HEIGHT) {
-				int old = R_WIND_WIDTH; 
+				int old = R_WIND_WIDTH;
 				inside_w = R_WIND_WIDTH = (float (MY_WIND_WIDTH) / MY_WIND_HEIGHT) * R_WIND_HEIGHT;
 				fld->shift = (old - R_WIND_WIDTH) / 2;
 				fld->vshift = 0;
@@ -196,6 +196,13 @@ O_UPDATE (field_update) {
 		}
 		break;
 	case FIELD_STATE_IN_GAME:
+		/*
+		FOR_2D (v, WWW, HHH) {
+			if (fld->a[v].val != fld->a[v.y][v.x].val) {
+				exit (0);    // NEVER WILL EXECUTE THIS !!!!!!!!!!!!
+			}
+		}
+		*/
 		if (!(fld->win || fld->game_over)) {
 			if (!fld->empty) {
 				fld->time += dt;
@@ -205,6 +212,9 @@ O_UPDATE (field_update) {
 			fld->sec.setPosition(int((MY_WIND_WIDTH - 12)*PIX - fld->sec.getGlobalBounds ().width) + fld->shift,int(6.4*PIX));
 		}
 		//fld->crt.update ();
+		if (fld->win) {
+			fld->win_time += dt;
+		}
 
 		v2f m;
 		get_mouse_pos (m);
@@ -288,8 +298,9 @@ O_UPDATE (field_update) {
 		if (!(input.mbutton[MOUSE_LEFT].pressed_now || input.mbutton[MOUSE_RIGHT].pressed_now)) {
 			fld->wait_all_release = false;
 		}
-
-		field_check_win (fld);
+		if (!fld->win) {
+			field_check_win (fld);
+		}
 		field_count_mines_left (fld);
 
 		field_cells_upd ((char *)fld, dt,

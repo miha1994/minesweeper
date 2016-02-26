@@ -1,6 +1,7 @@
 #pragma once
 #include "sfml.h"
 #include "main_header.h"
+#include <iostream>
 
 struct sprite {
 	sf::Texture texture;
@@ -73,4 +74,66 @@ struct sq_button {
 	float alpha;
 	void draw (sf::RenderWindow *wind);
 	bool update (float dt, v2f mouse_pos);
+};
+
+class r_n {
+	public:
+	int a, b;
+	void Norm ();
+	r_n (int c = 1, int d = 1) : a (c), b (d) {Norm (); }
+	~r_n () {
+	}
+	r_n operator + (const r_n &n) const {
+		r_n rv (a * n.b + n.a * b, b * n.b);
+		rv.Norm ();
+		return rv;
+	}
+	r_n operator - (const r_n &n) const {
+		r_n rv (a * n.b - n.a * b, b * n.b);
+		rv.Norm ();
+		return rv;
+	}
+	r_n operator * (const r_n &n) const {
+		r_n rv (a * n.a, b * n.b);
+		rv.Norm ();
+		return rv;
+	}
+	r_n operator / (const r_n &n) const {
+		r_n rv (a * n.b, b * n.a);
+		rv.Norm ();
+		return rv;
+	}
+	bool operator < (const r_n& r) {
+		r_n tmp = *this - r;
+		return tmp.a < 0;
+	}
+	bool operator > (const r_n& r) {
+		r_n tmp = *this - r;
+		return tmp.a > 0;
+	}
+	bool operator <= (const r_n& r) {
+		r_n tmp = *this - r;
+		return tmp.a <= 0;
+	}
+	bool operator >= (const r_n& r) {
+		r_n tmp = *this - r;
+		return tmp.a >= 0;
+	}
+	bool operator == (const r_n& r) {
+		return a == r.a && b == r.b;
+	}
+	bool operator != (const r_n& r) {
+		return a != r.a || b != r.b;
+	}
+	
+	std::string to_str () const {
+		return std::to_string (a) + (b == 1 ? "" : ":" + std::to_string (b));
+	}
+	void read () {
+		std::cout << "enter a / b.   a = ";
+		std::cin >> a;
+		std::cout << "b = ";
+		std::cin >> b;
+		Norm ();
+	}
 };

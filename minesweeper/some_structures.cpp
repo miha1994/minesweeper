@@ -295,12 +295,19 @@ CLR CLR_ADD (CLR col1, CLR col2) {
 	return col1;
 }
 
-/*
-CLR operator + (CLR col1, CLR col2) {
-	col1.r += col2.r;
-	col1.g += col2.g;
-	col1.b += col2.b;
-	clr_norm (&col1);
-	return col1;
+void r_n::Norm () {
+	int mx = std::max (sqrt (abs (a)), sqrt (abs (b)));
+	for (int i = 2; i <= mx; ++i) {
+		while (a % i == 0 && b % i == 0) {
+			a /= i;
+			b /= i;
+		}
+	}
+	if (b < 0) {
+		b = -b;
+		a = -a;
+	}
+	if (a == 0) {
+		b = 1;
+	}
 }
-*/

@@ -98,6 +98,7 @@
     <ClCompile Include="quad.cpp" />
     <ClCompile Include="read_write.cpp" />
     <ClCompile Include="save.cpp" />
+    <ClCompile Include="slau.cpp" />
     <ClCompile Include="some_structures.cpp" />
     <ClCompile Include="space.cpp" />
   </ItemGroup>
@@ -117,6 +118,7 @@
     <ClInclude Include="read_write.h" />
     <ClInclude Include="save.h" />
     <ClInclude Include="sfml.h" />
+    <ClInclude Include="slau.h" />
     <ClInclude Include="some_structures.h" />
     <ClInclude Include="space.h" />
   </ItemGroup>

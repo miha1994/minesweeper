@@ -21,6 +21,9 @@ extern bool Global_Bool_Key_Pressed;
 #define MK_C(c, point)			cell *c = &fld->a[point];
 #define POINT_IN_RECT(p, x0, y0, x1, y1)	(p.x >= x0 && p.y >= y0 && p.x < x1 && p.y < y1)
 
+#define TRN_ON(mask, flag)	(mask) |= (flag)
+#define TRN_OFF(mask,flag)	(mask) &= (~(flag))
+
 #define forvector(p_,end_,type_,vector_)		for (std::vector<type_>::iterator (p_) = (vector_).begin(), (end_) = (vector_).end(); (p_) != (end_); ++(p_))
 #define formap(p_,end_,type1_,type2_,map_)		for (std::map<type1_,type2_>::iterator (p_) = (map_).begin(), (end_) = (map_).end(); (p_) != (end_); ++(p_))
 #define forlist(p_,end_,type_,list_)			for (std::list<type_>::iterator (p_) = (list_).begin(), (end_) = (list_).end(); (p_) != (end_); ++(p_))

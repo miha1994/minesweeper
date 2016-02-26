@@ -1,4 +1,5 @@
 #include "field_utility.h"
+#include "slau.h"
 
 v2i dr[8] = {
 	v2i( 0, 1),
@@ -34,6 +35,7 @@ void field_make (field *fld, std::list <v2i> *free_cells, int mines) {
 	}
 	int sum;
 	FOR_2D (v, fld->gp.width, fld->gp.height) {
+		fld->a[v].flags |= CELL_FLAGS_CLOSED;
 		if (!(fld->a[v].flags & CELL_FLAGS_MINE)) {
 			sum = 0;
 			FOR_NEIGHBORS (r, v) {
@@ -87,6 +89,7 @@ bool field_assumption_ok (field *fld, v2i ch) {
     return true;
 }
 
+/*
 bool rec_solve (field *fld, std::list <q_point>::iterator p, std::list<q_point> *l, bool one = false, int free_count = 0, int const_mines = 0) {
     std::list <q_point>::iterator next = p;
     ++next;
@@ -166,14 +169,17 @@ bool rec_solve (field *fld, std::list <q_point>::iterator p, std::list<q_point> 
     fld->a[p->coord].flags &= ~CELL_P_SAFE;
 	return false;
 }
+*/
 
 #include <Windows.h>
 
 void field_solve (field *fld) {
-	std::list <v2i> q;
+	std::vector <v2i> q;
+	cell_ar <int> inv (HHH, WWW);
+	inv.init (-1);
     FOR_2D (v, WWW, HHH) {
         MK_C (c, v);
-		c->flags &= ~CELL_Q;
+		TRN_OFF (c->flags, CELL_Q);
 		if (!(c->flags & CELL_P_MINE || c->flags & CELL_P_SAFE || c->flags & CELL_Q) && (c->flags & CELL_FLAGS_CLOSED)) {
             FOR_NEIGHBORS (r, v) {
                 if (POINT_IN_RECT (r, 0, 0, WWW, HHH)) {
@@ -187,120 +193,66 @@ void field_solve (field *fld) {
         }
         if (c->flags & CELL_Q) {
 			q.push_back (v);
+			inv[v] = q.size () - 1;
         }
     }
 	if (!q.empty ()) {
-		std::list <q_point> q_p;
-		cell_ar <cell> a (HHH, WWW);
-		cell_ar <hlp> h (HHH, WWW);
-		for (int i = -1; i <= fld->gp.height; ++i) {
-			for (int j = -1; j <= fld->gp.width; ++j) {
-				a[i][j].flags = 100;
-				a[i][j].val = 0;
-				h[i][j].n_a = false;
-			}
-		}
+		std::list <std::list <int>> tmp_m_slau;
+		std::list <int> new_elem;
+		std::vector <int> r_values_in_slau_1;
+
 		FOR_2D (v, WWW, HHH) {
 			MK_C (c, v);
 			if (!(c->flags & CELL_FLAGS_CLOSED)) {
-				a[v].val = -1;
-			}
-		}
-		FOR_2D (v, WWW, HHH) {
-			FOR_NEIGHBORS (r, v) {
-				a[v].flags += a[r].val;
-			}
-		}
-		FOR_2D (v, WWW, HHH) {
-			if (fld->a[v].flags & CELL_FLAGS_CLOSED) {
+				int r_v = c->val;
+				new_elem.clear ();
 				FOR_NEIGHBORS (r, v) {
-					if (!(fld->a[r].flags & CELL_FLAGS_CLOSED)) {
-						h[v].het.push_back (r);
-						FOR_NEIGHBORS (u, r) {
-							if ((fld->a[u].flags & CELL_FLAGS_CLOSED) && (fld->a[u].flags & CELL_Q)) {
-								bool add = true;
-								forlist (p, end, v2i, h[v].hom) {
-									if (*p == u) {
-										add = false;
-										break;
-									}
-								}
-								if (add) {
-									h[v].hom.push_back (u);
-								}
+					if (POINT_IN_RECT (r, 0, 0, WWW, HHH)) {
+						MK_C (cr, r);
+						if (cr->flags & CELL_FLAGS_CLOSED) {
+							if (cr->flags & CELL_P_MINE) {
+								--r_v;
+							}
+							if (cr->flags & CELL_Q) {
+								new_elem.push_back (inv[r]);
 							}
 						}
 					}
 				}
+				if (!new_elem.empty ()) {
+					tmp_m_slau.push_back (new_elem);
+					r_values_in_slau_1.push_back (r_v);
+				}
 			}
 		}
-		while (!q.empty ()) {
-			v2i last (-1,-1);
-			bool first = true;
-			while (!q.empty ()) {
-				v2i mp;
-				int max_v = 0;
-				std::list <v2i>::iterator del;
-				int bon;
-				bool found_one = false;
-				forlist (it, end, v2i, q) {
-					if (first || h[*it].n_a) {
-						if (abs(it->x - last.x) + abs (it->y - last.y) == 1) {
-							bon = 200;
-						} else {
-							bon = 0;
-						}
-						if ((a[*it].flags) + bon > max_v) {
-							del = it;
-							mp = *it;
-							max_v = a[*it].flags;
-							found_one = true;
-						}
-					}
-				}
-				first = false;
-				if (!found_one) {
-					break;
-				}
-				q.erase (del);
-				q_p.push_back (mp);
-				forlist (p, end, v2i, h[mp].hom) {
-					a[*p].flags += (10-h[mp].hom.size ()) * (10 - h[*p].hom.size());
-					h[*p].n_a = true;
-				}
-				last = mp;
+		slau_1 sl_1 (tmp_m_slau.size (), q.size ());
+		sl_1.link = q;
+		int i = 0;
+		forlist (p, end, std::list < int>, tmp_m_slau) {
+			forlist (r, end, int, *p) {
+				sl_1.A_b[i][*r] = 1;
 			}
-			/*
-			sf::Event event;
-			while (window.pollEvent(event))
-			{
-			}
-			int count = 0;
-			forlist (p, end, q_point, q_p) {
-				fld->sec.setPosition ( v2f(v2i(7, 44) + p->coord*32));
-				fld->sec.setString (std::to_string (count));
-				window.draw (fld->sec);
-				++count;
-			}
-			window.display ();
-			while (!kb::isKeyPressed (kb::G)) {
-				Sleep (10);
-			}
-			*/
-			rec_solve (fld, q_p.begin (), &q_p);
-			forlist (p, end, q_point, q_p) {
-				if (!((p->flags & CELL_P_MINE) && (p->flags & CELL_P_SAFE))) {
-					MK_C (c, p->coord);
-					c->flags &= ~CELL_Q;
-					if (p->flags & CELL_P_MINE) {
-						c->flags |= CELL_P_MINE;
-					} else {
-						c->flags |= CELL_P_SAFE;
-					}
+			sl_1.A_b[i][sl_1.w_A_with_b - 1] = r_values_in_slau_1[i];
+			++i;
+		}
+		slau_2 sl_2 = sl_1.solve ();
+		sl_2.solve ();
+		v2i tmp_p;
+		FOR (i, sl_2.h) {
+			if (GET_F_STATE (sl_2.inf_h[i], SLAU_ELEM_INFO_FLAG_CAN_BE_ONE)) {
+				if (!GET_F_STATE (sl_2.inf_h[i], SLAU_ELEM_INFO_FLAG_CAN_BE_ZERO)) {
+					tmp_p = sl_2.link_h[i];
+					fld->a[tmp_p].flags &= ~CELL_Q;
+					fld->a[tmp_p].flags |= CELL_P_MINE;
 				}
+			} else {
+				tmp_p = sl_2.link_h[i];
+				fld->a[tmp_p].flags &= ~CELL_Q;
+				fld->a[tmp_p].flags |= CELL_P_SAFE;
 			}
 		}
 	}
+
 	fld->no_moves = true;
 	FOR_2D (v, WWW, HHH) {
 		MK_C (c, v);
@@ -456,7 +408,7 @@ void field_open_cell (field *fld, v2i choose) {
 					*/
 
 					fld->a[choose].flags |= CELL_P_SAFE;
-					rec_solve (fld, q_p.begin (), &q_p, true, free_count, const_mines + new_mines);
+					//rec_solve (fld, q_p.begin (), &q_p, true, free_count, const_mines + new_mines);
 					forlist (p, end, q_point, q_p) {
 						if (!((p->flags & CELL_P_MINE) || (p->flags & CELL_P_SAFE))) {
 							fld->game_over = true;
@@ -597,6 +549,7 @@ void field_check_win (field *fld) {
 	}
 	if (count == fld->gp.mines) {
 		fld->win = true;
+		fld->win_time = 0;
 		FOR_2D (v, WWW, HHH) {
 			MK_C (c, v);
 			if (c->flags & CELL_FLAGS_CLOSED) {
