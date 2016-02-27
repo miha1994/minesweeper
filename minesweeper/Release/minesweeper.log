@@ -1,7 +1,94 @@
-﻿Build started 27.02.2016 15:52:49.
+﻿Build started 27.02.2016 16:13:12.
      1>Project "C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt o_field.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp animation.cpp button_init.cpp button_update.cpp cell.cpp common_functions.cpp field_utility.cpp func_pointers.cpp input.cpp main.cpp o_button.cpp o_control.cpp o_field.cpp quad.cpp read_write.cpp save.cpp slau.cpp some_structures.cpp space.cpp
+         Game.cpp
+         animation.cpp
+     1>animation.cpp(5): warning C4005: 'MK_C' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\main_header.h(21) : see previous definition of 'MK_C'
+     1>animation.cpp(50): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
+     1>animation.cpp(54): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(56): warning C4305: '=' : truncation from 'double' to 'float'
+     1>animation.cpp(63): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(65): warning C4305: '=' : truncation from 'double' to 'float'
+     1>animation.cpp(76): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>animation.cpp(86): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(112): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
+     1>animation.cpp(116): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(118): warning C4305: '=' : truncation from 'double' to 'float'
+     1>animation.cpp(125): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(127): warning C4305: '=' : truncation from 'double' to 'float'
+     1>animation.cpp(138): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>animation.cpp(148): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(174): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
+     1>animation.cpp(178): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(180): warning C4305: '=' : truncation from 'double' to 'float'
+     1>animation.cpp(187): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(189): warning C4305: '=' : truncation from 'double' to 'float'
+     1>animation.cpp(196): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(198): warning C4305: '=' : truncation from 'double' to 'float'
+     1>animation.cpp(205): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(207): warning C4305: '=' : truncation from 'double' to 'float'
+     1>animation.cpp(218): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>animation.cpp(228): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(265): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>animation.cpp(322): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(330): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>animation.cpp(340): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(379): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>animation.cpp(435): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>animation.cpp(443): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>animation.cpp(453): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         button_init.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.h(20): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.h(26): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>button_init.cpp(54): warning C4101: 'c_str' : unreferenced local variable
+         button_update.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.h(20): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.h(26): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>button_update.cpp(126): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+     1>button_update.cpp(127): warning C4305: '+=' : truncation from 'double' to 'float'
+         cell.cpp
+     1>cell.cpp(23): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>cell.cpp(35): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>cell.cpp(50): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>cell.cpp(84): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>cell.cpp(86): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>cell.cpp(90): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>cell.cpp(97): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>cell.cpp(106): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         common_functions.cpp
+     1>common_functions.cpp(76): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         field_utility.cpp
+     1>field_utility.cpp(177): warning C4102: 'lll' : unreferenced label
+     1>field_utility.cpp(605): warning C4244: '+=' : conversion from 'sf::Int64' to 'int', possible loss of data
+     1>field_utility.cpp(655): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(655): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>field_utility.cpp(656): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(665): warning C4244: '+=' : conversion from 'sf::Int64' to 'int', possible loss of data
+     1>field_utility.cpp(735): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>field_utility.cpp(737): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         func_pointers.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.h(20): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.h(26): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         input.cpp
+         main.cpp
+         o_button.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.h(20): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_button.h(26): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(23): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(33): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(38): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(43): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(55): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(62): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(72): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(73): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(94): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(95): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(97): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>o_button.cpp(98): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         o_control.cpp
          o_field.cpp
      1>o_field.cpp(38): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
      1>o_field.cpp(43): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
@@ -30,11 +117,75 @@
      1>o_field.cpp(212): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
      1>o_field.cpp(215): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
      1>o_field.cpp(223): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(258): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(265): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(289): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(310): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(314): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>o_field.cpp(267): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>o_field.cpp(274): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>o_field.cpp(298): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>o_field.cpp(319): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>o_field.cpp(323): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         quad.cpp
+     1>quad.cpp(17): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>quad.cpp(18): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>quad.cpp(19): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>quad.cpp(20): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>quad.cpp(21): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>quad.cpp(22): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>quad.cpp(23): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>quad.cpp(24): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         read_write.cpp
+     1>read_write.cpp(25): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(32): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(39): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(46): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(48): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(55): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(57): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(64): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(66): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+         save.cpp
+     1>save.cpp(6): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(218) : see declaration of 'fopen'
+     1>save.cpp(26): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(218) : see declaration of 'fopen'
+         slau.cpp
+     1>slau.cpp(92): warning C4005: 'me' : macro redefinition
+                 slau.cpp(19) : see previous definition of 'me'
+         some_structures.cpp
+     1>some_structures.cpp(46): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>some_structures.cpp(63): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>some_structures.cpp(64): warning C4018: '<' : signed/unsigned mismatch
+     1>some_structures.cpp(75): warning C4305: '*=' : truncation from 'double' to 'float'
+     1>some_structures.cpp(78): warning C4305: '*=' : truncation from 'double' to 'float'
+     1>some_structures.cpp(83): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>some_structures.cpp(124): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>some_structures.cpp(127): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>some_structures.cpp(130): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>some_structures.cpp(133): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>some_structures.cpp(159): warning C4018: '<' : signed/unsigned mismatch
+     1>some_structures.cpp(184): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : see declaration of 'sprintf'
+     1>some_structures.cpp(192): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : see declaration of 'sprintf'
+     1>some_structures.cpp(202): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(218) : see declaration of 'fopen'
+     1>some_structures.cpp(243): warning C4244: 'argument' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>some_structures.cpp(278): warning C4244: '*=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>some_structures.cpp(279): warning C4244: '*=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>some_structures.cpp(280): warning C4244: '*=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>some_structures.cpp(281): warning C4244: '*=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+         space.cpp
+     1>space.cpp(11): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(233) : see declaration of 'freopen'
+     1>space.cpp(19): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>space.cpp(28): warning C4101: 'num' : unreferenced local variable
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"D:\SFML-2.3.1\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-audio-s.lib" "sfml-main.lib" opengl32.lib winmm.lib gdi32.lib freetype.lib jpeg.lib openal32.lib flac.lib vorbisenc.lib vorbisfile.lib vorbis.lib ogg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.lib" /MACHINE:X86 /SAFESEH Release\animation.obj
          Release\button_init.obj
@@ -63,4 +214,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:10.22
+Time Elapsed 00:00:39.95

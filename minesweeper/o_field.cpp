@@ -249,6 +249,15 @@ O_UPDATE (field_update) {
 					return false;
 				}
 			}
+			if (!fld->empty) {
+				FOR_2D (v, WWW, HHH) {
+					MK_C (c, v);
+					if ((c->flags & CELL_FLAGS_CLOSED) && !(c->flags & CELL_FLAGS_MINE)) {
+						field_open_cell (fld, v);
+						return false;
+					}
+				}
+			}
 		}
 		if (input.mbutton[MOUSE_MIDDLE].just_released ||
 			(input.mbutton[MOUSE_LEFT].pressed_now && input.mbutton[MOUSE_RIGHT].just_released) ||
