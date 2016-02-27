@@ -233,7 +233,7 @@ O_UPDATE (field_update) {
 		m.x -= fld->shift;
 		m.y -= fld->vshift;
 		m /= PIX;
-		if ( kb::isKeyPressed (bbbb)) {
+		if ( kb::isKeyPressed (bbbb) || kb::isKeyPressed (kb::Z)) {
 			if (bbbb == kb::A) {
 				bbbb = kb::B;
 			} else {

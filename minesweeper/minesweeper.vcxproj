@@ -51,14 +51,14 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>SFML_STATIC;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\SFML-2.3.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\SFML-2.3.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>"sfml-graphics-s.lib";"sfml-window-s.lib";"sfml-system-s.lib";"sfml-audio-s.lib";"sfml-main.lib";"opengl32.lib";"winmm.lib";"gdi32.lib";"freetype.lib";"jpeg.lib";"openal32.lib";"flac.lib";"vorbisenc.lib";"vorbisfile.lib";"vorbis.lib";"ogg.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>"sfml-graphics-d.lib";"sfml-window-d.lib";"sfml-system-d.lib";"sfml-audio-d.lib";"sfml-main-d.lib";"opengl32.lib";"winmm.lib";"gdi32.lib";"freetype.lib";"jpeg.lib";"openal32.lib";"flac.lib";"vorbisenc.lib";"vorbisfile.lib";"vorbis.lib";"ogg.lib";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

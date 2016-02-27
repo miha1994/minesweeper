@@ -1,16 +1,13 @@
-﻿Build started 26.02.2016 14:22:03.
+﻿Build started 27.02.2016 12:50:50.
      1>Project "C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt field_utility.cpp slau.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt field_utility.cpp
          field_utility.cpp
-     1>field_utility.cpp(506): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>field_utility.cpp(506): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>field_utility.cpp(507): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>field_utility.cpp(583): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
-     1>field_utility.cpp(585): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         slau.cpp
-     1>slau.cpp(87): warning C4005: 'me' : macro redefinition
-                 slau.cpp(19) : see previous definition of 'me'
+     1>field_utility.cpp(557): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(557): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>field_utility.cpp(558): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(634): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>field_utility.cpp(636): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"D:\SFML-2.3.1\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-audio-s.lib" "sfml-main.lib" opengl32.lib winmm.lib gdi32.lib freetype.lib jpeg.lib openal32.lib flac.lib vorbisenc.lib vorbisfile.lib vorbis.lib ogg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.lib" /MACHINE:X86 /SAFESEH Release\animation.obj
          Release\button_init.obj
@@ -39,4 +36,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:12.62
+Time Elapsed 00:00:11.60

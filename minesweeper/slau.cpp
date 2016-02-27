@@ -50,7 +50,7 @@ slau_2 slau_1::solve () const {
 		}
 		r_n first_non_zero_el = me[i][i];
 		if (first_non_zero_el != 1) {
-			for (int z = i; z < w_A_with_b; ++z) {
+			for (int z = i + 1; z < w_A_with_b; ++z) {
 				me[i][z] = me[i][z] / first_non_zero_el;
 			}
 		}
@@ -76,9 +76,14 @@ slau_2 slau_1::solve () const {
 	slau_2 rv (last, w_A_with_b - 1 - last);
 	rv.link_h.assign (copy.link.begin (), copy.link.begin () + last);
 	rv.link_w.assign (copy.link.begin () + last, copy.link.end ());
+
 	FOR (i, rv.h) {
 		FOR (j, rv.w_A_with_b) {
-			rv.A_b[i][j] = me[i][j + last];
+			if (j == rv.w_A_with_b - 1) {
+				rv.A_b[i][j] = me[i][j + last];
+			} else {
+				rv.A_b[i][j] = r_n(0) - me[i][j + last];
+			}
 		}
 	}
 	return rv;
@@ -87,6 +92,8 @@ slau_2 slau_1::solve () const {
 #define me (this->A_b)
 
 void slau_2::solve () {
+	bool debug = kb::isKeyPressed (kb::D);
+
 	int esp = 0;
 	int w_A_without_b = w_A_with_b - 1;
 	slau_elem_info sei;
@@ -96,9 +103,14 @@ void slau_2::solve () {
 	int *stack = new int [w_A_without_b];
 	int index_of_mnx;
 	memset (row_used, 0, sizeof (bool) * h);
-	memset (column_used, 0, sizeof (bool) * h);
+	memset (column_used, 0, sizeof (bool) * w_A_without_b);
 	inf_h.assign (h, sei);
 	inf_w.assign (w_A_without_b, sei);
+	
+	if (debug) {
+		min_a[0] = min_a[0] + 2;
+	}
+
 	while (1) {
 		index_of_mnx = -1;
 		FOR (i, h) {
@@ -112,9 +124,9 @@ void slau_2::solve () {
 						}
 					} else {
 						if (me[i][j] > 0) {
-							min_a[i] = min_a[i] + me[i][j];
-						} else {
 							max_a[i] = max_a[i] + me[i][j];
+						} else {
+							min_a[i] = min_a[i] + me[i][j];
 						}
 					}
 				}
@@ -125,27 +137,25 @@ void slau_2::solve () {
 				}
 			}
 		}
-		if (mnx == 0) {
+		if (mnx == 0 && index_of_mnx >= 0) {
 			row_used[index_of_mnx] = true;
 			FOR (j, w_A_without_b) {
 				if (!column_used[j] && me[index_of_mnx][j] != 0) {
 					stack[esp] = j;
-					inf_w[j].row = index_of_mnx;
-					SET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_CONST, true);
-					SET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_IS_EQUAL_TO_ONE, bool (max_a[index_of_mnx] == 0) ^ bool (me[index_of_mnx][j] < 0));
 					column_used[j] = true;
+					SET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_CONST, true);
+					SET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_IS_EQUAL_TO_ONE, bool (max_a[index_of_mnx] == 0) ^ bool (me[index_of_mnx][j] < 0));			
 					++esp;
 				}
 			}
 		}
-		if (mnx > 0) {
+		if (mnx > 0 && index_of_mnx >= 0) {
 			FOR (j, w_A_without_b) {
 				if (!column_used[j] && me[index_of_mnx][j] != 0) {
 					stack[esp] = j;
-					inf_w[j].row = index_of_mnx;
+					column_used[j] = true;
 					SET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_CONST, false);
 					SET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_IS_EQUAL_TO_ONE, false);
-					column_used[j] = true;
 					++esp;
 					break;
 				}
@@ -155,7 +165,11 @@ void slau_2::solve () {
 			FOR (j, w_A_without_b) {
 				SET_F_STATE (inf_w[j], GET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_IS_EQUAL_TO_ONE) ? SLAU_ELEM_INFO_FLAG_CAN_BE_ONE : SLAU_ELEM_INFO_FLAG_CAN_BE_ZERO, true);
 			}
-			r_n res;
+			r_n res = 0;
+			if (debug) {
+				res = res + 1;
+				res = res - 1;
+			}
 			FOR (i, h) {
 				res = 0;
 				FOR (j, w_A_with_b) {
@@ -163,18 +177,29 @@ void slau_2::solve () {
 						res = res + me[i][j];
 					}
 				}
+				
 				SET_F_STATE (inf_h[i], (res == 1) ? SLAU_ELEM_INFO_FLAG_CAN_BE_ONE : SLAU_ELEM_INFO_FLAG_CAN_BE_ZERO, true);
 			}
 		}
-		if (mnx < 0 || esp == w_A_without_b) {
+		if (mnx < 0 || esp == w_A_without_b || index_of_mnx < 0) {
+			//--esp;
 			for (--esp; ; --esp) {
 				if (esp < 0) {
+					delete []row_used;
+					delete []column_used;
+					delete []min_a;
+					delete []max_a;
+					delete []stack;
 					return;
 				}
 				if (GET_F_STATE (inf_w[stack[esp]], SLAU_ELEM_INFO_FLAG_CONST) ) {
 					SET_F_STATE (inf_w[stack[esp]], SLAU_ELEM_INFO_FLAG_CONST, false);
-					row_used[inf_w[stack[esp]].row] = false;
 					column_used[stack[esp]] = false;
+					FOR (i, h) {
+						if (me[i][stack[esp]] != 0) {
+							row_used [i] = false;
+						}
+					}
 					continue;
 				}
 				SET_F_STATE (inf_w[stack[esp]], SLAU_ELEM_INFO_FLAG_IS_EQUAL_TO_ONE, true);
@@ -185,9 +210,4 @@ void slau_2::solve () {
 			continue;
 		}
 	}
-	delete []row_used;
-	delete []column_used;
-	delete []min_a;
-	delete []max_a;
-	delete []stack;
 }

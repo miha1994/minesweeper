@@ -1,0 +1,8 @@
+esp = 0
+, w_A_without_b = 10
+, w_A_with_b = 11
+, h = 32
+, inf_h.size () = 32
+, inf_w.size () = 10
+, link_h.size () = 32
+, link_w.size () = 10

@@ -19,8 +19,7 @@
 class slau_elem_info {
 public:
 	int state;
-	int row;
-	slau_elem_info () : state (0), row (0) {}
+	slau_elem_info () : state (0) {}
 };
 
 class slau_2 {

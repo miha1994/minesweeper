@@ -26,8 +26,9 @@ extern bool Global_Bool_Key_Pressed;
 
 #define forvector(p_,end_,type_,vector_)		for (std::vector<type_>::iterator (p_) = (vector_).begin(), (end_) = (vector_).end(); (p_) != (end_); ++(p_))
 #define formap(p_,end_,type1_,type2_,map_)		for (std::map<type1_,type2_>::iterator (p_) = (map_).begin(), (end_) = (map_).end(); (p_) != (end_); ++(p_))
+#define forset(p_,end_,type_,set_)				for (std::set<type_>::iterator (p_) = (set_).begin(), (end_) = (set_).end(); (p_) != (end_); ++(p_))
 #define forlist(p_,end_,type_,list_)			for (std::list<type_>::iterator (p_) = (list_).begin(), (end_) = (list_).end(); (p_) != (end_); ++(p_))
-#define forlist_no_inc(p_,end_,type_,list_)			for (std::list<type_>::iterator (p_) = (list_).begin(), (end_) = (list_).end(); (p_) != (end_); )
+#define forlist_no_inc(p_,end_,type_,list_)		for (std::list<type_>::iterator (p_) = (list_).begin(), (end_) = (list_).end(); (p_) != (end_); )
 
 extern int MY_WIND_WIDTH, MY_WIND_HEIGHT;
 extern int SC_WIDTH, SC_HEIGHT;
