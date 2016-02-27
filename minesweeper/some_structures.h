@@ -76,6 +76,7 @@ struct sq_button {
 	bool update (float dt, v2f mouse_pos);
 };
 
+/*
 class r_n {
 	public:
 	int a, b;
@@ -137,3 +138,4 @@ class r_n {
 		Norm ();
 	}
 };
+*/

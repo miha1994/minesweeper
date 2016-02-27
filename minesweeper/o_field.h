@@ -26,11 +26,13 @@ struct smiley {
 class field {
 public:
 	int state;
+	int mkr;
 	smiley sm;
 	cell_ar<cell> a;
 	game_parameters gp;
     sf::RectangleShape bg;
 	std::list <force_cell> fc_l;
+	std::set <v2i> was_q;
 	sq_button menu;
 	sprite menu_na[2];
 	sprite menu_a[2];

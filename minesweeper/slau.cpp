@@ -36,7 +36,7 @@ slau_2 slau_1::solve () const {
 				break;
 			}
 			FOR (z, w_A_with_b) {
-				swap (r_n, me[i][z],me[last][z]);
+				swap (int, me[i][z],me[last][z]);
 			}
 		} while (1);
 		if (i == last) {
@@ -44,11 +44,11 @@ slau_2 slau_1::solve () const {
 		}
 		if (i_non_zero != i) {
 			for (int j = 0; j < last; ++j) {
-				swap (r_n, me[j][i], me[j][i_non_zero]);
+				swap (int, me[j][i], me[j][i_non_zero]);
 			}
 			swap (v2i, copy.link[i], copy.link[i_non_zero]);
 		}
-		r_n first_non_zero_el = me[i][i];
+		int first_non_zero_el = me[i][i];
 		if (first_non_zero_el != 1) {
 			for (int z = i + 1; z < w_A_with_b; ++z) {
 				me[i][z] = me[i][z] / first_non_zero_el;
@@ -56,7 +56,7 @@ slau_2 slau_1::solve () const {
 		}
 		for (int j = i+1; j < last; ++j) {
 			if (me[j][i] != 0) {
-				r_n mn = me[j][i];
+				int mn = me[j][i];
 				for (int z = i; z < w_A_with_b; ++z) {
 					me[j][z] = me[j][z] - mn * me[i][z];
 				}
@@ -66,7 +66,7 @@ slau_2 slau_1::solve () const {
 	for (int i = last-1; i; --i) { // обратный ход
 		FOR (j, i) {
 			if (me[j][i] != 0) {
-				r_n mn = me[j][i];
+				int mn = me[j][i];
 				for (int z = i; z < w_A_with_b; ++z) {
 					me[j][z] = me[j][z] - mn * me[i][z];
 				}
@@ -82,7 +82,7 @@ slau_2 slau_1::solve () const {
 			if (j == rv.w_A_with_b - 1) {
 				rv.A_b[i][j] = me[i][j + last];
 			} else {
-				rv.A_b[i][j] = r_n(0) - me[i][j + last];
+				rv.A_b[i][j] = -me[i][j + last];
 			}
 		}
 	}
@@ -92,24 +92,18 @@ slau_2 slau_1::solve () const {
 #define me (this->A_b)
 
 void slau_2::solve () {
-	bool debug = kb::isKeyPressed (kb::D);
-
 	int esp = 0;
 	int w_A_without_b = w_A_with_b - 1;
 	slau_elem_info sei;
 	bool *row_used = new bool [h];
 	bool *column_used = new bool [w_A_without_b];
-	r_n *min_a = new r_n[h], *max_a = new r_n[h], mnx;
+	int *min_a = new int[h], *max_a = new int[h], mnx;
 	int *stack = new int [w_A_without_b];
 	int index_of_mnx;
 	memset (row_used, 0, sizeof (bool) * h);
 	memset (column_used, 0, sizeof (bool) * w_A_without_b);
 	inf_h.assign (h, sei);
 	inf_w.assign (w_A_without_b, sei);
-	
-	if (debug) {
-		min_a[0] = min_a[0] + 2;
-	}
 
 	while (1) {
 		index_of_mnx = -1;
@@ -119,18 +113,18 @@ void slau_2::solve () {
 				FOR (j, w_A_without_b) {
 					if (column_used[j]) {
 						if (GET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_IS_EQUAL_TO_ONE)) {
-							min_a[i] = min_a[i] + me[i][j];
-							max_a[i] = max_a[i] + me[i][j];
+							min_a[i] += me[i][j];
+							max_a[i] += me[i][j];
 						}
 					} else {
 						if (me[i][j] > 0) {
-							max_a[i] = max_a[i] + me[i][j];
+							max_a[i] += me[i][j];
 						} else {
-							min_a[i] = min_a[i] + me[i][j];
+							min_a[i] += me[i][j];
 						}
 					}
 				}
-				r_n cur = (r_n(1) - min_a[i]) * (max_a[i]);
+				int cur = (1 - min_a[i]) * (max_a[i]);
 				if (index_of_mnx < 0 || cur < mnx) {
 					index_of_mnx = i;
 					mnx = cur;
@@ -165,16 +159,12 @@ void slau_2::solve () {
 			FOR (j, w_A_without_b) {
 				SET_F_STATE (inf_w[j], GET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_IS_EQUAL_TO_ONE) ? SLAU_ELEM_INFO_FLAG_CAN_BE_ONE : SLAU_ELEM_INFO_FLAG_CAN_BE_ZERO, true);
 			}
-			r_n res = 0;
-			if (debug) {
-				res = res + 1;
-				res = res - 1;
-			}
+			int res = 0;
 			FOR (i, h) {
 				res = 0;
 				FOR (j, w_A_with_b) {
 					if (j == w_A_without_b || GET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_IS_EQUAL_TO_ONE)) {
-						res = res + me[i][j];
+						res += me[i][j];
 					}
 				}
 				

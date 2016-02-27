@@ -26,7 +26,7 @@ class slau_2 {
 public:
 	int h;
 	int w_A_with_b;
-	cell_ar <r_n> A_b;
+	cell_ar <int> A_b;
 	std::vector <v2i> link_h;
 	std::vector <v2i> link_w;
 	std::vector <slau_elem_info> inf_h;
@@ -34,7 +34,7 @@ public:
 	explicit slau_2 (int h_, int w_of_A_without_b) : A_b (h_, w_of_A_without_b + 1) {
 		h = h_;
 		w_A_with_b = w_of_A_without_b + 1;
-		A_b.init (r_n (0,1));
+		A_b.init (0);
 	}
 	void solve ();
 };
@@ -43,12 +43,12 @@ class slau_1 {
 public:
 	int h;
 	int w_A_with_b;
-	cell_ar <r_n> A_b;
+	cell_ar <int> A_b;
 	std::vector <v2i> link;
 	explicit slau_1 (int h_, int w_of_A_without_b) : A_b (h_, w_of_A_without_b + 1) {
 		h = h_;
 		w_A_with_b = w_of_A_without_b + 1;
-		A_b.init (r_n (0,1));
+		A_b.init (0);
 	}
 	slau_2 solve () const;
 };

@@ -294,7 +294,7 @@ CLR CLR_ADD (CLR col1, CLR col2) {
 	clr_norm (&col1);
 	return col1;
 }
-
+/*
 void r_n::Norm () {
 	int mx = std::max (sqrt (abs (a)), sqrt (abs (b)));
 	for (int i = 2; i <= mx; ++i) {
@@ -310,4 +310,8 @@ void r_n::Norm () {
 	if (a == 0) {
 		b = 1;
 	}
+	if (b != 1) {
+		exit (0);
+	}
 }
+*/

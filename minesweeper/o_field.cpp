@@ -21,10 +21,12 @@ void field_reset (field *fld) {
 			fld->a[i][j].val = 0;
 		}
 	}
+	fld->was_q.clear ();
 	fld->empty = true;
 	fld->game_over = false;
 	fld->win = false;
 	fld->time = 0.0f;
+	fld->mkr = 0;
 	fld->no_moves = false;
 	fld->state = FIELD_STATE_INTRO;
 }
@@ -208,7 +210,8 @@ O_UPDATE (field_update) {
 				fld->time += dt;
 			}
 			fld->sec.setCharacterSize(20 * PIX);
-			fld->sec.setString (std::to_string (Min (int (fld->time), 999)));
+			fld->sec.setString (Tstr (fld->time) + "  " + Tstr (fld->mkr / 1000000.0));
+			//fld->sec.setString (std::to_string (Min (int (fld->time), 999)));
 			fld->sec.setPosition(int((MY_WIND_WIDTH - 12)*PIX - fld->sec.getGlobalBounds ().width) + fld->shift,int(6.4*PIX));
 		}
 		//fld->crt.update ();
