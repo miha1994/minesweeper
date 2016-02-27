@@ -25,6 +25,7 @@ void field_reset (field *fld) {
 	fld->game_over = false;
 	fld->win = false;
 	fld->time = 0.0f;
+	fld->mcr = 0;
 	fld->no_moves = false;
 	fld->state = FIELD_STATE_INTRO;
 }
@@ -201,7 +202,7 @@ O_UPDATE (field_update) {
 				fld->time += dt;
 			}
 			fld->sec.setCharacterSize(20 * PIX);
-			fld->sec.setString (std::to_string (Min (int (fld->time), 999)));
+			fld->sec.setString (std::to_string (Min (int (fld->time), 999)) + "   " + Tstr (fld->mcr / 1000000.0));
 			fld->sec.setPosition(int((MY_WIND_WIDTH - 12)*PIX - fld->sec.getGlobalBounds ().width) + fld->shift,int(6.4*PIX));
 		}
 		//fld->crt.update ();
@@ -235,6 +236,15 @@ O_UPDATE (field_update) {
 					field_open_cell (fld, v);
 					return false;
 				}
+			}
+			if (!fld->empty) {
+			FOR_2D (v, WWW, HHH) {
+				MK_C (c, v);
+				if ((c->flags & CELL_FLAGS_CLOSED) && !(c->flags & CELL_FLAGS_MINE)) {
+					field_open_cell (fld, v);
+					return false;
+				}
+			}
 			}
 		}
 		if (input.mbutton[MOUSE_MIDDLE].just_released ||

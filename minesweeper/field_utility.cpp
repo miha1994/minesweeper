@@ -558,7 +558,10 @@ void field_open_cell (field *fld, v2i choose) {
 			}
 		}
 	}
+	sf::Clock timer;
+	timer.restart ();
     field_solve (fld);
+	fld->mcr += timer.getElapsedTime ().asMicroseconds ();
 }
 
 void field_double_mouse (field *fld, v2i choose) {

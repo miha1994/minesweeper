@@ -26,6 +26,7 @@ struct smiley {
 class field {
 public:
 	int state;
+	int mcr;
 	smiley sm;
 	cell_ar<cell> a;
 	game_parameters gp;
