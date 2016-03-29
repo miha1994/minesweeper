@@ -31,10 +31,13 @@ public:
 	std::vector <v2i> link_w;
 	std::vector <slau_elem_info> inf_h;
 	std::vector <slau_elem_info> inf_w;
-	explicit slau_2 (int h_, int w_of_A_without_b) : A_b (h_, w_of_A_without_b + 1) {
+    bool one_solution_is_enough;
+    int max_number_of_mines;
+	explicit slau_2 (int h_, int w_of_A_without_b, int max_number_of_mines_) : A_b (h_, w_of_A_without_b + 1), max_number_of_mines (max_number_of_mines_) {
 		h = h_;
 		w_A_with_b = w_of_A_without_b + 1;
 		A_b.init (0);
+        one_solution_is_enough = false;
 	}
 	void solve ();
 };
@@ -43,9 +46,10 @@ class slau_1 {
 public:
 	int h;
 	int w_A_with_b;
+    int max_number_of_mines;
 	cell_ar <int> A_b;
 	std::vector <v2i> link;
-	explicit slau_1 (int h_, int w_of_A_without_b) : A_b (h_, w_of_A_without_b + 1) {
+	explicit slau_1 (int h_, int w_of_A_without_b, int max_number_of_mines_) : A_b (h_, w_of_A_without_b + 1), max_number_of_mines (max_number_of_mines_) {
 		h = h_;
 		w_A_with_b = w_of_A_without_b + 1;
 		A_b.init (0);

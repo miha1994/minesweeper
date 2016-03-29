@@ -29,6 +29,8 @@ extern bool Global_Bool_Key_Pressed;
 #define forset(p_,end_,type_,set_)				for (std::set<type_>::iterator (p_) = (set_).begin(), (end_) = (set_).end(); (p_) != (end_); ++(p_))
 #define forlist(p_,end_,type_,list_)			for (std::list<type_>::iterator (p_) = (list_).begin(), (end_) = (list_).end(); (p_) != (end_); ++(p_))
 #define forlist_no_inc(p_,end_,type_,list_)		for (std::list<type_>::iterator (p_) = (list_).begin(), (end_) = (list_).end(); (p_) != (end_); )
+#define forstl(p_,end_,container_)              for (auto (p_) = (container_).begin (), (end_) = (container_).end (); (p_) != (end_); ++(p_))
+#define forstl_no_inc(p_,end_,container_)       for (auto (p_) = (container_).begin (), (end_) = (container_).end (); (p_) != (end_); )
 
 extern int MY_WIND_WIDTH, MY_WIND_HEIGHT;
 extern int SC_WIDTH, SC_HEIGHT;

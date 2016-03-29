@@ -21,7 +21,6 @@ void field_reset (field *fld) {
 			fld->a[i][j].val = 0;
 		}
 	}
-	fld->was_q.clear ();
 	fld->empty = true;
 	fld->game_over = false;
 	fld->win = false;
@@ -43,6 +42,8 @@ void field_ch_pix (field *fld) {
 		fld->sm.spr[i][PX_1].itself.setPosition ((MY_WIND_WIDTH / 2 - 16) * PIX + fld->shift, 3.5 * PIX);
 		fld->sm.spr[i][PX_1].itself.setScale ((fld->pix / PX_96) * (28.0 / 30), (fld->pix / PX_96) * (28.0 / 30));
 	}
+	fld->wm.spr[PX_1].itself.setScale ((fld->pix / PX_96), (fld->pix / PX_96));
+
 	fld->mines_left.setCharacterSize(20 * PIX);
 	fld->mines_left.setPosition (int(90*PIX - fld->mines_left.getGlobalBounds ().width) + fld->shift , int(7*PIX));
 	fld->sec.setCharacterSize(20 * PIX);
@@ -61,6 +62,8 @@ O_LOAD (field_load) {
 	fld->r_wind_h = R_WIND_HEIGHT;
 	fld->inside_w =
 	fld->r_wind_w = R_WIND_WIDTH;
+
+	fld->mm.fld_ = (char *) fld;
 
 	fld->font.loadFromFile ("assets/fonts/cg.ttf");
 
@@ -115,18 +118,88 @@ O_LOAD (field_load) {
 	}
 	fld->sm.state = SMILEY_NONE;
 
+	FOR (z, 2) {
+		fld->wm.spr[z].init ((std::string("assets/textures/wtruck") + (z ? "" : "_48") + ".png").c_str(), 4*(z ? 96 : 48), 4*(z ? 96 : 48), true);
+		fld->wm.spr[z].itself.setColor (my_clr_s[color_theme].win_man);
+	}
+
 	field_reset (fld);
 	field_ch_pix (fld);
 
 	read_string ();
+    fld->commit = new field (*fld);
 	return (char *)fld;
 }
+
+#define DF(smth)    smth (fld.smth)
+#define DF1(q1,q2,q3,q4,q5)    DF(q1), DF(q2), DF(q3), DF(q4), DF(q5)
+field::field (field& fld) : DF(state),
+	DF (mkr),
+    DF (sm),
+	DF (wm),
+	DF (mm),
+    DF (a),
+    DF (gp),
+    DF (bg),
+    DF (fc_l),
+    DF (new_digits),
+    DF (menu),
+    DF (cells),
+    DF (forced_cells),
+    DF (flags),
+    DF (mines),
+    DF (digits),
+    DF (crs),
+    DF (mines_left),
+    DF (sec),
+    DF1 (time, pix, shift, vshift, win_time),
+    DF1 (r_wind_h, r_wind_w, intro_num, inside_w, empty),
+    DF1 (game_over, win, wait_all_release, no_moves, crt),
+    commit (&fld) {}
+#undef DF1
+#undef DF
+
+
+#define DF(s)   s = commit->s;
+#define DF1(q1,q2,q3,q4,q5)    DF(q1); DF(q2); DF(q3); DF(q4); DF(q5)
+void field::checkout () {
+    DF (state);
+	DF (mkr);
+    DF (sm);
+	DF (wm);
+	DF (mm);
+    DF (a);
+    DF (gp);
+    DF (bg);
+    DF (fc_l);
+    DF (new_digits);
+    DF (menu);
+    DF (cells);
+    DF (forced_cells);
+    DF (flags);
+    DF (mines);
+    DF (digits);
+    DF (crs);
+    DF (mines_left);
+    DF (sec);
+    DF1 (time, pix, shift, vshift, win_time);
+    DF1 (r_wind_h, r_wind_w, intro_num, inside_w, empty);
+    DF1 (game_over, win, wait_all_release, no_moves, crt);
+}
+#undef DF1
+#undef DF
 
 kb::Key bbbb = kb::A;
 
 O_UPDATE (field_update) {
 	CNTRL ("field_update");
 	O_DECL (field, fld);
+    if (input.kb_abc['Q'-'A'].just_pressed) {
+        fld->commit->checkout ();
+    }
+    if (input.kb_abc['W'-'A'].just_pressed) {
+        fld->checkout ();
+    }
 	int inside_w;
 	if (fld->r_wind_h != R_WIND_HEIGHT || fld->r_wind_w != R_WIND_WIDTH) {
 		v2i wpos = window.getPosition ();
@@ -210,14 +283,11 @@ O_UPDATE (field_update) {
 				fld->time += dt;
 			}
 			fld->sec.setCharacterSize(20 * PIX);
-			fld->sec.setString (Tstr (fld->time) + "  " + Tstr (fld->mkr / 1000000.0));
+			fld->sec.setString (Tstr (int (fld->time)));
 			//fld->sec.setString (std::to_string (Min (int (fld->time), 999)));
 			fld->sec.setPosition(int((MY_WIND_WIDTH - 12)*PIX - fld->sec.getGlobalBounds ().width) + fld->shift,int(6.4*PIX));
 		}
 		//fld->crt.update ();
-		if (fld->win) {
-			fld->win_time += dt;
-		}
 
 		v2f m;
 		get_mouse_pos (m);
@@ -249,6 +319,7 @@ O_UPDATE (field_update) {
 					return false;
 				}
 			}
+            /*
 			if (!fld->empty) {
 				FOR_2D (v, WWW, HHH) {
 					MK_C (c, v);
@@ -258,6 +329,7 @@ O_UPDATE (field_update) {
 					}
 				}
 			}
+            */
 		}
 		if (input.mbutton[MOUSE_MIDDLE].just_released ||
 			(input.mbutton[MOUSE_LEFT].pressed_now && input.mbutton[MOUSE_RIGHT].just_released) ||
@@ -312,6 +384,9 @@ O_UPDATE (field_update) {
 		}
 		if (!fld->win) {
 			field_check_win (fld);
+			if (fld->win) {
+				fld->mm.init ();
+			}
 		}
 		field_count_mines_left (fld);
 
@@ -330,6 +405,40 @@ O_UPDATE (field_update) {
 		if (fld->win) {
 			ip = SMILEY_WIN;
 		}
+		if (fld->win) {
+			fld->win_time += dt;
+			float x;
+
+			switch (fld->wm.state) {
+			case 0:
+				x = pow(1 - fld->win_time, 2) * (-10);
+				fld->wm.spr[PX_1].itself.setPosition (v2f (fld->shift, fld->vshift) + v2f( v2f(6, 43) + v2f(x, HHH - 4)*32.0f ) * PIX);
+				if (fld->win_time >= 1) {
+					fld->win_time = 0;
+					fld->wm.state = 1;
+					fld->wm.spr[PX_1].itself.setPosition (v2f (fld->shift, fld->vshift) + v2f( v2f(6, 43) + v2f(0, HHH - 4)*32.0f ) * PIX);
+				}
+				break;
+			case 1:
+				fld->wm.spr[PX_1].itself.setPosition (v2f (fld->shift, fld->vshift) + v2f( v2f(6, 43) + v2f(0, HHH - 4)*32.0f ) * PIX);
+				break;
+			case 2:
+				x = pow(fld->win_time, 2) * (-10);
+				fld->wm.spr[PX_1].itself.setPosition (v2f (fld->shift, fld->vshift) + v2f( v2f(6, 43) + v2f(x, HHH - 4)*32.0f ) * PIX);
+				if (fld->win_time >= 2) {
+					fld->win_time = 0;
+					fld->wm.state = 3;
+					fld->wm.spr[PX_1].itself.setPosition (v2f (fld->shift, fld->vshift) + v2f( v2f(6, 43) + v2f(-1000, HHH - 4)*32.0f ) * PIX);
+				}
+				break;
+			case 3:
+				fld->wm.spr[PX_1].itself.setPosition (v2f (fld->shift, fld->vshift) + v2f( v2f(6, 43) + v2f(-1000, HHH - 4)*32.0f ) * PIX);
+			}
+			if (fld->mm.update (dt*1.5)) {
+				fld->wm.state = 2;
+				fld->win_time = 0;
+			}
+		}
 		break;
 	}
 	
@@ -338,18 +447,25 @@ O_UPDATE (field_update) {
 
 O_RENDER (field_render) {
 	O_DECL (field, fld);
-	//fld->bg.setFillColor (rand () & 1 ? CLR::Black : CLR::White);
 	window.draw (fld->bg);
+	if (fld->win) {
+		window.draw (fld->mines, &fld->mine_text[fld->pix > 48]);
+	}
 	window.draw (fld->cells, &fld->cell_text[fld->pix > 48]);
 	window.draw (fld->digits, &fld->digits_text[fld->pix > 48]);
 	window.draw (fld->forced_cells, &fld->cell_text[fld->pix > 48]);
-	window.draw (fld->mines, &fld->mine_text[fld->pix > 48]);
+	if (!fld->win) {
+		window.draw (fld->mines, &fld->mine_text[fld->pix > 48]);
+	}
 	window.draw (fld->flags, &fld->flag_text[fld->pix > 48]);
 	window.draw (fld->crs, &fld->crs_text[fld->pix > 48]);
 	fld->menu.draw (&window);
 	fld->sm.spr[fld->sm.state][PX_1].draw (&window);
 	window.draw (fld->sec);
 	window.draw (fld->mines_left);
+	if (fld->win) {
+		fld->wm.spr[PX_1].draw (&window);
+	}
 	//fld->crt.render ();
 }
 

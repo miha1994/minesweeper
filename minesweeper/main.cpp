@@ -4,6 +4,7 @@
 
 int main()
 {
+	srand (41);
 	dig_colors[1] = CLR(31,36,255,255);
 	dig_colors[2] = CLR(0,142,0,255);
 	dig_colors[3] = CLR(224,0,0,255);

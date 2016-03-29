@@ -20,6 +20,11 @@ struct smiley {
 	int state;
 };
 
+struct win_s {
+	sprite spr[2];
+	int state;
+};
+
 #define FIELD_STATE_INTRO	0
 #define FIELD_STATE_IN_GAME 1
 
@@ -28,11 +33,13 @@ public:
 	int state;
 	int mkr;
 	smiley sm;
+	win_s wm;
+	mines_moving mm;
 	cell_ar<cell> a;
 	game_parameters gp;
     sf::RectangleShape bg;
 	std::list <force_cell> fc_l;
-	std::set <v2i> was_q;
+	std::set <v2i> new_digits;
 	sq_button menu;
 	sprite menu_na[2];
 	sprite menu_a[2];
@@ -65,7 +72,10 @@ public:
 	bool wait_all_release;
 	bool no_moves;
 	change_real_time crt;
+    field *commit;
 	explicit field (int h, int w) : a (h,w) { }
+    field (field &fld);
+    void checkout ();
 };
 
 extern std_obj_functions field_f;

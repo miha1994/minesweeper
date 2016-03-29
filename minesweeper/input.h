@@ -17,6 +17,7 @@ public:
 class INPUT {
 public:
 	button_state mbutton[3];
+    button_state kb_abc[26];
 	void upd ();
 	INPUT () {
 		FOR (i, 3) {
@@ -24,6 +25,11 @@ public:
 			mbutton[i].just_pressed = false;
 			mbutton[i].just_released = false;
 		}
+        FOR (i, 26) {
+            kb_abc[i].just_pressed = false;
+            kb_abc[i].just_released = false;
+            kb_abc[i].pressed_now = false;
+        }
 	}
 };
 

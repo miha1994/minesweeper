@@ -32,7 +32,7 @@ bool Game::init (bool fullscreen) {
 
 void Game::update () {
 	CNTRL ("game_update");
-	rand ();
+	//rand ();
 	if (!window.isOpen ()) {
 		running = false;
 		return;

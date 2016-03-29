@@ -1,6 +1,7 @@
 #pragma once
 #include "sfml.h"
 #include "main_header.h"
+#include "quad.h"
 #include <iostream>
 
 struct sprite {
@@ -24,7 +25,8 @@ struct color_s {
     CLR font;
 	CLR bg;
 	CLR flag;
-    color_s (CLR Unknown, CLR Mine, CLR Safe, CLR Font, CLR BG, CLR Flag) : unknown (Unknown), mine (Mine), safe (Safe), font (Font), bg (BG), flag (Flag)
+	CLR win_man;
+	color_s (CLR Unknown, CLR Mine, CLR Safe, CLR Font, CLR BG, CLR Flag, CLR Win_man) : unknown (Unknown), mine (Mine), safe (Safe), font (Font), bg (BG), flag (Flag), win_man (Win_man)
     {}
 };
 
@@ -74,6 +76,38 @@ struct sq_button {
 	float alpha;
 	void draw (sf::RenderWindow *wind);
 	bool update (float dt, v2f mouse_pos);
+};
+
+struct mines_moving {
+	char *fld_;
+	struct mine {
+		v2i tmp_goal;
+		v2i cur_pos;
+		v2i nxt_pos;
+		float part_of_step;
+		float speed;
+        float wait;
+	};
+	struct splinter {
+		quad q;
+		float speed;
+		float a;
+	};
+	struct flag {
+		v2i start_pos;
+		float time;
+	};
+	struct digit : public flag {
+		int dig;
+	};
+	std::list <mine> e;
+	std::list <flag> f;
+	std::list <splinter> s;
+	std::list <digit> d;
+	int h2;
+	int w2;
+	void init ();
+	bool update (float dt);
 };
 
 /*

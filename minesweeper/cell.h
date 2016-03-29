@@ -62,6 +62,7 @@ cell_ar<T> & cell_ar<T>::operator = (const cell_ar<T>& ca) {
 		}
 	}
 	memcpy (f, ca.f, sizeof (T) * (W+2) * (H+2));
+    return *this;
 }
 
 template <class T>

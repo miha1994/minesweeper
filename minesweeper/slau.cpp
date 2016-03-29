@@ -63,7 +63,7 @@ slau_2 slau_1::solve () const {
 			}
 		}
 	}
-	for (int i = last-1; i; --i) { // обратный ход
+	for (int i = last-1; i>=0; --i) { // обратный ход
 		FOR (j, i) {
 			if (me[j][i] != 0) {
 				int mn = me[j][i];
@@ -73,7 +73,7 @@ slau_2 slau_1::solve () const {
 			}
 		}
 	}
-	slau_2 rv (last, w_A_with_b - 1 - last);
+    slau_2 rv (last, w_A_with_b - 1 - last, max_number_of_mines);
 	rv.link_h.assign (copy.link.begin (), copy.link.begin () + last);
 	rv.link_w.assign (copy.link.begin () + last, copy.link.end ());
 
@@ -92,6 +92,9 @@ slau_2 slau_1::solve () const {
 #define me (this->A_b)
 
 void slau_2::solve () {
+	if (!h || w_A_with_b <= 0) {
+		return;
+	}
 	int esp = 0;
 	int w_A_without_b = w_A_with_b - 1;
 	slau_elem_info sei;
@@ -156,20 +159,42 @@ void slau_2::solve () {
 			}
 		}
 		if (esp == w_A_without_b) {
-			FOR (j, w_A_without_b) {
-				SET_F_STATE (inf_w[j], GET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_IS_EQUAL_TO_ONE) ? SLAU_ELEM_INFO_FLAG_CAN_BE_ONE : SLAU_ELEM_INFO_FLAG_CAN_BE_ZERO, true);
+            int mines_count = 0;
+            bool *bw = new bool [w_A_without_b];
+            bool *bh = new bool [h];
+            FOR (j, w_A_without_b) {
+                bw [j] = GET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_IS_EQUAL_TO_ONE);
+                mines_count += bw [j];
 			}
-			int res = 0;
-			FOR (i, h) {
+            int res;
+            FOR (i, h) {
 				res = 0;
 				FOR (j, w_A_with_b) {
 					if (j == w_A_without_b || GET_F_STATE (inf_w[j], SLAU_ELEM_INFO_FLAG_IS_EQUAL_TO_ONE)) {
 						res += me[i][j];
 					}
 				}
-				
-				SET_F_STATE (inf_h[i], (res == 1) ? SLAU_ELEM_INFO_FLAG_CAN_BE_ONE : SLAU_ELEM_INFO_FLAG_CAN_BE_ZERO, true);
+                mines_count += (bh[i] = res == 1);
 			}
+            if (mines_count <= max_number_of_mines) {
+                FOR (j, w_A_without_b) {
+				    SET_F_STATE (inf_w[j], bw[j] ? SLAU_ELEM_INFO_FLAG_CAN_BE_ONE : SLAU_ELEM_INFO_FLAG_CAN_BE_ZERO, true);
+			    }
+			    FOR (i, h) {
+				    SET_F_STATE (inf_h[i], bh[i] ? SLAU_ELEM_INFO_FLAG_CAN_BE_ONE : SLAU_ELEM_INFO_FLAG_CAN_BE_ZERO, true);
+			    }
+                if (one_solution_is_enough) {
+                    delete []row_used;
+				    delete []column_used;
+				    delete []min_a;
+				    delete []max_a;
+				    delete []stack;
+                    return;
+                }
+            }
+
+            delete [] bw;
+            delete [] bh;
 		}
 		if (mnx < 0 || esp == w_A_without_b || index_of_mnx < 0) {
 			//--esp;
