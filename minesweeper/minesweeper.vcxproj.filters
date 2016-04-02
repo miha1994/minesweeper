@@ -72,6 +72,21 @@
     <ClCompile Include="slau.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="empty.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tooltip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="field_update.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="field_load.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hot_vars.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="func_pointers.h">
@@ -128,6 +143,12 @@
     <ClInclude Include="slau.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tooltip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hot_vars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Release\assets\inf\main.txt">
@@ -137,6 +158,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="..\Release\assets\inf\L0.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\Release\assets\inf\hot_vars.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

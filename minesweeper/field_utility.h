@@ -3,10 +3,12 @@
 
 void field_make (field *fld, std::list <v2i> *free_cells, int mines);
 void field_solve (field *fld, bool first = true);
-void field_open_cell (field *fld, v2i choose);
-void field_double_mouse (field *fld, v2i choose);
+void field_open_cell (field *fld, v2i choice);
+void field_double_mouse (field *fld, v2i choice);
 void field_check_win (field *fld);
 void field_count_mines_left (field *fld);
+void field_ch_pix (field *fld);
+void field_reset (field *fld);
 
 class row_for_slau_info {
 public:

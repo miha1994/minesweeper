@@ -45,23 +45,35 @@ void make_table (button *btn) {
 	}
     btn->play_buttons.clear ();
     btn->del_buttons.clear ();
-	sq_button b;
-	b.alpha = 0;
-	b.spr = &btn->play_not_active;
-	b.act = &btn->play_active;
-	b.pos = v2f (5, 96);
-	btn->play_buttons.push_back (b);
+
+#define tmp(i)  btn->play_buttons[i]
+#define tmp1(i)  tmp(i).spr = &btn->play_not_active; tmp(i).act = &btn->play_active; tmp(i).alpha = 0; \
+    tmp(i).tip_using = true; \
+    tmp(i).tip.setString ("Play using this parameters");
+
+    btn->play_buttons.assign (btn->save.Num_of_templates + 4, sq_button ());
+    tmp1(0);
+    tmp(0).pos = v2f (5, 96);
+    
 	FOR (j, btn->save.Num_of_templates + 3) {
-		b.pos = v2f (x[3], (j+1) * 32);
-		btn->play_buttons.push_back (b);
+        int i = j + 1;
+	    tmp1(i);
+        tmp(i).pos = v2f (x[3], (j+1) * 32);
 	}
-    b.spr = &btn->del_not_active;
-	b.act = &btn->del_active;
-    b.pressed_lt = true;
+    
+#define tmp(i)  btn->del_buttons[i]
+#define tmp1(i)  tmp(i).spr = &btn->del_not_active; tmp(i).act = &btn->del_active; tmp(i).alpha = 0; \
+    tmp(i).tip_using = true; \
+    tmp(i).tip.setString ("Delete this template");
+
+    btn->del_buttons.assign (btn->save.Num_of_templates, sq_button ());
+
     FOR (j, btn->save.Num_of_templates) {
-		b.pos = v2f (x[3] + 32, (j+4) * 32);
-		btn->del_buttons.push_back (b);
+        tmp1(j);
+		tmp(j).pos = v2f (x[3] + 32, (j+4) * 32);
 	}
+#undef tmp
+#undef tmp1
 }
 
 O_RENDER (button_render) {
@@ -111,6 +123,8 @@ O_RENDER (button_render) {
 	}
 	btn->add.draw (&window);
 	btn->crt.render ();
+    btn->sw_map_realloc.draw (&window);
+    btn->sw_open_mine_free_cell.draw (&window);
 }
 
 O_DEL (button_del) {

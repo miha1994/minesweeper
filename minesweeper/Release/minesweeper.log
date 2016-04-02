@@ -1,99 +1,51 @@
-﻿Build started 28.03.2016 17:29:32.
+﻿Build started 02.04.2016 21:19:51.
      1>Project "C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt animation.cpp field_utility.cpp o_field.cpp
-         animation.cpp
-     1>animation.cpp(5): warning C4005: 'MK_C' : macro redefinition
-                 c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\main_header.h(21) : see previous definition of 'MK_C'
-     1>animation.cpp(50): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
-     1>animation.cpp(54): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(56): warning C4305: '=' : truncation from 'double' to 'float'
-     1>animation.cpp(63): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(65): warning C4305: '=' : truncation from 'double' to 'float'
-     1>animation.cpp(76): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>animation.cpp(86): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(112): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
-     1>animation.cpp(116): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(118): warning C4305: '=' : truncation from 'double' to 'float'
-     1>animation.cpp(125): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(127): warning C4305: '=' : truncation from 'double' to 'float'
-     1>animation.cpp(138): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>animation.cpp(148): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(174): warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
-     1>animation.cpp(178): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(180): warning C4305: '=' : truncation from 'double' to 'float'
-     1>animation.cpp(187): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(189): warning C4305: '=' : truncation from 'double' to 'float'
-     1>animation.cpp(196): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(198): warning C4305: '=' : truncation from 'double' to 'float'
-     1>animation.cpp(205): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(207): warning C4305: '=' : truncation from 'double' to 'float'
-     1>animation.cpp(218): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>animation.cpp(228): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(265): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>animation.cpp(322): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(330): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>animation.cpp(340): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(379): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-     1>animation.cpp(435): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>animation.cpp(443): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>animation.cpp(453): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         field_utility.cpp
-     1>field_utility.cpp(476): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>field_utility.cpp(476): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>field_utility.cpp(477): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>field_utility.cpp(486): warning C4244: '+=' : conversion from 'sf::Int64' to 'int', possible loss of data
-     1>field_utility.cpp(562): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
-     1>field_utility.cpp(564): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         o_field.cpp
-     1>o_field.cpp(37): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>o_field.cpp(42): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>o_field.cpp(43): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>o_field.cpp(47): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
-     1>o_field.cpp(48): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(49): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
-     1>o_field.cpp(50): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(51): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>o_field.cpp(51): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(52): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>o_field.cpp(82): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(212): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(213): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(217): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(219): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(227): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(229): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(233): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(234): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(243): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(259): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
-     1>o_field.cpp(261): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(262): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
-     1>o_field.cpp(264): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(285): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
-     1>o_field.cpp(288): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(293): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(339): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(346): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(370): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(394): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>o_field.cpp(398): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(415): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(419): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(423): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(427): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(431): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(435): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>o_field.cpp(437): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt field_update.cpp
+         field_update.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.h(10): warning C4099: 'sprite' : type name first seen using 'class' now seen using 'struct'
+                 c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\tooltip.h(43) : see declaration of 'sprite'
+     1>field_update.cpp(37): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>field_update.cpp(38): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(42): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>field_update.cpp(44): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(52): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
+     1>field_update.cpp(54): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>field_update.cpp(58): warning C4244: '-=' : conversion from 'float' to 'int', possible loss of data
+     1>field_update.cpp(59): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>field_update.cpp(68): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(83): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(104): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>field_update.cpp(106): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(107): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>field_update.cpp(109): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(130): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>field_update.cpp(133): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(179): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>field_update.cpp(186): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>field_update.cpp(210): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>field_update.cpp(234): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>field_update.cpp(238): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(254): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(258): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(262): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(266): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(270): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(274): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_update.cpp(276): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"D:\SFML-2.3.1\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-audio-s.lib" "sfml-main.lib" opengl32.lib winmm.lib gdi32.lib freetype.lib jpeg.lib openal32.lib flac.lib vorbisenc.lib vorbisfile.lib vorbis.lib ogg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.lib" /MACHINE:X86 /SAFESEH Release\animation.obj
          Release\button_init.obj
          Release\button_update.obj
          Release\cell.obj
          Release\common_functions.obj
+         Release\empty.obj
+         Release\field_load.obj
+         Release\field_update.obj
          Release\field_utility.obj
          Release\func_pointers.obj
          Release\Game.obj
+         Release\hot_vars.obj
          Release\input.obj
          Release\main.obj
          Release\o_button.obj
@@ -105,6 +57,7 @@
          Release\slau.obj
          Release\some_structures.obj
          Release\space.obj
+         Release\tooltip.obj
          Generating code
      1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\common_functions.cpp(28): warning C4715: 'get_command' : not all control paths return a value
          Finished generating code
@@ -113,4 +66,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:16.67
+Time Elapsed 00:00:14.22

@@ -34,6 +34,8 @@ v2i std_directions[] = {
 	v2i (-1,0)
 };
 
+int error_generator = 0;
+
 int vec_to_dir (v2i v) {
 	if (v.x) {
 		return v.x > 0 ? 1 : 3;

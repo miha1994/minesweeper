@@ -9,6 +9,15 @@ O_UPDATE (button_update) {
 	CNTRL ("button_update");
 	O_DECL (button, btn);
 
+    if (btn->sw_map_realloc.update (dt, &window)) {
+        btn->save.Mine_moving_ability = btn->sw_map_realloc.turned_on;
+        set_save_status (btn->save);
+    }
+    if (btn->sw_open_mine_free_cell.update (dt, &window)) {
+        btn->save.Safe_opening_ability = btn->sw_open_mine_free_cell.turned_on;
+        set_save_status (btn->save);
+    }
+
 	v2i m;
 	get_mouse_pos (m);
     int i = 0;
@@ -26,7 +35,9 @@ O_UPDATE (button_update) {
 			R_WIND_HEIGHT = MY_WIND_HEIGHT = 49 + global_game_parameters.height * 32;//f_modes[0].height;
 
             window.close ();
-            window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Default);
+			sf::ContextSettings settings;
+			settings.antialiasingLevel = 0;
+            window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Default, settings);
 			sf::Image image;
 			image.loadFromFile( "assets/textures/icon.png" );
 			window.setIcon( image.getSize().x, image.getSize().y, image.getPixelsPtr() );
@@ -38,6 +49,8 @@ O_UPDATE (button_update) {
 			mc->todo.push_back (instruction ("delete", "MENU"));
 			mc->todo.push_back (instruction ("load", "L0"));
 			mc->todo.push_back (instruction ("active", "L0"));
+            btn->save.Last_mode = global_game_parameters;
+            set_save_status (btn->save);
         }
         ++i;
 	}

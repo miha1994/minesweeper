@@ -87,9 +87,13 @@
     <ClCompile Include="button_update.cpp" />
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="common_functions.cpp" />
+    <ClCompile Include="empty.cpp" />
+    <ClCompile Include="field_load.cpp" />
+    <ClCompile Include="field_update.cpp" />
     <ClCompile Include="field_utility.cpp" />
     <ClCompile Include="func_pointers.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="hot_vars.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="o_button.cpp" />
@@ -101,6 +105,7 @@
     <ClCompile Include="slau.cpp" />
     <ClCompile Include="some_structures.cpp" />
     <ClCompile Include="space.cpp" />
+    <ClCompile Include="tooltip.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h" />
@@ -108,6 +113,7 @@
     <ClInclude Include="field_utility.h" />
     <ClInclude Include="func_pointers.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="hot_vars.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="main_header.h" />
     <ClInclude Include="object.h" />
@@ -121,8 +127,10 @@
     <ClInclude Include="slau.h" />
     <ClInclude Include="some_structures.h" />
     <ClInclude Include="space.h" />
+    <ClInclude Include="tooltip.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\Release\assets\inf\hot_vars.txt" />
     <Text Include="..\Release\assets\inf\L0.txt" />
     <Text Include="..\Release\assets\inf\main.txt" />
     <Text Include="..\Release\assets\inf\menu.txt" />

@@ -11,7 +11,9 @@ char *button_load (char *parent_space) {
 	MY_WIND_HEIGHT = 400;//f_modes[0].height;
 
     window.close ();
-	window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Titlebar | sf::Style::Close);
+	sf::ContextSettings settings;
+	settings.antialiasingLevel = 0;
+	window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Titlebar | sf::Style::Close, settings);
 	sf::Image image;
 	image.loadFromFile( "assets/textures/icon.png" );
 	window.setIcon( image.getSize().x, image.getSize().y, image.getPixelsPtr() );
@@ -19,7 +21,7 @@ char *button_load (char *parent_space) {
 	window.setFramerateLimit (60);
 
     btn->font.loadFromFile ("assets/fonts/cg.ttf");
-	btn->mine.init ("assets/textures/mine.png", 25, 25);
+	btn->mine.init ("assets/textures/mine2.png", 25, 25);
 
     btn->height.setFont (btn->font);
     btn->height.setColor (my_clr_s[color_theme].font);
@@ -50,6 +52,23 @@ char *button_load (char *parent_space) {
 	btn->play_not_active.init ("assets/textures/play_not_active.png", 30, 30);
     btn->del_active.init ("assets/textures/del_active.png", 30, 30);
     btn->del_not_active.init ("assets/textures/del_not_active.png", 30, 30);
+    btn->bool_a.init ("assets/textures/bool_a.png", 30, 30);
+	btn->bool_na.init ("assets/textures/bool_na.png", 30, 30);
+
+    get_save_status (&btn->save);
+
+#define DF1 btn->sw_map_realloc.get_text ()
+#define DF2 btn->sw_open_mine_free_cell.get_text ()
+    btn->sw_map_realloc.init ("Mine moving ability", &btn->font, v2f (10, 200), v2f (190, 20), &btn->bool_na, &btn->bool_a);
+    btn->sw_open_mine_free_cell.init ("Safe opening ability", &btn->font, v2f (10, 240), v2f (190, 20), &btn->bool_na, &btn->bool_a);
+    DF1.setCharacterSize (16);
+    DF2.setCharacterSize (16);
+    btn->sw_map_realloc.turned_on = btn->save.Mine_moving_ability;
+    btn->sw_open_mine_free_cell.turned_on = btn->save.Safe_opening_ability;
+    btn->sw_map_realloc.set_tip_msg ("Allows you open any cell\nif there is no logical move\nMines will change their\npositions if you click on\ncell containing one");
+    btn->sw_open_mine_free_cell.set_tip_msg ("Allows you click special \nbutton to open one of\nmine-free cell if there\nis no logical move");
+#undef DF1
+#undef DF2
 
 	char c_str[100];
 	btn->x[0] = 5;
@@ -65,6 +84,7 @@ char *button_load (char *parent_space) {
     btn->hwm[0].min_val = 2;
 	btn->hwm[1].min_val = 8;
 	btn->hwm[2].min_val = 0;
+    global_game_parameters = btn->save.Last_mode;
 	FOR (i, 3) {
 		btn->hwm[i].active = false;
 		btn->hwm[i].txt.setFont (btn->font);
@@ -82,8 +102,7 @@ char *button_load (char *parent_space) {
 			btn->hwm[i].upd (global_game_parameters.mines);
 			break;
 		}
-	}
-	get_save_status (&btn->save);
+    }
 	btn->save.First = false;
 	btn->cells.setPrimitiveType (sf::Quads);
 	make_table (btn);
@@ -94,6 +113,8 @@ char *button_load (char *parent_space) {
 	btn->add.pos = v2f(37, 96);
 	btn->add.act = &btn->add_a;
 	btn->add.spr = &btn->add_na;
+    btn->add.tip.setString ("Add these game parameters\nto template list");
+    btn->add.tip_using = true;
 
 	read_string ();
 	return (char *)btn;

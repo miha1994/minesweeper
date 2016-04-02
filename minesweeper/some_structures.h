@@ -2,7 +2,10 @@
 #include "sfml.h"
 #include "main_header.h"
 #include "quad.h"
+#include "tooltip.h"
 #include <iostream>
+
+class tooltip;
 
 struct sprite {
 	sf::Texture texture;
@@ -71,12 +74,67 @@ public:
 struct sq_button {
 	v2f pos;
 	bool pressed_lt;
+    bool is_available_to_be_pressed;
+    bool on_it;
 	sprite *spr;
 	sprite *act;
 	float alpha;
+    tooltip tip;
+    bool tip_using;
+    bool is_dead;
+    sq_button () : is_available_to_be_pressed (true), on_it (false), tip_using (false), is_dead (false) {}
 	void draw (sf::RenderWindow *wind);
 	bool update (float dt, v2f mouse_pos);
 };
+
+template <class T>
+class text_one_type {
+    T inf;
+    v2f position;
+public:
+    sf::Text txt;
+    struct {
+        int v;
+        void set__xy_is_center_point () {v = 0;}
+        void set__xy_is_top_left_point () {v = 1;}
+        void set__xy_is_top_right_point () {v = 2;}
+    } origin_type;
+    void set_pos (v2f pos);
+    void set_pos (float x, float y) {set_pos (v2f(x,y));}
+    void set_inf_value (T val);
+    T get_inf_value () {return inf;}
+    sf::Text *operator -> () {
+        return &txt;
+    }
+};
+
+template <class T>
+void text_one_type <T>::set_pos (v2f pos) {
+    position = pos;
+    auto r = txt.getGlobalBounds ();
+    switch (origin_type.v) {
+        case 0: pos -= r.v_size () * 0.5F; break;
+        case 1: break;
+        case 2: pos.x -= r.width;
+    }
+    pos.y -= r.height * 0.5;
+    txt.setPosition (v2f(v2i(pos)));
+}
+
+template <class T>
+void text_one_type <T>::set_inf_value (T val) {
+    inf = val;
+    txt.setString (Tstr (inf));
+    v2f pos = position;
+    auto r = txt.getGlobalBounds ();
+    switch (origin_type.v) {
+        case 0: pos -= r.v_size () *0.5F; break;
+        case 1: break;
+        case 2: pos.x -= r.width;
+    }
+    pos.y -= r.height * 0.5;
+    txt.setPosition (v2f(v2i(pos)));
+}
 
 struct mines_moving {
 	char *fld_;

@@ -5,11 +5,15 @@
 #include "save.h"
 #include "input.h"
 
+bool no_pause = false;
+
 bool Game::init (bool fullscreen) {
 	MY_WIND_WIDTH = 10;//f_modes[0].width;
 	MY_WIND_HEIGHT = 10;//f_modes[0].height;
 
-	window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Default);
+	sf::ContextSettings settings;
+	settings.antialiasingLevel = 0;
+	window.create (sf::VideoMode (MY_WIND_WIDTH, MY_WIND_HEIGHT), "Minesweeper", sf::Style::Default, settings);
 	window.setVerticalSyncEnabled (true);
 	window.setFramerateLimit (60);
 	
@@ -32,7 +36,7 @@ bool Game::init (bool fullscreen) {
 
 void Game::update () {
 	CNTRL ("game_update");
-	//rand ();
+	rand ();
 	if (!window.isOpen ()) {
 		running = false;
 		return;
@@ -66,7 +70,7 @@ void Game::update () {
 	}
 	input.upd ();
 
-	if (!paused) {
+	if (!paused || no_pause) {
         float dt = (clock.restart ()).asSeconds ();
 		if (all_spaces["MAIN"]->update (dt > 1 ? 1 : dt)) {
 			running = false;

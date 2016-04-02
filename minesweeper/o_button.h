@@ -5,6 +5,7 @@
 #include <list>
 #include "some_structures.h"
 #include "save.h"
+#include "tooltip.h"
 
 struct cell_s {
 	int value;
@@ -37,11 +38,16 @@ public:
 	sprite play_not_active;
 	sprite add_na;
 	sprite add_a;
+    sprite bool_a;
+    sprite bool_na;
     sprite del_active;
     sprite del_not_active;
+
 	vec <sq_button> play_buttons;
     vec <sq_button> del_buttons;
 	sq_button add;
+    option_switcher sw_map_realloc;
+    option_switcher sw_open_mine_free_cell;
     sf::Font font;
 	sf::Text height;
     sf::Text width;

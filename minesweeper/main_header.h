@@ -48,6 +48,7 @@ typedef unsigned int uint;
 #define v2u		sf::Vector2u
 #define MAP(T)	std::map <std::string, T>
 #define kb		sf::Keyboard
+#define VS(v)   ((v).x), ((v).y)
 
 #define sleep10			{sf::sleep (sf::milliseconds(10));}
 
@@ -64,6 +65,12 @@ float length (v2f v);
 #define D_RIGHT 1
 #define D_DOWN	2
 #define D_LEFT	3
+
+extern int error_generator;
+#define ERROR   (error_generator = 100 / error_generator)
+
+inline v2i operator ! (v2f vf) {return v2i (vf);}
+inline v2f operator ! (v2i vi) {return v2f (vi);}
 
 class in_out_d {
 public:

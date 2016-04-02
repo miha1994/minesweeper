@@ -6,6 +6,8 @@ struct SV_info {
 	game_parameters Last_mode;
 	int Col_theme;
 	int Num_of_templates;
+    int Mine_moving_ability;
+    int Safe_opening_ability;
 	vec <game_parameters> templates;
 };
 

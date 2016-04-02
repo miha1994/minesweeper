@@ -235,8 +235,12 @@ change_real_time::~change_real_time() {
 }
 
 void sq_button::draw (sf::RenderWindow *wind) {
+    if (is_dead) {
+        return;
+    }
 	if (alpha < 254) {
 		spr->itself.setPosition (v2f(pos));
+        spr->itself.setColor (CLR (255,255,255,255-alpha));
 		spr->draw (wind);
 	}
 	if (alpha > 1) {
@@ -247,9 +251,12 @@ void sq_button::draw (sf::RenderWindow *wind) {
 }
 
 bool sq_button::update (float dt, v2f mouse_pos) {
+    if (is_dead) {
+        return false;
+    }
 	bool ret = false;
 	spr->itself.setPosition (v2f(pos));
-	if (spr->itself.getGlobalBounds ().contains (mouse_pos)) {
+    if ((on_it = spr->itself.getGlobalBounds ().contains (mouse_pos)) && is_available_to_be_pressed) {
 		alpha += dt * 1255;
 		alpha = Min (255, alpha);
 		if (input.mbutton[MOUSE_LEFT].just_released) {
@@ -265,6 +272,10 @@ bool sq_button::update (float dt, v2f mouse_pos) {
 		alpha = Max (0, alpha);
 		pressed_lt = false;
 	}
+    if (tip_using) {
+        tip.setActive (on_it);
+        tip.update (dt);
+    }
 	return ret;
 }
 
@@ -295,42 +306,6 @@ CLR CLR_ADD (CLR col1, CLR col2) {
 	clr_norm (&col1);
 	return col1;
 }
-/*
-void r_n::Norm () {
-	int mx = std::max (sqrt (abs (a)), sqrt (abs (b)));
-	for (int i = 2; i <= mx; ++i) {
-		while (a % i == 0 && b % i == 0) {
-			a /= i;
-			b /= i;
-		}
-	}
-	if (b < 0) {
-		b = -b;
-		a = -a;
-	}
-	if (a == 0) {
-		b = 1;
-	}
-	if (b != 1) {
-		exit (0);
-	}
-}
-*/
-
-/*
-struct mines_moving {
-	char *fld;
-	struct mine {
-		v2i tmp_goal;
-		v2i cur_pos;
-		v2i nxt_pos;
-	};
-	std::list <mine> e;
-	float tick;
-	void init (char *fld_);
-	bool update (float dt);
-};
-*/
 
 int sign (float f) {
 	return f > 0 ? 1 : (f < 0 ? -1 : 0);
@@ -338,6 +313,7 @@ int sign (float f) {
 
 void mines_moving::init () {
 	field *fld = (field *) fld_;
+    fld->reallocation_time = 100;
 	mine m;
 	flag fl;
 	digit dg;
@@ -403,6 +379,7 @@ void mines_moving::init () {
 				new_sp = rand1;
 				r_sp = Min (new_sp, rest);
 
+                sp.speed = -rand1 * 3000;
 				sp.a = 300.0 * (HHH - v.y) / HHH + rand1 * 200;
 				quad_set_color (sp.q, c->flags & CELL_FLAGS_CLOSED ? my_clr_s[color_theme].unknown : my_clr_s[color_theme].safe);
 				quad_set_tex_rect (sp.q, sf::Rect <int> ((1 - rest) * PX_96, 0, r_sp * PX_96, PX_96));
@@ -427,6 +404,7 @@ void mines_moving::init () {
 }
 
 bool mines_moving::update (float dt) {
+    dt = Min (dt, 0.07);
 	field *fld = (field *) fld_;
 	fld->mines.clear ();
 	v2f v;
@@ -502,7 +480,9 @@ bool mines_moving::update (float dt) {
 	forlist (p, end, splinter, s) {
 		p->a += 500 * dt;
 		p->speed += p->a * dt;
-		quad_move (p->q, v2f (0, p->speed * dt));
+        if (p->speed > 0) {
+		    quad_move (p->q, v2f (0, p->speed * dt));
+        }
 		quad_v_a (p->q, &fld->cells);
 	}
 	fld->flags.clear ();
