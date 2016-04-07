@@ -29,9 +29,9 @@ void tooltip::activate () {
         time = delay_time;
         ++count_of_active;
         active = true;
-    }
-    if (count_of_active) {
-        no_pause = true;
+		if (count_of_active) {
+			no_pause = true;
+		}
     }
 }
 
@@ -66,9 +66,9 @@ void tooltip::deactivate () {
         }
         active = false;
         --count_of_active;
-    }
-    if (!count_of_active) {
-        no_pause = false;
+		if (!count_of_active) {
+			no_pause = false;
+		}
     }
 }
 

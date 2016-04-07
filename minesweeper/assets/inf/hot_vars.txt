@@ -1,2 +1,26 @@
-double 0.0 0.0 70 1 0.3
-int 255  4
+%double
+10
+-30
+-89
+-78
+
+%int
+590 450		# width height
+20			# character size
+53  # place width
+328  # place x
+83	# time width
+104 # hints used width
+32  # step y
+90  # y shift
+230 # gray intens
+150 #info x
+80 #info y
+
+160 180 120
+
+%string
+"consolas.ttf"
+"pos"
+"time"
+"hints"

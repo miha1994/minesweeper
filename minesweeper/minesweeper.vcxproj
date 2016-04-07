@@ -105,6 +105,7 @@
     <ClCompile Include="slau.cpp" />
     <ClCompile Include="some_structures.cpp" />
     <ClCompile Include="space.cpp" />
+    <ClCompile Include="table_stat.cpp" />
     <ClCompile Include="tooltip.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +128,7 @@
     <ClInclude Include="slau.h" />
     <ClInclude Include="some_structures.h" />
     <ClInclude Include="space.h" />
+    <ClInclude Include="table_stat.h" />
     <ClInclude Include="tooltip.h" />
   </ItemGroup>
   <ItemGroup>

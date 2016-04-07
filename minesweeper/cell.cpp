@@ -16,18 +16,20 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 	fld->expl.update (dt);
 	fld->cells.clear ();
 	fld->forced_cells.clear ();
-	if (!fld->win) {
+	if (!fld->win ()) {
 		fld->mines.clear ();
 	}
 	fld->digits.clear ();
+	fld->bg_cells.clear ();
 	fld->flags.clear ();
 	fld->crs.clear ();
 	fld->free.clear ();
+	fld->q_array.clear ();
 
 	quad q;
 	quad_set_tex_rect (q, SFRECTcv (int, 0,0,fld->pix > 48 ? v2f(96,96) : v2f (48, 48)));
     CLR safe = my_clr_s[color_theme].safe;
-	if (fld->win) {
+	if (fld->win ()) {
 		if (fld->wm.state) {
 			safe.a = 100;
 		} else {
@@ -45,7 +47,7 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 	}
 	*/
 	unknown = my_clr_s[color_theme].unknown;
-	if (fld->win) {
+	if (fld->win ()) {
 		unknown = my_clr_s[color_theme].safe;
 		if (fld->wm.state) {
 			unknown.a = 100;
@@ -99,7 +101,7 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 			}
 			if (c->flags & CELL_FLAGS_MARK) {
 				if (!fld->game_over || (c->flags & CELL_FLAGS_MINE)) {
-					if (!fld->win) {
+					if (!fld->win ()) {
 						quad_set_color (q, my_clr_s[color_theme].flag);
 						quad_v_a (q, &fld->flags);
 					}
@@ -108,6 +110,12 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 					quad_v_a (q, &fld->mines);
 					quad_set_color (q, my_clr_s[color_theme].mine);
 					quad_v_a (q, &fld->crs);
+				}
+			}
+			if (c->flags & CELL_FLAGS_Q) {
+				if (!fld->game_over && !fld->win ()) {
+					quad_set_color (q, CLR::Black);
+					quad_v_a (q, &fld->q_array);
 				}
 			}
 			if (false) {//kb::isKeyPressed (kb::S)) {
@@ -132,20 +140,20 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 						quad_set_color (q, unknown);
 					}
 				} else {
-					if (c->flags & CELL_FLAGS_MARK || fld->game_over || fld->win) {
+					if (c->flags & CELL_FLAGS_MARK || fld->game_over || fld->win ()) {
 						quad_set_color (q, unknown);
 					} else {
 						quad_set_color (q, my_clr_s[color_theme].safe);
 					}
 				}
 			}
-			quad_v_a (q, &fld->cells);
+			quad_v_a (q, fld->win () ? &fld->bg_cells : &fld->cells);
 		}
 		else {
 			quad_set_color (q, safe);
-			quad_v_a (q, &fld->cells);
+			quad_v_a (q, fld->win () ? &fld->bg_cells : &fld->cells);
 		}
-		if (! (c->flags & CELL_FLAGS_CLOSED) && c->val && (!fld->win)) {
+		if (! (c->flags & CELL_FLAGS_CLOSED) && c->val && (!fld->win ())) {
 			quad_set_color (q, dig_colors[c->val]); // my_clr_s[color_theme].font);
 			quad_set_tex_rect (q, SFRECTcv (int, c->val * (fld->pix > 48 ? 96 : 48), 0, fld->pix > 48 ? v2f(96,96) : v2f (48, 48)));
 			quad_v_a (q, &fld->digits);

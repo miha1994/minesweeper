@@ -6,6 +6,7 @@
 #include "input.h"
 
 bool no_pause = false;
+sf::RenderWindow *rwind = 0;
 
 bool Game::init (bool fullscreen) {
 	MY_WIND_WIDTH = 10;//f_modes[0].width;
@@ -24,7 +25,7 @@ bool Game::init (bool fullscreen) {
 	SC_WIDTH = sf::VideoMode::getDesktopMode ().width;
 	SC_HEIGHT = sf::VideoMode::getDesktopMode ().height;
 	SV_info si;
-	get_save_status (&si);
+	get_save_status (si);
 	color_theme = si.Col_theme;
 	global_game_parameters = si.Last_mode;
 	all_spaces["MAIN"] = load ("assets/inf/main.txt");
@@ -70,7 +71,7 @@ void Game::update () {
 	}
 	input.upd ();
 
-	if (!paused || no_pause) {
+	if (!paused || no_pause || (rwind && rwind->isOpen ())) {
         float dt = (clock.restart ()).asSeconds ();
 		if (all_spaces["MAIN"]->update (dt > 1 ? 1 : dt)) {
 			running = false;

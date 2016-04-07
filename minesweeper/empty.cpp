@@ -14,7 +14,7 @@ struct cl_info {
 bool operator < (const cl_info &c1, const cl_info &c2) {return c1.num_of_dig_nbrs < c2.num_of_dig_nbrs;}
 
 void field::use_hint () {
-    if (fld->state != FIELD_STATE_IN_GAME || fld->empty || fld->win || fld->game_over) {
+    if (fld->state != FIELD_STATE_IN_GAME || fld->empty || fld->win () || fld->game_over) {
         return ;
     }
     if (fld->no_moves) {
@@ -56,6 +56,11 @@ void field::use_hint () {
 }
 
 void field::fail (v2i bad_choice) {
+	SV_info s;
+	get_save_status (s);
+	s.statistic[gp].fails_count ++;
+	set_save_status (s);
+
     game_over = true;
     win_time = 0.0;
 	fail_choice = bad_choice;
@@ -76,7 +81,7 @@ double my_sin (double x) {
 	return 1;
 }
 
-int std_N[] = {4,8,8};
+int std_N[] = {3,4,4,6,8};
 
 void explosions::init (void *fld_, v2i center) {
 	field_ = fld_;
@@ -84,7 +89,8 @@ void explosions::init (void *fld_, v2i center) {
 	list_of_explosions.clear ();
 	list_of_explosions.assign (fld->gp.mines, elem ());
 	circles.setPrimitiveType (sf::Quads);
-	N = std_N[rand ()%3];
+	rnd = rand () % 5;
+	N = std_N[rnd];
 	auto p = list_of_explosions.begin ();
 	FOR_2D (v, WWW, HHH) {
 		MK_C (c, v);
@@ -96,7 +102,7 @@ void explosions::init (void *fld_, v2i center) {
 			if (center.x < 0) {
 				l = rand1* (WWW+HHH)/4;
 			}
-			p->time_when_state_will_be_changed = l * 0.2 + my_sin (l/10) * rand1 * 0.5;
+			p->time_when_state_will_be_changed = l * 0.1 + my_sin (l/10) * rand1 * 0.5;
 			p++;
 		}
 	}
@@ -128,10 +134,14 @@ void explosions::update (float dt) {
 				end = list_of_explosions.end ();
 				continue;
 			}
+			if (out_rad - in_rad < 10 && (rnd == 0 || rnd == 3)) {
+				blow_col.a = 125 * (out_rad - in_rad) / 10;
+				quad_set_color (q, blow_col);
+			}
 			v2f center (v2f (fld->shift, fld->vshift) + v2f(v2i(6, 43) + p->pos*32) * PIX +
 				v2f(fld->pix / 2.0f,fld->pix / 2.0f));
 			FOR (i, N) {
-				double ang = ((i+1)/double(N) + 1/(2.0*N))* PI* 2;
+				double ang = ((i+1)/double(N) + (rnd == 1 ? 0 : 1)/(2.0*N))* PI* 2;
 				v2f k (sin (ang), cos (ang));
 				q[2].position = center + k * float(out_rad);
 				q[3].position = center + k * float(in_rad);
@@ -139,7 +149,7 @@ void explosions::update (float dt) {
 					q[0] = old[3];
 					q[1] = old[2];
 				} else {
-					ang = (i/double(N) + 1/(2.0*N))* PI* 2;
+					ang = (i/double(N) + (rnd == 1 ? 0 : 1)/(2.0*N))* PI* 2;
 					k = v2f(sin (ang), cos (ang));
 					q[1].position = center + k * float(out_rad);
 					q[0].position = center + k * float(in_rad);
@@ -148,6 +158,10 @@ void explosions::update (float dt) {
 				FOR (z, 4) {
 					old[z] = q[z];
 				}
+			}
+			if (out_rad - in_rad < 10 && (rnd == 0 || rnd == 3)) {
+				blow_col.a = 125;
+				quad_set_color (q, blow_col);
 			}
 			break;
 		}

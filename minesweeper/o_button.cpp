@@ -125,6 +125,8 @@ O_RENDER (button_render) {
 	btn->crt.render ();
     btn->sw_map_realloc.draw (&window);
     btn->sw_open_mine_free_cell.draw (&window);
+	btn->sw_q.draw (&window);
+	btn->shadow.draw (&window);
 }
 
 O_DEL (button_del) {

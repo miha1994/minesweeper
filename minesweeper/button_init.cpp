@@ -4,6 +4,8 @@
 #include "save.h"
 #include "quad.h"
 
+#include "hot_vars.h"
+
 char *button_load (char *parent_space) {
 	button *btn = new button;
     
@@ -33,7 +35,7 @@ char *button_load (char *parent_space) {
 
     btn->bg.setPosition (0,0);
     btn->bg.setSize (v2f(440,400));
-	btn->bg.setFillColor (my_clr_s[color_theme].bg);
+	btn->bg.setFillColor (CLR (253, 253, 245, 255));
 
 	btn->cell.setFillColor (my_clr_s[color_theme].safe);
 	
@@ -54,19 +56,27 @@ char *button_load (char *parent_space) {
     btn->del_not_active.init ("assets/textures/del_not_active.png", 30, 30);
     btn->bool_a.init ("assets/textures/bool_a.png", 30, 30);
 	btn->bool_na.init ("assets/textures/bool_na.png", 30, 30);
+	btn->shadow.init ("assets/textures/shadow.png", 200, 200);
 
-    get_save_status (&btn->save);
+	btn->shadow.itself.setPosition (0, MY_WIND_HEIGHT - 200);
+
+    get_save_status (btn->save);
 
 #define DF1 btn->sw_map_realloc.get_text ()
 #define DF2 btn->sw_open_mine_free_cell.get_text ()
-    btn->sw_map_realloc.init ("Mine moving ability", &btn->font, v2f (10, 200), v2f (190, 20), &btn->bool_na, &btn->bool_a);
-    btn->sw_open_mine_free_cell.init ("Safe opening ability", &btn->font, v2f (10, 240), v2f (190, 20), &btn->bool_na, &btn->bool_a);
+#define DF3 btn->sw_q.get_text ()
+    btn->sw_map_realloc.init ("Mine moving", &btn->font, v2f (10, 150 + I_[0]), v2f (140, 20), &btn->bool_na, &btn->bool_a);
+    btn->sw_open_mine_free_cell.init ("Safe opening", &btn->font, v2f (10, 150 + I_[1]), v2f (140, 20), &btn->bool_na, &btn->bool_a);
+	btn->sw_q.init ("marks", &btn->font, v2f (10, 150 + I_[2]), v2f (80, 20), &btn->bool_na, &btn->bool_a);
     DF1.setCharacterSize (16);
     DF2.setCharacterSize (16);
+	DF3.setCharacterSize (16);
     btn->sw_map_realloc.turned_on = btn->save.Mine_moving_ability;
     btn->sw_open_mine_free_cell.turned_on = btn->save.Safe_opening_ability;
-    btn->sw_map_realloc.set_tip_msg ("Allows you open any cell\nif there is no logical move\nMines will change their\npositions if you click on\ncell containing one");
-    btn->sw_open_mine_free_cell.set_tip_msg ("Allows you click special \nbutton to open one of\nmine-free cell if there\nis no logical move");
+	btn->sw_q.turned_on = btn->save.q_is_enabled;
+    btn->sw_map_realloc.set_tip_msg ("Allows you to open any\ncell if there is no logical\nmove\nMines will change their\npositions if you click on\ncell containing one");
+    btn->sw_open_mine_free_cell.set_tip_msg ("Allows you to click special \nbutton to open one of\nmine-free cell if there\nis no logical move");
+	btn->sw_q.set_tip_msg ("Marks are used to denote\nsome cells");
 #undef DF1
 #undef DF2
 
@@ -81,7 +91,7 @@ char *button_load (char *parent_space) {
 	btn->hwm[0].max_val = 30;
 	btn->hwm[1].max_val = 100;
 	btn->hwm[2].max_val = 999;
-    btn->hwm[0].min_val = 2;
+    btn->hwm[0].min_val = 6;
 	btn->hwm[1].min_val = 8;
 	btn->hwm[2].min_val = 0;
     global_game_parameters = btn->save.Last_mode;

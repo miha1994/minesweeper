@@ -101,7 +101,7 @@ public:
     } origin_type;
     void set_pos (v2f pos);
     void set_pos (float x, float y) {set_pos (v2f(x,y));}
-    void set_inf_value (T val);
+    void set_inf_value (T val = T ());
     T get_inf_value () {return inf;}
     sf::Text *operator -> () {
         return &txt;
@@ -120,6 +120,10 @@ void text_one_type <T>::set_pos (v2f pos) {
     pos.y -= r.height * 0.5;
     txt.setPosition (v2f(v2i(pos)));
 }
+
+namespace std {
+	string to_string (string s);
+};
 
 template <class T>
 void text_one_type <T>::set_inf_value (T val) {

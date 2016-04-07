@@ -13,11 +13,19 @@ kb::Key bbbb = kb::A;
 O_UPDATE (field_update) {
 	CNTRL ("field_update");
 	O_DECL (field, fld);
-	if (fld->game_over || fld->win) {
-		window.setFramerateLimit (1000);
+	if (fld->game_over || fld->win ()) {
+		window.setFramerateLimit (100);
 	} else {
 		window.setFramerateLimit (60);
+		fld->records.close ();
 	}
+	if (fld->win ()) {
+		fld->show_results.is_dead = false;
+	} else {
+		fld->show_results.is_dead = true;
+		fld->show_results.is_available_to_be_pressed = true;
+	}
+	fld->records.update (dt);
     fld->reallocation_time += dt;
     if (false) {//input.kb_abc['Q'-'A'].just_pressed) {
         fld->commit->checkout ();
@@ -81,6 +89,14 @@ O_UPDATE (field_update) {
 	}
     v2f m;
 	get_mouse_pos (m);
+	if (fld->show_results.update (dt, m)) {
+		SV_info s;
+		get_save_status (s);
+		table_stat ts = s.statistic[fld->gp];
+		fld->records.show (ts, fld->time, fld->reallocation_count.get_inf_value ());
+		fld->show_results.is_available_to_be_pressed = false;
+		fld->show_results.is_dead = true;
+	}
     if (fld->menu.update (dt, v2f(m))) {
 		control *mc = (control *)main_control;
 		mc->todo.push_back (instruction ("delete", "L0"));
@@ -88,7 +104,7 @@ O_UPDATE (field_update) {
 		mc->todo.push_back (instruction ("active", "MENU"));
 	}
 
-    if (!fld->b_switch_safe_opening_ability || fld->win || fld->game_over || fld->state == FIELD_STATE_INTRO) {
+    if (!fld->b_switch_safe_opening_ability || fld->win () || fld->game_over || fld->state == FIELD_STATE_INTRO) {
         fld->hint.is_available_to_be_pressed = false;
     } else {
         fld->hint.is_available_to_be_pressed = true;
@@ -113,6 +129,7 @@ O_UPDATE (field_update) {
 		if (intro_anim[fld->intro_num] (fld, dt)) {
 			fld->state = FIELD_STATE_IN_GAME;
 			fld->intro_num = -1;
+			fld->time = 0;
 		}
 		break;
 	case FIELD_STATE_IN_GAME:
@@ -123,7 +140,7 @@ O_UPDATE (field_update) {
 			}
 		}
 		*/
-		if (!(fld->win || fld->game_over)) {
+		if (!(fld->win () || fld->game_over)) {
 			if (!fld->empty) {
 				fld->time += dt;
 			}
@@ -145,7 +162,7 @@ O_UPDATE (field_update) {
 		m.x -= fld->shift;
 		m.y -= fld->vshift;
 		m /= PIX;
-		if (false) { // kb::isKeyPressed (bbbb) || kb::isKeyPressed (kb::Z)) {
+		if ( kb::isKeyPressed (bbbb) || kb::isKeyPressed (kb::Z)) {
 			if (bbbb == kb::A) {
 				bbbb = kb::B;
 			} else {
@@ -180,7 +197,7 @@ O_UPDATE (field_update) {
 					field_double_mouse (fld, choice);
 				}
 				fld->wait_all_release = true;
-		} else if (! (fld->win || fld->game_over)) {
+		} else if (! (fld->win () || fld->game_over)) {
 			if (input.mbutton[MOUSE_LEFT].just_released && !fld->wait_all_release) {
 				if (!fld->game_over && sf::Rect <int> (6, 43, 32*fld->gp.width, 32*fld->gp.height).contains (v2i(m)) ) {
 					v2i choice ((m.x - 6) / 32, (m.y - 43) / 32);
@@ -212,6 +229,11 @@ O_UPDATE (field_update) {
 					if (c->flags & CELL_FLAGS_CLOSED) {
 						if (c->flags & CELL_FLAGS_MARK) {
 							c->flags &= ~CELL_FLAGS_MARK;
+							if (fld->q_is_enabled) {
+								c->flags |= CELL_FLAGS_Q;
+							}
+						} else if (c->flags & CELL_FLAGS_Q) {
+							TRN_OFF (c->flags, CELL_FLAGS_Q);
 						} else {
 							c->flags |= CELL_FLAGS_MARK;
 						}
@@ -222,9 +244,9 @@ O_UPDATE (field_update) {
 		if (!(input.mbutton[MOUSE_LEFT].pressed_now || input.mbutton[MOUSE_RIGHT].pressed_now)) {
 			fld->wait_all_release = false;
 		}
-		if (!fld->win) {
+		if (!fld->win ()) {
 			field_check_win (fld);
-			if (fld->win) {
+			if (fld->win ()) {
 				fld->mm.init ();
 			}
 		}
@@ -243,16 +265,16 @@ O_UPDATE (field_update) {
 			ip = SMILEY_GAME_OVER;
             fld->win_time += dt;
 		}
-		if (fld->win) {
+		if (fld->win ()) {
 			ip = SMILEY_WIN;
 			fld->win_time += dt;
 			float x;
 
 			switch (fld->wm.state) {
 			case 0:
-				x = pow(1 - fld->win_time, 2) * (-10);
+				x = pow(3 - fld->win_time, 2) * (10);
 				fld->wm.spr[PX_1].itself.setPosition (v2f (fld->shift, fld->vshift) + v2f( v2f(6, 43) + v2f(x, HHH - 4)*32.0f ) * PIX);
-				if (fld->win_time >= 1) {
+				if (fld->win_time >= 3) {
 					fld->win_time = 0;
 					fld->wm.state = 1;
 					fld->wm.spr[PX_1].itself.setPosition (v2f (fld->shift, fld->vshift) + v2f( v2f(6, 43) + v2f(0, HHH - 4)*32.0f ) * PIX);

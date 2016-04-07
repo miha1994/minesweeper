@@ -7,6 +7,7 @@
 #include "save.h"
 #include "cell.h"
 #include "tooltip.h"
+#include "table_stat.h"
 
 #define HHH		fld->gp.height
 #define WWW		fld->gp.width
@@ -39,6 +40,7 @@ struct explosions {
 		elem () {}
 	};
 	int N;
+	int rnd;
 	std::list <elem> list_of_explosions;
 	sf::VertexArray circles;
 	void init (void *fld_á, v2i center);
@@ -47,6 +49,7 @@ struct explosions {
 };
 
 class field {
+	bool z_win_;
 public:
 	int state;
 	int mkr;
@@ -65,21 +68,27 @@ public:
     sq_button hint;
     sprite hint_na[2];
     sprite hint_a[2];
+	sq_button show_results;
+	sprite spr_show_results[2];
     tooltip tooltip_for_mines;
 	tooltip tooltip_for_sm;
+	table_wind records;
 	sf::Texture mine_text[2];
 	sf::Texture digits_text[2];
 	sf::Texture flag_text[2];
 	sf::Texture crs_text[2];
 	sf::Texture cell_text[2];
 	sf::Texture free_text[2];
+	sf::Texture q_text[2];
 	sf::VertexArray cells;
+	sf::VertexArray bg_cells;
 	sf::VertexArray forced_cells;
 	sf::VertexArray flags;
 	sf::VertexArray mines;
 	sf::VertexArray digits;
 	sf::VertexArray crs;
 	sf::VertexArray free;
+	sf::VertexArray q_array;
 	sf::Font font;
 	sf::Text mines_left;
 	sf::Text sec;
@@ -97,11 +106,11 @@ public:
 	int inside_w;
 	bool empty;
 	bool game_over;
-	bool win;
 	bool wait_all_release;
 	bool no_moves;
     bool b_switch_mine_moving_ability;
     bool b_switch_safe_opening_ability;
+	bool q_is_enabled;
 	change_real_time crt;
     field *commit;
 	explicit field (int h, int w) : a (h,w) { }
@@ -109,6 +118,8 @@ public:
     void checkout ();
     void use_hint ();
     void fail (v2i bad_choice);
+	bool win () {return z_win_;}
+	void set_win (bool val) {z_win_ = val;}
 };
 
 extern std_obj_functions field_f;

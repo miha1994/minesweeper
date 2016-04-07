@@ -138,6 +138,9 @@ struct game_parameters {
 	game_parameters () {}
 };
 
+bool operator < (const game_parameters &g1, const game_parameters &g2);
+bool operator == (const game_parameters &g1, const game_parameters &g2);
+
 extern int color_theme;
 extern game_parameters global_game_parameters;
 

@@ -98,6 +98,25 @@ struct {
 
 #define TEST print && kb::isKeyPressed (kb::P)
 
+bool operator < (const game_parameters &g1, const game_parameters &g2) {
+	if (g1.height < g2.height) {
+		return true;
+	} else if (g1.height == g2.height) {
+		if (g1.width < g2.width) {
+			return true;
+		} else if (g1.width == g2.width) {
+			if (g1.mines < g2.mines) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool operator == (const game_parameters &g1, const game_parameters &g2) {
+	return g1.height == g2.height && g1.width == g2.width && g1.mines == g2.mines;
+}
+
 in_out_d::in_out_d (std::string s) {
 	func_name = s;
 	print = false;

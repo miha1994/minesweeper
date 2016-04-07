@@ -529,7 +529,7 @@ void field_open_cell (field *fld, v2i choice) {
 }
 
 void field_double_mouse (field *fld, v2i choice) {
-	if (fld->win || fld->game_over) {
+	if (fld->win () || fld->game_over) {
 		return;
 	}
 	MK_C (c, choice);
@@ -563,9 +563,17 @@ void field_check_win (field *fld) {
 		}
 	}
 	if (count == fld->gp.mines) {
-		fld->win = true;
+		fld->set_win (true);
 		fld->win_time = 0;
 		fld->wm.state = 0;
+		SV_info s;
+		get_save_status (s);
+		round_results rs;
+		rs.hints_used = fld->reallocation_count.get_inf_value ();
+		rs.time = fld->time;
+		s.statistic[fld->gp].wins.insert (rs);
+		s.statistic[fld->gp].wins_count++;
+		set_save_status (s);
 		/*
 		FOR_2D (v, WWW, HHH) {
 			MK_C (c, v);
@@ -598,7 +606,7 @@ void field_count_mines_left (field *fld) {
 	if (m_c != fld->gp.mines) {
 		//exit (0);
 	}
-	if (fld->win) {
+	if (fld->win ()) {
 		count = fld->gp.mines;
 	}
 	fld->mines_left.setCharacterSize(20 * PIX);
@@ -619,6 +627,10 @@ void field_ch_pix (field *fld) {
 	fld->hint.spr = &fld->hint_na[PX_1];
 	fld->hint.act->itself.setScale (scale, scale);
 	fld->hint.spr->itself.setScale (scale, scale);
+
+	fld->show_results.pos = v2f (fld->shift, fld->vshift) + v2f(!v2i(6, 43) + v2f (0, 0)*32.0f) * PIX;
+	fld->show_results.act = fld->show_results.spr = &fld->spr_show_results[PX_1];
+	fld->show_results.act->itself.setScale (fld->pix / PX_96, fld->pix / PX_96);
 
 	FOR (i, 4) {
 		fld->sm.spr[i][PX_1].itself.setPosition ((MY_WIND_WIDTH / 2 - 16) * PIX + fld->shift, 3.5 * PIX);
@@ -645,7 +657,7 @@ void field_reset (field *fld) {
 	}
 	fld->empty = true;
 	fld->game_over = false;
-	fld->win = false;
+	fld->set_win (false);
 	fld->time = 0.0f;
     fld->reallocation_count.set_inf_value (0);
 	fld->mkr = 0;

@@ -6,9 +6,10 @@
 #define CELL_FLAGS_MINE			0x1
 #define CELL_FLAGS_CLOSED		0x2
 #define CELL_FLAGS_MARK			0x4
-#define CELL_P_MINE             0x8
-#define CELL_P_SAFE             0x10
-#define CELL_Q                  0x20
+#define CELL_FLAGS_Q			0x8
+#define CELL_P_MINE             0x10
+#define CELL_P_SAFE             0x20
+#define CELL_Q                  0x40
 
 class cell {
 public:

@@ -39,7 +39,7 @@ field::field (field& fld) : DF(state),
     DF (sec),
     DF1 (time, pix, shift, vshift, win_time),
     DF1 (r_wind_h, r_wind_w, intro_num, inside_w, empty),
-    DF1 (game_over, win, wait_all_release, no_moves, crt),
+    DF1 (game_over, z_win_, wait_all_release, no_moves, crt),
     commit (&fld) {}
 #undef DF1
 #undef DF
@@ -69,7 +69,7 @@ void field::checkout () {
     DF (sec);
     DF1 (time, pix, shift, vshift, win_time);
     DF1 (r_wind_h, r_wind_w, intro_num, inside_w, empty);
-    DF1 (game_over, win, wait_all_release, no_moves, crt);
+    DF1 (game_over, z_win_, wait_all_release, no_moves, crt);
 }
 #undef DF1
 #undef DF
@@ -79,19 +79,24 @@ O_UPDATE (field_update);
 O_RENDER (field_render) {
 	O_DECL (field, fld);
 	window.draw (fld->bg);
-	if (fld->win) {
+	if (fld->win ()) {
 		window.draw (fld->mines, &fld->mine_text[fld->pix > 48]);
 	}
-	window.draw (fld->cells, &fld->cell_text[fld->pix > 48]);
-	window.draw (fld->digits, &fld->digits_text[fld->pix > 48]);
-	window.draw (fld->forced_cells, &fld->cell_text[fld->pix > 48]);
-	if (!fld->win) {
-		window.draw (fld->mines, &fld->mine_text[fld->pix > 48]);
+	window.draw (fld->bg_cells, &fld->cell_text[PX_1]);
+	if (fld->show_results.is_dead == false && fld->show_results.is_available_to_be_pressed) {
+		fld->show_results.draw (&window);
+	}
+	window.draw (fld->cells, &fld->cell_text[PX_1]);
+	window.draw (fld->digits, &fld->digits_text[PX_1]);
+	window.draw (fld->forced_cells, &fld->cell_text[PX_1]);
+	if (!fld->win ()) {
+		window.draw (fld->mines, &fld->mine_text[PX_1]);
 	}
 	
-	window.draw (fld->flags, &fld->flag_text[fld->pix > 48]);
-	window.draw (fld->crs, &fld->crs_text[fld->pix > 48]);
-	window.draw (fld->free, &fld->free_text[fld->pix > 48]);
+	window.draw (fld->flags, &fld->flag_text[PX_1]);
+	window.draw (fld->q_array, &fld->q_text[PX_1]);
+	window.draw (fld->crs, &fld->crs_text[PX_1]);
+	window.draw (fld->free, &fld->free_text[PX_1]);
 
 	fld->menu.draw (&window);
 	fld->sm.spr[fld->sm.state][PX_1].draw (&window);
@@ -100,7 +105,7 @@ O_RENDER (field_render) {
 	
 	window.draw (fld->sec);
 	window.draw (fld->mines_left);
-	if (fld->win) {
+	if (fld->win ()) {
 		fld->wm.spr[PX_1].draw (&window);
 	}
 	if (fld->game_over) {

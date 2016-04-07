@@ -49,11 +49,13 @@ O_LOAD (field_load) {
 
 	fld->cells.setPrimitiveType (sf::Quads);
 	fld->forced_cells.setPrimitiveType (sf::Quads);
+	fld->bg_cells.setPrimitiveType (sf::Quads);
 	fld->mines.setPrimitiveType (sf::Quads);
 	fld->digits.setPrimitiveType (sf::Quads);
 	fld->flags.setPrimitiveType (sf::Quads);
 	fld->crs.setPrimitiveType (sf::Quads);
 	fld->free.setPrimitiveType (sf::Quads);
+	fld->q_array.setPrimitiveType (sf::Quads);
 	
 	FOR (i, 2) {
 		fld->digits_text[i].loadFromFile ("assets/textures/digits" + (!i ? std::string("_48") : std::string("")) + ".png");
@@ -68,6 +70,8 @@ O_LOAD (field_load) {
 		fld->cell_text[i].setSmooth (true);
 		fld->free_text[i].loadFromFile ("assets/textures/free" + (!i ? std::string("_48") : std::string("")) + ".png");
 		fld->free_text[i].setSmooth (true);
+		fld->q_text[i].loadFromFile ("assets/textures/q" + (!i ? std::string("_48") : std::string("")) + ".png");
+		fld->q_text[i].setSmooth (true);
 	}
 
 	fld->menu_na[0].init ("assets/textures/menu_na_48.png", 78, 48, true);
@@ -79,6 +83,11 @@ O_LOAD (field_load) {
     fld->menu.tip.setString ("Back to menu");
     fld->menu.tip_using = true;
 
+	fld->spr_show_results[0].init ("assets/textures/results_48.png", 192, 96, true);
+	fld->spr_show_results[1].init ("assets/textures/results.png", 384, 192, true);
+	fld->show_results.alpha = 0;
+	fld->show_results.is_dead = true;
+
     fld->hint_na[0].init ("assets/textures/hint_na_48.png", 78, 48, true);
 	fld->hint_a[0].init ("assets/textures/hint_a_48.png", 78, 48, true);
 	fld->hint_na[1].init ("assets/textures/hint_na.png", 156, 96, true);
@@ -86,7 +95,9 @@ O_LOAD (field_load) {
 	
     fld->hint.alpha = 0;
     SV_info sv;
-    get_save_status (&sv);
+    get_save_status (sv);
+	fld->q_is_enabled = sv.q_is_enabled;
+
     fld->b_switch_mine_moving_ability = sv.Mine_moving_ability;
     fld->b_switch_safe_opening_ability = sv.Safe_opening_ability;
     if (fld->b_switch_safe_opening_ability) {

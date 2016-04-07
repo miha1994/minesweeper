@@ -17,6 +17,10 @@ O_UPDATE (button_update) {
         btn->save.Safe_opening_ability = btn->sw_open_mine_free_cell.turned_on;
         set_save_status (btn->save);
     }
+	if (btn->sw_q.update (dt, &window)) {
+		btn->save.q_is_enabled = btn->sw_q.turned_on;
+		set_save_status (btn->save);
+	}
 
 	v2i m;
 	get_mouse_pos (m);

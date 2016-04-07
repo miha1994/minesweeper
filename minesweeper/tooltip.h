@@ -28,6 +28,7 @@ public:
     void update (float dt);
     void deactivate ();
     void setActive (bool act) {if (act) activate (); else deactivate ();}
+	~tooltip () {deactivate ();}
 
     friend struct sq_button;
 };

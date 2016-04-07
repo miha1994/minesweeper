@@ -38,6 +38,7 @@ public:
 	sprite play_not_active;
 	sprite add_na;
 	sprite add_a;
+	sprite shadow;
     sprite bool_a;
     sprite bool_na;
     sprite del_active;
@@ -48,6 +49,7 @@ public:
 	sq_button add;
     option_switcher sw_map_realloc;
     option_switcher sw_open_mine_free_cell;
+	option_switcher sw_q;
     sf::Font font;
 	sf::Text height;
     sf::Text width;

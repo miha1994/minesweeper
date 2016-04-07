@@ -520,3 +520,9 @@ bool mines_moving::update (float dt) {
 	}
 	return false;
 }
+
+namespace std {
+	string to_string (string s) {
+		return s;
+	}
+};
