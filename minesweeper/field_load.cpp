@@ -22,6 +22,7 @@ O_LOAD (field_load) {
 	fld->tooltip_for_sm.setString ("Reset");
     fld->reallocation_time = 10;
 	fld->mm.fld_ = (char *) fld;
+	fld->history_is_writing = true;
 
 	fld->font.loadFromFile ("assets/fonts/cg.ttf");
 

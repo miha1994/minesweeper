@@ -16,7 +16,7 @@ struct sprite {
 
 #define CLR sf::Color
 
-CLR CLR_BLIND (CLR c);
+CLR CLR_BLIND (CLR c, int a_comp = 0);
 CLR CLR_ADD (CLR col1, CLR col2);
 
 CLR operator * (CLR col, float m);
@@ -83,7 +83,7 @@ struct sq_button {
     bool tip_using;
     bool is_dead;
     sq_button () : is_available_to_be_pressed (true), on_it (false), tip_using (false), is_dead (false) {}
-	void draw (sf::RenderWindow *wind);
+	void draw (sf::RenderWindow *wind, int alpha_channel = 255);
 	bool update (float dt, v2f mouse_pos);
 };
 
@@ -157,17 +157,19 @@ struct mines_moving {
 	};
 	struct flag {
 		v2i start_pos;
-		float time;
 	};
 	struct digit : public flag {
 		int dig;
 	};
+	typedef flag q_mark;
 	std::list <mine> e;
 	std::list <flag> f;
+	std::list <q_mark> q;
 	std::list <splinter> s;
 	std::list <digit> d;
 	int h2;
 	int w2;
+	float m_time;
 	void init ();
 	bool update (float dt);
 };

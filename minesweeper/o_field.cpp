@@ -84,7 +84,7 @@ O_RENDER (field_render) {
 	}
 	window.draw (fld->bg_cells, &fld->cell_text[PX_1]);
 	if (fld->show_results.is_dead == false && fld->show_results.is_available_to_be_pressed) {
-		fld->show_results.draw (&window);
+		fld->show_results.draw (&window, fld->mm.m_time > 2 ? 255 : 255.0 / 2 * fld->mm.m_time);
 	}
 	window.draw (fld->cells, &fld->cell_text[PX_1]);
 	window.draw (fld->digits, &fld->digits_text[PX_1]);
@@ -95,8 +95,8 @@ O_RENDER (field_render) {
 	
 	window.draw (fld->flags, &fld->flag_text[PX_1]);
 	window.draw (fld->q_array, &fld->q_text[PX_1]);
-	window.draw (fld->crs, &fld->crs_text[PX_1]);
 	window.draw (fld->free, &fld->free_text[PX_1]);
+	window.draw (fld->crs, &fld->crs_text[PX_1]);
 
 	fld->menu.draw (&window);
 	fld->sm.spr[fld->sm.state][PX_1].draw (&window);

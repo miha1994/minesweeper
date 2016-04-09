@@ -8,6 +8,7 @@
 #include "cell.h"
 #include "tooltip.h"
 #include "table_stat.h"
+#include "history_of_attempt.h"
 
 #define HHH		fld->gp.height
 #define WWW		fld->gp.width
@@ -55,6 +56,7 @@ public:
 	int mkr;
 	smiley sm;
 	win_s wm;
+	history hist;
 	mines_moving mm;
 	explosions expl;
 	cell_ar<cell> a;
@@ -72,7 +74,6 @@ public:
 	sprite spr_show_results[2];
     tooltip tooltip_for_mines;
 	tooltip tooltip_for_sm;
-	table_wind records;
 	sf::Texture mine_text[2];
 	sf::Texture digits_text[2];
 	sf::Texture flag_text[2];
@@ -111,6 +112,7 @@ public:
     bool b_switch_mine_moving_ability;
     bool b_switch_safe_opening_ability;
 	bool q_is_enabled;
+	bool history_is_writing;
 	change_real_time crt;
     field *commit;
 	explicit field (int h, int w) : a (h,w) { }
@@ -120,6 +122,9 @@ public:
     void fail (v2i bad_choice);
 	bool win () {return z_win_;}
 	void set_win (bool val) {z_win_ = val;}
+	void save ();
+	bool load ();
+	~field ();
 };
 
 extern std_obj_functions field_f;

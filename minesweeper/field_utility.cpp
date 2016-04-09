@@ -23,6 +23,11 @@ struct hlp {
 void field_make (field *fld, std::list <v2i> *free_cells, int mines) {
 	For (mines) {
 		int nxt = rand_n (free_cells->size ());
+		if (fld->history_is_writing == false) {
+			nxt = fld->hist.get_rand_n ();
+		} else {
+			fld->hist.push_rand_n (nxt);
+		}
 		v2i mine_pos;
 		forlist (p, end, v2i, *free_cells) {
 			if (!(nxt--)) {
@@ -288,6 +293,9 @@ void field_open_cell (field *fld, v2i choice) {
 	}
 	if (!(fld->a[choice].flags & CELL_FLAGS_CLOSED) || (fld->a[choice].flags & CELL_FLAGS_MARK)) {
 		return;
+	}
+	if (fld->history_is_writing) {
+		fld->hist.push_left_click (choice);
 	}
 	if (fld->a[choice].flags & CELL_FLAGS_MINE) {
         if (fld->no_moves && fld->b_switch_mine_moving_ability) {
@@ -663,4 +671,10 @@ void field_reset (field *fld) {
 	fld->mkr = 0;
 	fld->no_moves = false;
 	fld->state = FIELD_STATE_INTRO;
+	fld->hist.clear ();
+
+	if (fld->load ()) {
+		fld->empty = false;
+		fld->state = FIELD_STATE_IN_GAME;
+	}
 }

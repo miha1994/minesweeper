@@ -167,7 +167,7 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 			++p;
 		}
 	}
-	quad_set_tex_rect (q, sf::IntRect (4, 4, 40, 40));
+	quad_set_tex_rect (q, sf::IntRect (4, 4, 1, 1));
 	quad_set_pos (q, v2f(fld->shift ,0), v2f(MY_WIND_WIDTH, 37) * PIX, 0);
 	quad_set_color (q, my_clr_s[color_theme].unknown);
 	quad_v_a (q, &fld->cells);

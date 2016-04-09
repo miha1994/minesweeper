@@ -17,8 +17,10 @@ void sprite::draw (sf::RenderWindow *wnd, bool f, v2f xy) {
 	wnd->draw (itself);
 }
 
+#include "hot_vars.h"
+
 color_s my_clr_s[] = {
-    color_s (CLR (175,175,175,255), CLR(255,0,0,255), CLR(225,225,225,225), CLR(0,0,0,255), CLR (255, 255, 255, 255), CLR(255,0,0,255), CLR (0, 0, 0, 255))
+    color_s (CLR (175,175,175,255), CLR(255,0,0,255), CLR(I_[3],I_[4],I_[5],225), CLR(0,0,0,255), CLR (255, 255, 255, 255), CLR(255,0,0,255), CLR (0, 0, 0, 255))
 };
 CLR dig_colors[10];
 
@@ -200,6 +202,9 @@ void change_real_time::render () {
 }
 
 change_real_time::~change_real_time() {
+	if (elements.empty ()) {
+		return;
+	}
     FILE *out = fopen (out_file_name.c_str (), "w");
     int count = 0;
     forvector (p, end, elem, elements) {
@@ -234,18 +239,18 @@ change_real_time::~change_real_time() {
     fclose (out);
 }
 
-void sq_button::draw (sf::RenderWindow *wind) {
+void sq_button::draw (sf::RenderWindow *wind, int alpha_ch) {
     if (is_dead) {
         return;
     }
 	if (alpha < 254) {
 		spr->itself.setPosition (v2f(pos));
-        spr->itself.setColor (CLR (255,255,255,255-alpha));
+		spr->itself.setColor (CLR (255,255,255,(255-alpha)) * (alpha_ch / 255.0));
 		spr->draw (wind);
 	}
 	if (alpha > 1) {
 		act->itself.setPosition (v2f (pos));
-		act->itself.setColor (sf::Color (255,255,255, alpha));
+		act->itself.setColor (sf::Color (255,255,255, alpha * (alpha_ch / 255.0)));
 		act->draw (wind);
 	}
 }
@@ -294,8 +299,8 @@ CLR operator * (CLR col, float m) {
 	clr_norm (&col);
 	return col;
 }
-CLR CLR_BLIND (CLR c) {
-	c.a = 0;
+CLR CLR_BLIND (CLR c, int a_comp) {
+	c.a = a_comp;
 	return c;
 }
 CLR CLR_ADD (CLR col1, CLR col2) {
@@ -317,8 +322,7 @@ void mines_moving::init () {
 	mine m;
 	flag fl;
 	digit dg;
-	fl.time = 0;
-	dg.time = 0;
+	m_time = 0;
 	h2 = HHH / 2;
 	w2 = WWW / 2;
 	e.clear ();
@@ -370,6 +374,10 @@ void mines_moving::init () {
 			fl.start_pos = v;
 			f.push_back (fl);
 		}
+		if (c->flags & CELL_FLAGS_Q) {
+			fl.start_pos = v;
+			q.push_back (fl);
+		}
 		if (true) {
 			splinter sp;
 			sp.speed = 0;
@@ -405,12 +413,13 @@ void mines_moving::init () {
 
 bool mines_moving::update (float dt) {
     dt = Min (dt, 0.07);
+	m_time += dt;
 	field *fld = (field *) fld_;
 	fld->mines.clear ();
 	v2f v;
 	quad q;
 	quad_set_tex_rect (q, SFRECTcv (int, 0,0,fld->pix > 48 ? v2f(96,96) : v2f (48, 48)));
-	quad_set_color (q, my_clr_s[color_theme].mine);
+	quad_set_color (q, CLR_BLIND (my_clr_s[color_theme].mine, m_time > 2 ? 255 : 255.0 / 2 * m_time));
 	forlist_no_inc (p, end, mine, e) {
         if ((p->wait -= dt) > 0) {
             v = v2f(p->cur_pos) + v2f(p->nxt_pos) * p->part_of_step;
@@ -486,33 +495,46 @@ bool mines_moving::update (float dt) {
 		quad_v_a (p->q, &fld->cells);
 	}
 	fld->flags.clear ();
+	float p_time = m_time * m_time / 4;
 	forlist_no_inc (p, end, flag, f) {
-		p->time += dt;
-		if (p->time >= 0.97) {
+		if (p_time >= 0.97) {
 			p = f.erase (p);
 			continue;
 		}
 		CLR clr = my_clr_s[color_theme].flag;
-		clr.a = (1 - p->time) * 255;
+		clr.a = (1 - p_time) * 255;
 		quad_set_color (q, clr);
 		v = v2f(p->start_pos);
-		v.y += p->time;
+		v.y += p_time;
 		quad_set_pos (q, v2f (fld->shift, fld->vshift) + v2f(v2f(6, 43) + v*32.0f) * PIX, v2f(fld->pix,fld->pix),false);
 		quad_v_a (q, &fld->flags);
 		++p;
 	}
+	forlist_no_inc (p, end, q_mark, this->q) {
+		if (p_time >= 0.97) {
+			p = this->q.erase (p);
+			continue;
+		}
+		CLR clr = CLR::Black;
+		clr.a = (1 - p_time) * 255;
+		quad_set_color (q, clr);
+		v = v2f(p->start_pos);
+		v.y += p_time;
+		quad_set_pos (q, v2f (fld->shift, fld->vshift) + v2f(v2f(6, 43) + v*32.0f) * PIX, v2f(fld->pix,fld->pix),false);
+		quad_v_a (q, &fld->q_array);
+		++p;
+	}
 	fld->digits.clear ();
 	forlist_no_inc (p, end, digit, d) {
-		p->time += dt;
-		if (p->time >= 0.97) {
+		if (p_time >= 0.97) {
 			p = d.erase (p);
 			continue;
 		}
 		CLR clr = dig_colors [p->dig];
-		clr.a = (1 - p->time) * 255;
+		clr.a = (1 - p_time) * 255;
 		quad_set_color (q, clr);
 		v = v2f(p->start_pos);
-		v.y += p->time;
+		v.y += p_time;
 		quad_set_tex_rect (q, SFRECTcv (int, p->dig * (fld->pix > 48 ? 96 : 48), 0, fld->pix > 48 ? v2f(96,96) : v2f (48, 48)));
 		quad_set_pos (q, v2f (fld->shift, fld->vshift) + v2f(v2f(6, 43) + v*32.0f) * PIX, v2f(fld->pix,fld->pix),false);
 		quad_v_a (q, &fld->digits);
@@ -520,9 +542,3 @@ bool mines_moving::update (float dt) {
 	}
 	return false;
 }
-
-namespace std {
-	string to_string (string s) {
-		return s;
-	}
-};

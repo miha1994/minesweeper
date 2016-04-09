@@ -93,6 +93,7 @@
     <ClCompile Include="field_utility.cpp" />
     <ClCompile Include="func_pointers.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="history_of_attempt.cpp" />
     <ClCompile Include="hot_vars.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="field_utility.h" />
     <ClInclude Include="func_pointers.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="history_of_attempt.h" />
     <ClInclude Include="hot_vars.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="main_header.h" />

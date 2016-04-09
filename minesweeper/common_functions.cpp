@@ -96,6 +96,13 @@ struct {
 	"run", 0
 };
 
+
+namespace std {
+	string to_string (string s) {
+		return s;
+	}
+};
+
 #define TEST print && kb::isKeyPressed (kb::P)
 
 bool operator < (const game_parameters &g1, const game_parameters &g2) {

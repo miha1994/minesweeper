@@ -58,6 +58,16 @@ O_UPDATE (button_update) {
         }
         ++i;
 	}
+	i = 0;
+	forvector (p, end, sq_button, btn->res_buttons) {
+		if (p->update (dt, v2f(m))) {
+			global_game_parameters = btn->save.templates[i];
+			table_stat ts = btn->save.statistic[btn->save.templates[i]];
+			records.show (ts, 0, -1);
+        }
+        ++i;
+	}
+	records.update (dt);
     i = 0;
     bool del = false;
     forvector (p, end, sq_button, btn->del_buttons) {

@@ -11,8 +11,10 @@ void INPUT::upd () {
 		if (new_v != mbutton[i].pressed_now) {
 			if (new_v) {
 				mbutton[i].just_pressed = true;
+				mbutton[i].just_released = false;
 			} else {
 				mbutton[i].just_released = true;
+				mbutton[i].just_pressed = false;
 			}
 		} else {
 			mbutton[i].just_pressed = false;
@@ -25,8 +27,10 @@ void INPUT::upd () {
         if (new_v != kb_abc[i].pressed_now) {
 			if (new_v) {
 				kb_abc[i].just_pressed = true;
+				kb_abc[i].just_released = false;
 			} else {
 				kb_abc[i].just_released = true;
+				kb_abc[i].just_pressed = false;
 			}
 		} else {
 			kb_abc[i].just_pressed = false;

@@ -17,7 +17,7 @@ O_UPDATE (field_update) {
 		window.setFramerateLimit (100);
 	} else {
 		window.setFramerateLimit (60);
-		fld->records.close ();
+		records.close ();
 	}
 	if (fld->win ()) {
 		fld->show_results.is_dead = false;
@@ -25,7 +25,7 @@ O_UPDATE (field_update) {
 		fld->show_results.is_dead = true;
 		fld->show_results.is_available_to_be_pressed = true;
 	}
-	fld->records.update (dt);
+	records.update (dt);
     fld->reallocation_time += dt;
     if (false) {//input.kb_abc['Q'-'A'].just_pressed) {
         fld->commit->checkout ();
@@ -33,6 +33,14 @@ O_UPDATE (field_update) {
     if (false) {//input.kb_abc['W'-'A'].just_pressed) {
         fld->checkout ();
     }
+	if (input.kb_abc['S'-'A'].just_pressed && fld->history_is_writing) {
+		fld->hist.store ();
+	}
+	if (input.kb_abc['O'-'A'].pressed_now && input.kb_abc['I'-'A'].pressed_now && input.kb_abc['U'-'A'].pressed_now) {
+		fld->history_is_writing = false;
+		field_reset (fld);
+		fld->hist.load ();
+	}
 	int inside_w;
 	if (fld->r_wind_h != R_WIND_HEIGHT || fld->r_wind_w != R_WIND_WIDTH) {
 		v2i wpos = window.getPosition ();
@@ -89,11 +97,11 @@ O_UPDATE (field_update) {
 	}
     v2f m;
 	get_mouse_pos (m);
-	if (fld->show_results.update (dt, m)) {
+	if (fld->show_results.update (dt, m) && fld->mm.m_time > 0.1) {
 		SV_info s;
 		get_save_status (s);
 		table_stat ts = s.statistic[fld->gp];
-		fld->records.show (ts, fld->time, fld->reallocation_count.get_inf_value ());
+		records.show (ts, fld->time, fld->reallocation_count.get_inf_value ());
 		fld->show_results.is_available_to_be_pressed = false;
 		fld->show_results.is_dead = true;
 	}
@@ -162,7 +170,8 @@ O_UPDATE (field_update) {
 		m.x -= fld->shift;
 		m.y -= fld->vshift;
 		m /= PIX;
-		if ( kb::isKeyPressed (bbbb) || kb::isKeyPressed (kb::Z)) {
+		
+		if (false ) {// kb::isKeyPressed (bbbb) || kb::isKeyPressed (kb::Z)) {
 			if (bbbb == kb::A) {
 				bbbb = kb::B;
 			} else {
@@ -185,23 +194,37 @@ O_UPDATE (field_update) {
 					}
 				}
 			}
-            */
+			*/
 		}
 
 		if (input.mbutton[MOUSE_MIDDLE].just_released ||
 			(input.mbutton[MOUSE_LEFT].pressed_now && input.mbutton[MOUSE_RIGHT].just_released) ||
 			(input.mbutton[MOUSE_RIGHT].pressed_now && input.mbutton[MOUSE_LEFT].just_released) ||
-			(input.mbutton[MOUSE_RIGHT].just_released && input.mbutton[MOUSE_LEFT].just_released)) {
+			(input.mbutton[MOUSE_RIGHT].just_released && input.mbutton[MOUSE_LEFT].just_released)
+			|| !fld->history_is_writing && input.kb_abc['N' - 'A'].just_pressed && !fld->hist.empty () && fld->hist.is_next_click_double ()) {
 				if (!fld->game_over && sf::Rect <int> (6, 43, 32*fld->gp.width, 32*fld->gp.height).contains (v2i(m)) ) {
 					v2i choice ((m.x - 6) / 32, (m.y - 43) / 32);
+					if (fld->history_is_writing == false) {
+						choice = fld->hist.get_next_point ();
+					} else {
+						fld->hist.push_double_click (choice);
+					}
 					field_double_mouse (fld, choice);
 				}
 				fld->wait_all_release = true;
 		} else if (! (fld->win () || fld->game_over)) {
-			if (input.mbutton[MOUSE_LEFT].just_released && !fld->wait_all_release) {
+			if (input.mbutton[MOUSE_LEFT].just_released && !fld->wait_all_release
+				|| !fld->history_is_writing && input.kb_abc['N' - 'A'].just_pressed && !fld->hist.empty () && fld->hist.is_next_click_left ()) {
 				if (!fld->game_over && sf::Rect <int> (6, 43, 32*fld->gp.width, 32*fld->gp.height).contains (v2i(m)) ) {
 					v2i choice ((m.x - 6) / 32, (m.y - 43) / 32);
+					if (fld->history_is_writing == false) {
+						choice = fld->hist.get_next_point ();
+					}
+
 					if (fld->empty) {
+						if (fld->history_is_writing) {
+							fld->hist.push_left_click (choice);
+						}
 						fld->empty = false;
 						std::list <v2i> fc;
 						int more;
@@ -219,14 +242,23 @@ O_UPDATE (field_update) {
 						}
 						field_make (fld, &fc, fld->gp.mines);
 					}
+					
 					field_open_cell (fld, choice);
 				}
 			}
-			if (input.mbutton[MOUSE_RIGHT].just_pressed || (input.mbutton[MOUSE_LEFT].just_pressed && input.mbutton[MOUSE_RIGHT].pressed_now)) {
+			if (input.mbutton[MOUSE_RIGHT].just_pressed || (input.mbutton[MOUSE_LEFT].just_pressed && input.mbutton[MOUSE_RIGHT].pressed_now
+				|| !fld->history_is_writing && input.kb_abc['N' - 'A'].just_pressed && !fld->hist.empty () && fld->hist.is_next_click_right ())) {
 				if (!fld->game_over && sf::Rect <int> (6, 43, 32*fld->gp.width, 32*fld->gp.height).contains (v2i(m)) ) {
 					v2i choice ((m.x - 6) / 32, (m.y - 43) / 32);
+					if (fld->history_is_writing == false) {
+						choice = fld->hist.get_next_point ();
+					}
 					MK_C (c, choice);
+					
 					if (c->flags & CELL_FLAGS_CLOSED) {
+						if (fld->history_is_writing) {
+							fld->hist.push_right_click (choice);
+						}
 						if (c->flags & CELL_FLAGS_MARK) {
 							c->flags &= ~CELL_FLAGS_MARK;
 							if (fld->q_is_enabled) {
@@ -304,4 +336,52 @@ O_UPDATE (field_update) {
 	}
 	
 	return false;
+}
+
+#define SZ1				sizeof (int), 1, f
+#define write(f, what)	fwrite (&(what), sizeof(what), 1, f)
+#define read(f, what)	fread (&(what), sizeof(what), 1, f)
+
+#define fld this
+
+void field::save () {
+	std::string file_name = "assets/inf/" + Tstr(gp.height) + "_" + Tstr(gp.width) + "_" + Tstr(gp.mines) + ".stt";
+	if (fld->state == FIELD_STATE_IN_GAME && fld->win () == false && fld->game_over == false) {
+		FILE *f = fopen (file_name.c_str (), "wb");
+		write (f, time);
+		int rc = reallocation_count.get_inf_value ();
+		write (f, rc);
+		FOR_2D (v, WWW, HHH) {
+			MK_C (c, v);
+			write (f, c->flags);
+			write (f, c->val);
+		}
+		fclose (f);
+	} else {
+		unlink (file_name.c_str ());
+	}
+}
+
+bool field::load () {
+	std::string file_name = "assets/inf/" + Tstr(gp.height) + "_" + Tstr(gp.width) + "_" + Tstr(gp.mines) + ".stt";
+	FILE *f = fopen (file_name.c_str (), "rb");
+	if (!f) {
+		return false;
+	}
+	read (f, time);
+	int rc;
+	read (f, rc);
+	reallocation_count.set_inf_value (rc);
+	FOR_2D (v, WWW, HHH) {
+		MK_C (c, v);
+		read (f, c->flags);
+		read (f, c->val);
+	}
+	fclose (f);
+	unlink (file_name.c_str ());
+	return true;
+}
+
+field::~field () {
+	save ();
 }

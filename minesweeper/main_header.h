@@ -128,6 +128,10 @@ public:
 	}
 };
 
+namespace std {
+	string to_string (string s);
+};
+
 #define Tstr(something)		std::to_string (something)
 
 struct game_parameters {

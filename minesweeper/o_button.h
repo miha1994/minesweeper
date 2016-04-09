@@ -43,9 +43,12 @@ public:
     sprite bool_na;
     sprite del_active;
     sprite del_not_active;
+	sprite res_a;
+	sprite res_na;
 
 	vec <sq_button> play_buttons;
     vec <sq_button> del_buttons;
+	vec <sq_button> res_buttons;
 	sq_button add;
     option_switcher sw_map_realloc;
     option_switcher sw_open_mine_free_cell;

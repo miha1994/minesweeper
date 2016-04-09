@@ -82,7 +82,7 @@ int intro_anim3 (field *fld, float dt) {
 		quad_set_color (q, (my_clr_s[color_theme].unknown * (*c)) + (my_clr_s[color_theme].safe * (1 - *c)));
 		quad_v_a (q, &fld->cells);
 	}
-	quad_set_tex_rect (q, sf::IntRect (4, 4, 40, 40));
+	quad_set_tex_rect (q, sf::IntRect (4, 4, 1, 1));
 	quad_set_pos (q, v2f(fld->shift ,0), v2f(MY_WIND_WIDTH, 37) * PIX, 0);
 	quad_set_color (q, my_clr_s[color_theme].unknown);
 	quad_v_a (q, &fld->cells);
@@ -144,7 +144,7 @@ int intro_anim4 (field *fld, float dt) {
 		quad_set_color (q, (my_clr_s[color_theme].unknown * (*c)) + (my_clr_s[color_theme].safe * (1 - *c)));
 		quad_v_a (q, &fld->cells);
 	}
-	quad_set_tex_rect (q, sf::IntRect (4, 4, 40, 40));
+	quad_set_tex_rect (q, sf::IntRect (4, 4, 1, 1));
 	quad_set_pos (q, v2f(fld->shift ,0), v2f(MY_WIND_WIDTH, 37) * PIX, 0);
 	quad_set_color (q, my_clr_s[color_theme].unknown);
 	quad_v_a (q, &fld->cells);
@@ -224,7 +224,7 @@ int intro_anim5 (field *fld, float dt) {
 		quad_set_color (q, (my_clr_s[color_theme].unknown * (*c)) + (my_clr_s[color_theme].safe * (1 - *c)));
 		quad_v_a (q, &fld->cells);
 	}
-	quad_set_tex_rect (q, sf::IntRect (4, 4, 40, 40));
+	quad_set_tex_rect (q, sf::IntRect (4, 4, 1, 1));
 	quad_set_pos (q, v2f(fld->shift ,0), v2f(MY_WIND_WIDTH, 37) * PIX, 0);
 	quad_set_color (q, my_clr_s[color_theme].unknown);
 	quad_v_a (q, &fld->cells);
@@ -336,7 +336,7 @@ int intro_anim1 (field *fld, float dt) {
 		quad_set_color (q, (my_clr_s[color_theme].unknown * (*c)) + (my_clr_s[color_theme].safe * (1 - *c)));
 		quad_v_a (q, &fld->cells);
 	}
-	quad_set_tex_rect (q, sf::IntRect (4, 4, 40, 40));
+	quad_set_tex_rect (q, sf::IntRect (4, 4, 1, 1));
 	quad_set_pos (q, v2f(fld->shift ,0), v2f(MY_WIND_WIDTH, 37) * PIX, 0);
 	quad_set_color (q, my_clr_s[color_theme].unknown);
 	quad_v_a (q, &fld->cells);
@@ -449,7 +449,7 @@ int intro_anim2 (field *fld, float dt) {
 		quad_set_color (q, (my_clr_s[color_theme].unknown * (*c)) + (my_clr_s[color_theme].safe * (1 - *c)));
 		quad_v_a (q, &fld->cells);
 	}
-	quad_set_tex_rect (q, sf::IntRect (4, 4, 40, 40));
+	quad_set_tex_rect (q, sf::IntRect (4, 4, 1, 1));
 	quad_set_pos (q, v2f(fld->shift ,0), v2f(MY_WIND_WIDTH, 37) * PIX, 0);
 	quad_set_color (q, my_clr_s[color_theme].unknown);
 	quad_v_a (q, &fld->cells);

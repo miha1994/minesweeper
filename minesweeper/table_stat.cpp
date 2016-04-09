@@ -1,8 +1,12 @@
 #include "table_stat.h"
 #include "some_structures.h"
 
+table_wind records;
+
+
 extern bool no_pause;
 extern sf::RenderWindow *rwind;
+
 
 bool operator < (const round_results & r1, const round_results & r2) {
 	return r1.time < r2.time || (r1.time == r2.time && r1.hints_used < r2.hints_used);
@@ -41,6 +45,7 @@ void table_wind::show (const table_stat &ts, float ttime, int realloc_count) {
 		}
 	}
 	wind.create (sf::VideoMode(t_width, t_height), "Results", sf::Style::Titlebar | sf::Style::Close);
+	wind.setPosition (sf::Mouse::getPosition () + v2i (50,50));
 	wind.clear (CLR (170,195,190,255));
 
 	sprite spr;

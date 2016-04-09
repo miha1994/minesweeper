@@ -90,6 +90,9 @@
     <ClCompile Include="table_stat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="history_of_attempt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="func_pointers.h">
@@ -153,6 +156,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="table_stat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="history_of_attempt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

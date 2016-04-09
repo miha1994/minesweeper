@@ -26,3 +26,5 @@ public:
 	void update (float dt);
 	~table_wind () {if (active) {if (wind.isOpen ()) wind.close ();}};
 };
+
+extern table_wind records;

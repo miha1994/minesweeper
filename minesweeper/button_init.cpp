@@ -56,6 +56,9 @@ char *button_load (char *parent_space) {
     btn->del_not_active.init ("assets/textures/del_not_active.png", 30, 30);
     btn->bool_a.init ("assets/textures/bool_a.png", 30, 30);
 	btn->bool_na.init ("assets/textures/bool_na.png", 30, 30);
+	btn->res_a.init ("assets/textures/res_a.png", 18, 30);
+	btn->res_na.init ("assets/textures/res_na.png", 18, 30);
+
 	btn->shadow.init ("assets/textures/shadow.png", 200, 200);
 
 	btn->shadow.itself.setPosition (0, MY_WIND_HEIGHT - 200);
@@ -79,6 +82,7 @@ char *button_load (char *parent_space) {
 	btn->sw_q.set_tip_msg ("Marks are used to denote\nsome cells");
 #undef DF1
 #undef DF2
+#undef DF3
 
 	char c_str[100];
 	btn->x[0] = 5;

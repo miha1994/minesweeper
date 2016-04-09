@@ -43,14 +43,30 @@ void make_table (button *btn) {
 		t.setPosition (x[3] - t.getGlobalBounds ().width - 8, 32 * (j+1) + 4);
 		txt->push_back (t);
 	}
+	btn->res_buttons.clear ();
     btn->play_buttons.clear ();
     btn->del_buttons.clear ();
+
+#define tmp(i)  btn->res_buttons[i]
+#define tmp1(i)  tmp(i).spr = &btn->res_na; tmp(i).act = &btn->res_a; tmp(i).alpha = 0; \
+    tmp(i).tip_using = true; \
+    tmp(i).tip.setString ("Show statistic");
+
+    btn->res_buttons.assign (btn->save.Num_of_templates + 3, sq_button ());
+    
+	FOR (i, btn->save.Num_of_templates + 3) {
+	    tmp1(i);
+		if (btn->save.statistic.find (btn->save.templates[i]) == btn->save.statistic.end () || !btn->save.statistic[btn->save.templates[i]].wins_count) {
+			tmp(i).is_dead = true;
+		}
+        tmp(i).pos = v2f (x[0]-20, (i+1) * 32);
+	}
 
 #define tmp(i)  btn->play_buttons[i]
 #define tmp1(i)  tmp(i).spr = &btn->play_not_active; tmp(i).act = &btn->play_active; tmp(i).alpha = 0; \
     tmp(i).tip_using = true; \
-    tmp(i).tip.setString ("Play using this parameters");
-
+    tmp(i).tip.setString ("Play using these parameters");
+	
     btn->play_buttons.assign (btn->save.Num_of_templates + 4, sq_button ());
     tmp1(0);
     tmp(0).pos = v2f (5, 96);
@@ -119,6 +135,9 @@ O_RENDER (button_render) {
 		p->draw (&window);
 	}
     forvector (p, end, sq_button, btn->del_buttons) {
+		p->draw (&window);
+	}
+	forstl (p, end, btn->res_buttons) {
 		p->draw (&window);
 	}
 	btn->add.draw (&window);
