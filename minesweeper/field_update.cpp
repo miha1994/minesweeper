@@ -7,6 +7,8 @@
 #include "input.h"
 #include "animation.h"
 
+#undef fld
+
 extern std::string sm_file_names [4];
 kb::Key bbbb = kb::A;
 
@@ -171,7 +173,7 @@ O_UPDATE (field_update) {
 		m.y -= fld->vshift;
 		m /= PIX;
 		
-		if (false ) {// kb::isKeyPressed (bbbb) || kb::isKeyPressed (kb::Z)) {
+		if ( kb::isKeyPressed (bbbb) || kb::isKeyPressed (kb::Z)) {
 			if (bbbb == kb::A) {
 				bbbb = kb::B;
 			} else {
@@ -214,7 +216,7 @@ O_UPDATE (field_update) {
 				fld->wait_all_release = true;
 		} else if (! (fld->win () || fld->game_over)) {
 			if (input.mbutton[MOUSE_LEFT].just_released && !fld->wait_all_release
-				|| !fld->history_is_writing && input.kb_abc['N' - 'A'].just_pressed && !fld->hist.empty () && fld->hist.is_next_click_left ()) {
+				|| !fld->history_is_writing && (input.kb_abc['N' - 'A'].just_pressed || input.kb_abc['M' - 'A'].pressed_now) && !fld->hist.empty () && fld->hist.is_next_click_left ()) {
 				if (!fld->game_over && sf::Rect <int> (6, 43, 32*fld->gp.width, 32*fld->gp.height).contains (v2i(m)) ) {
 					v2i choice ((m.x - 6) / 32, (m.y - 43) / 32);
 					if (fld->history_is_writing == false) {
@@ -379,6 +381,13 @@ bool field::load () {
 	}
 	fclose (f);
 	unlink (file_name.c_str ());
+	fld->no_moves = true;
+	FOR_2D (v, WWW, HHH) {
+		MK_C (c, v);
+		if ((c->flags & CELL_FLAGS_CLOSED) && (c->flags & CELL_P_SAFE)) {
+			fld->no_moves = false;
+		}
+	}
 	return true;
 }
 

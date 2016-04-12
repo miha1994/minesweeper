@@ -59,7 +59,7 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
     const float rt_max = 0.9;
     if (fld->reallocation_time < rt_max) {
         float sn = sin ((fld->reallocation_time / rt_max) * 3.14);
-        unknown = CLR_ADD(unknown * (1 - sn), CLR (200,100,100,255) * sn);
+        unknown = CLR_ADD(unknown * (1 - sn), CLR (255,0,0,255) * sn);
     }
 
 	CLR gray(150,0,0,105);
@@ -118,7 +118,7 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 					quad_v_a (q, &fld->q_array);
 				}
 			}
-			if (false) {//kb::isKeyPressed (kb::S)) {
+			if (kb::isKeyPressed (kb::S)) {
 				if (c->flags & CELL_FLAGS_MINE) {
 					quad_set_color (q, my_clr_s[color_theme].mine);
 					quad_v_a (q, &fld->mines);
