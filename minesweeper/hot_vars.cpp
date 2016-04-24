@@ -13,7 +13,6 @@ ___hot_vars::___hot_vars () {
     int state = -1;
     while (in >> s) {
 label:
-
         if (s.find_first_of ("%") != string::npos) {
             if (s == "%double") {
                 state = 0;

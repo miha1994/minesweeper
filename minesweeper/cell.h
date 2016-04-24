@@ -15,6 +15,7 @@ class cell {
 public:
 	int flags;
 	int val;
+    float open_time;
 };
 
 template <class T>
@@ -92,4 +93,4 @@ public:
 	bool upd (sf::VertexArray *va, float dt, quad q, int ptx, field *fld);
 };
 
-void field_cells_upd (char *o, float dt, v2i double_point);
+void field_cells_upd (char *o, float dt, v2i double_point, v2f actual_mouse_pos);

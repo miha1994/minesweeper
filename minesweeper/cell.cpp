@@ -11,7 +11,10 @@
 
 const float sv_ = 6, sv_sec_ = 3;
 
-void field_cells_upd (char *o, float dt, v2i double_point) {
+extern v2i dr[8];
+#define FOR_NEIGHBORS(r, Center_)	v2i r = Center_ + dr[0]; for (int z = 0; z < 8; ++z, r = Center_ + dr[z])
+
+void field_cells_upd (char *o, float dt, v2i double_point, v2f actual_mouse_pos) {
 	O_DECL (field, fld);
 	fld->expl.update (dt);
 	fld->cells.clear ();
@@ -37,7 +40,7 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 		}
 		safe.a = 100;
 	}
-	CLR unknown;
+	CLR unknown, loc_unknown;
 	/*
 	if (fld->win && fld->win_time < sv_sec_) {
 		float mul = (cos (fld->win_time*sv_) + 1) / 2.0;
@@ -79,9 +82,17 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 			Free = CLR_ADD(CLR(255,255,255,0) * (1 - sn), Free * sn);
 		}
 	}
+	float swag = 2*fld->swag_power - 1 - fld->swag_time;
+	swag = Max (0, swag);
 	FOR_2D (v, WWW, HHH) {
 		quad_set_pos (q, v2f (fld->shift, fld->vshift) + v2f(v2i(6, 43) + v*32) * PIX, v2f(fld->pix,fld->pix),false);
 		MK_C (c, v);
+		if (!(c->flags & CELL_FLAGS_CLOSED)) {
+			c->open_time += dt*3;
+			if (c->open_time > 1) {
+				c->open_time = 1;
+			}
+		}
 		if (c->flags & CELL_FLAGS_CLOSED) {
 			if (fld->game_over && (c->flags & CELL_FLAGS_MINE) && !(c->flags & CELL_FLAGS_MARK)) {
 				if (fld->game_over) {
@@ -118,7 +129,7 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 					quad_v_a (q, &fld->q_array);
 				}
 			}
-			if (kb::isKeyPressed (kb::S)) {
+			if (false) {//kb::isKeyPressed (kb::D)) {
 				if (c->flags & CELL_FLAGS_MINE) {
 					quad_set_color (q, my_clr_s[color_theme].mine);
 					quad_v_a (q, &fld->mines);
@@ -129,6 +140,32 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 				}
 				quad_set_color (q, (c->flags & CELL_Q) ? CLR::Blue : unknown);
 			} else {
+				double prop = length (actual_mouse_pos - !v) / (Min(WWW, HHH)*2 / (1/0.3));
+				prop = Min (1, prop);
+				prop = 1 - prop * prop;
+                bool tf = 0;
+				double td = 0;
+                if (! (c->flags & CELL_FLAGS_MARK)) {
+                    FOR_NEIGHBORS (r, v) {
+                        MK_C (c, r);
+                        if (!(c->flags & CELL_FLAGS_CLOSED)) {
+                            tf = 1;
+							td = Max (td, c->open_time);
+                        }
+                    }
+                } else {
+                    tf = 1;
+					td = 1;
+                }
+				tf = 1;
+				td = 1;
+                if (!tf) {
+                    prop = 0;
+                } else {
+					prop *= td;
+				}
+				prop *= swag;
+				loc_unknown = CLR_ADD ((c->flags & CELL_FLAGS_MARK ? CLR (255, 0, 0) : CLR (0, 0, 255)) * prop, unknown * (1-prop));
 				if (length (v2f(double_point - v)) > 1.7 ) {
 					if (fld->game_over && v == fld->fail_choice) {
 						quad_set_color (q, my_clr_s[color_theme].mine);
@@ -137,11 +174,11 @@ void field_cells_upd (char *o, float dt, v2i double_point) {
 							quad_set_color (q, Free);
 							quad_v_a (q, &fld->free);
 						}
-						quad_set_color (q, unknown);
+						quad_set_color (q, loc_unknown);
 					}
 				} else {
 					if (c->flags & CELL_FLAGS_MARK || fld->game_over || fld->win ()) {
-						quad_set_color (q, unknown);
+						quad_set_color (q, loc_unknown);
 					} else {
 						quad_set_color (q, my_clr_s[color_theme].safe);
 					}

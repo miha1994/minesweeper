@@ -153,6 +153,7 @@ O_UPDATE (field_update) {
 		if (!(fld->win () || fld->game_over)) {
 			if (!fld->empty) {
 				fld->time += dt;
+				fld->swag_time += dt;
 			}
 			fld->sec.setCharacterSize(20 * PIX);
 			fld->sec.setString (Tstr (int (fld->time)));
@@ -173,7 +174,7 @@ O_UPDATE (field_update) {
 		m.y -= fld->vshift;
 		m /= PIX;
 		
-		if ( kb::isKeyPressed (bbbb) || kb::isKeyPressed (kb::Z)) {
+		if (false) {// kb::isKeyPressed (bbbb) || kb::isKeyPressed (kb::Z)) {
 			if (bbbb == kb::A) {
 				bbbb = kb::B;
 			} else {
@@ -206,7 +207,7 @@ O_UPDATE (field_update) {
 			|| !fld->history_is_writing && input.kb_abc['N' - 'A'].just_pressed && !fld->hist.empty () && fld->hist.is_next_click_double ()) {
 				if (!fld->game_over && sf::Rect <int> (6, 43, 32*fld->gp.width, 32*fld->gp.height).contains (v2i(m)) ) {
 					v2i choice ((m.x - 6) / 32, (m.y - 43) / 32);
-					if (fld->history_is_writing == false) {
+					if (fld->history_is_writing == false  && !fld->hist.empty ()) {
 						choice = fld->hist.get_next_point ();
 					} else {
 						fld->hist.push_double_click (choice);
@@ -219,7 +220,7 @@ O_UPDATE (field_update) {
 				|| !fld->history_is_writing && (input.kb_abc['N' - 'A'].just_pressed || input.kb_abc['M' - 'A'].pressed_now) && !fld->hist.empty () && fld->hist.is_next_click_left ()) {
 				if (!fld->game_over && sf::Rect <int> (6, 43, 32*fld->gp.width, 32*fld->gp.height).contains (v2i(m)) ) {
 					v2i choice ((m.x - 6) / 32, (m.y - 43) / 32);
-					if (fld->history_is_writing == false) {
+					if (fld->history_is_writing == false && !fld->hist.empty ()) {
 						choice = fld->hist.get_next_point ();
 					}
 
@@ -252,7 +253,7 @@ O_UPDATE (field_update) {
 				|| !fld->history_is_writing && input.kb_abc['N' - 'A'].just_pressed && !fld->hist.empty () && fld->hist.is_next_click_right ())) {
 				if (!fld->game_over && sf::Rect <int> (6, 43, 32*fld->gp.width, 32*fld->gp.height).contains (v2i(m)) ) {
 					v2i choice ((m.x - 6) / 32, (m.y - 43) / 32);
-					if (fld->history_is_writing == false) {
+					if (fld->history_is_writing == false && !fld->hist.empty ()) {
 						choice = fld->hist.get_next_point ();
 					}
 					MK_C (c, choice);
@@ -287,7 +288,9 @@ O_UPDATE (field_update) {
 		field_count_mines_left (fld);
 
 		field_cells_upd ((char *)fld, dt,
-			(input.mbutton[MOUSE_LEFT].pressed_now && input.mbutton[MOUSE_RIGHT].pressed_now) || input.mbutton[MOUSE_MIDDLE].pressed_now ? v2i((m.x - 6) / 32, (m.y - 43) / 32) : v2i (-10, -10));
+			(input.mbutton[MOUSE_LEFT].pressed_now && input.mbutton[MOUSE_RIGHT].pressed_now)
+			|| input.mbutton[MOUSE_MIDDLE].pressed_now ? v2i((m.x - 6) / 32, (m.y - 43) / 32) : v2i (-10, -10),
+			v2f((m.x - 6) / 32.0, (m.y - 43) / 32.0) );
 
 		int &ip = fld->sm.state;
 		ip = SMILEY_NONE;
@@ -346,7 +349,7 @@ O_UPDATE (field_update) {
 
 #define fld this
 
-void field::save () {
+void field::save (int const_) {
 	std::string file_name = "assets/inf/" + Tstr(gp.height) + "_" + Tstr(gp.width) + "_" + Tstr(gp.mines) + ".stt";
 	if (fld->state == FIELD_STATE_IN_GAME && fld->win () == false && fld->game_over == false) {
 		FILE *f = fopen (file_name.c_str (), "wb");

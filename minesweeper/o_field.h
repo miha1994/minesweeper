@@ -101,6 +101,8 @@ public:
 	float vshift;
 	float win_time;
     float reallocation_time;
+	float swag_time;
+	float swag_power;
 	int r_wind_w;
 	int r_wind_h;
 	int intro_num;
@@ -122,7 +124,7 @@ public:
     void fail (v2i bad_choice);
 	bool win () {return z_win_;}
 	void set_win (bool val) {z_win_ = val;}
-	void save ();
+	void save (int const_ = 0);
 	bool load ();
 	~field ();
 };

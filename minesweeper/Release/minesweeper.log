@@ -1,20 +1,58 @@
-﻿Build started 12.04.2016 16:44:19.
+﻿Build started 24.04.2016 17:55:19.
      1>Project "C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\minesweeper\minesweeper.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt cell.cpp
-         cell.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt field_utility.cpp
+         field_utility.cpp
      1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.h(10): warning C4099: 'sprite' : type name first seen using 'class' now seen using 'struct'
                  c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\tooltip.h(44) : see declaration of 'sprite'
-     1>cell.cpp(30): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>cell.cpp(36): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>cell.cpp(55): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
-     1>cell.cpp(59): warning C4305: 'initializing' : truncation from 'double' to 'const float'
-     1>cell.cpp(61): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
-     1>cell.cpp(158): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>cell.cpp(160): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>cell.cpp(164): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>cell.cpp(171): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>cell.cpp(180): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>C:\Program Files (x86)\Windows Kits\8.0\Include\um\wingdi.h(114): warning C4005: 'ERROR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\main_header.h(70) : see previous definition of 'ERROR'
+     1>field_utility.cpp(73): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(550): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(550): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>field_utility.cpp(551): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(561): warning C4244: '+=' : conversion from 'sf::Int64' to 'int', possible loss of data
+     1>field_utility.cpp(645): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>field_utility.cpp(647): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_utility.cpp(654): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(658): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(669): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(670): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(674): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>field_utility.cpp(675): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_utility.cpp(676): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>field_utility.cpp(678): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>field_utility.cpp(679): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_utility.cpp(680): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>field_utility.cpp(680): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>field_utility.cpp(681): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.h(120): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+                 c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.h(112) : while compiling class template member function 'void text_one_type<T>::set_pos(sf::Vector2f)'
+                 with
+                 [
+                     T=int
+                 ]
+                 c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.h(103) : see reference to function template instantiation 'void text_one_type<T>::set_pos(sf::Vector2f)' being compiled
+                 with
+                 [
+                     T=int
+                 ]
+                 c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\o_field.h(96) : see reference to class template instantiation 'text_one_type<T>' being compiled
+                 with
+                 [
+                     T=int
+                 ]
+     1>c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.h(139): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
+                 c:\users\user\documents\visual studio 2012\projects\minesweeper\minesweeper\some_structures.h(129) : while compiling class template member function 'void text_one_type<T>::set_inf_value(T)'
+                 with
+                 [
+                     T=int
+                 ]
+                 field_utility.cpp(443) : see reference to function template instantiation 'void text_one_type<T>::set_inf_value(T)' being compiled
+                 with
+                 [
+                     T=int
+                 ]
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"D:\SFML-2.3.1\lib" "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" "sfml-audio-s.lib" "sfml-main.lib" opengl32.lib winmm.lib gdi32.lib freetype.lib jpeg.lib openal32.lib flac.lib vorbisenc.lib vorbisfile.lib vorbis.lib ogg.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Documents\Visual Studio 2012\Projects\minesweeper\Release\minesweeper.lib" /MACHINE:X86 /SAFESEH Release\animation.obj
          Release\button_init.obj
@@ -50,4 +88,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:11.47
+Time Elapsed 00:00:15.14

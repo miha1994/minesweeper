@@ -4,8 +4,6 @@
 #include "save.h"
 #include "quad.h"
 
-#include "hot_vars.h"
-
 char *button_load (char *parent_space) {
 	button *btn = new button;
     
@@ -68,9 +66,9 @@ char *button_load (char *parent_space) {
 #define DF1 btn->sw_map_realloc.get_text ()
 #define DF2 btn->sw_open_mine_free_cell.get_text ()
 #define DF3 btn->sw_q.get_text ()
-    btn->sw_map_realloc.init ("Mine moving", &btn->font, v2f (10, 150 + I_[0]), v2f (140, 20), &btn->bool_na, &btn->bool_a);
-    btn->sw_open_mine_free_cell.init ("Safe opening", &btn->font, v2f (10, 150 + I_[1]), v2f (140, 20), &btn->bool_na, &btn->bool_a);
-	btn->sw_q.init ("marks", &btn->font, v2f (10, 150 + I_[2]), v2f (80, 20), &btn->bool_na, &btn->bool_a);
+    btn->sw_map_realloc.init ("Mine moving", &btn->font, v2f (10, 150 + 10), v2f (140, 20), &btn->bool_na, &btn->bool_a);
+    btn->sw_open_mine_free_cell.init ("Safe opening", &btn->font, v2f (10, 150 + 37), v2f (140, 20), &btn->bool_na, &btn->bool_a);
+	btn->sw_q.init ("Question marks", &btn->font, v2f (10, 150 + 100), v2f (150, 20), &btn->bool_na, &btn->bool_a);
     DF1.setCharacterSize (16);
     DF2.setCharacterSize (16);
 	DF3.setCharacterSize (16);

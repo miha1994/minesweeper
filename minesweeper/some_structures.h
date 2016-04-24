@@ -174,12 +174,11 @@ struct mines_moving {
 	bool update (float dt);
 };
 
-/*
 class r_n {
 	public:
 	int a, b;
 	void Norm ();
-	r_n (int c = 1, int d = 1) : a (c), b (d) {Norm (); }
+	explicit r_n (int c = 1, int d = 1) : a (c), b (d) {Norm (); }
 	~r_n () {
 	}
 	r_n operator + (const r_n &n) const {
@@ -201,6 +200,13 @@ class r_n {
 		r_n rv (a * n.b, b * n.a);
 		rv.Norm ();
 		return rv;
+	}
+	r_n operator - () const {
+		r_n rv (-a, b);
+		return rv;
+	}
+	r_n &operator += (const r_n &n) {
+		return *this = *this + n;
 	}
 	bool operator < (const r_n& r) {
 		r_n tmp = *this - r;
@@ -226,7 +232,7 @@ class r_n {
 	}
 	
 	std::string to_str () const {
-		return std::to_string (a) + (b == 1 ? "" : ":" + std::to_string (b));
+		return std::to_string (a) + (b == 1 ? "" : "/" + std::to_string (b));
 	}
 	void read () {
 		std::cout << "enter a / b.   a = ";
@@ -236,4 +242,3 @@ class r_n {
 		Norm ();
 	}
 };
-*/

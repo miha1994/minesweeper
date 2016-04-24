@@ -102,7 +102,7 @@ void explosions::init (void *fld_, v2i center) {
 			if (center.x < 0) {
 				l = rand1* (WWW+HHH)/4;
 			}
-			p->time_when_state_will_be_changed = l * 0.1 + my_sin (l/10) * rand1 * 0.5;
+			p->time_when_state_will_be_changed = l * 0.2 + my_sin (l/4) * rand1 * 0.5;
 			p++;
 		}
 	}
@@ -127,8 +127,8 @@ void explosions::update (float dt) {
 				break;
 			}
 		case 1:
-			double out_rad = my_sin (p->time * 3) * 70 * PIX;
-			double in_rad = my_sin ((p->time - 0.2) * 3) * 70 * PIX;
+			double out_rad = my_sin (p->time * 4) * 75 * PIX;
+			double in_rad = my_sin ((p->time - 0.2) * 1.5) * 75 * PIX;
 			if (in_rad > out_rad - 0.01) {
 				p = list_of_explosions.erase (p);
 				end = list_of_explosions.end ();

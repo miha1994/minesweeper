@@ -17,10 +17,8 @@ void sprite::draw (sf::RenderWindow *wnd, bool f, v2f xy) {
 	wnd->draw (itself);
 }
 
-#include "hot_vars.h"
-
 color_s my_clr_s[] = {
-    color_s (CLR (175,175,175,255), CLR(255,0,0,255), CLR(I_[3],I_[4],I_[5],225), CLR(0,0,0,255), CLR (255, 255, 255, 255), CLR(255,0,0,255), CLR (0, 0, 0, 255))
+    color_s (CLR (175,175,175,255), CLR(255,0,0,255), CLR(235, 235, 235,225), CLR(0,0,0,255), CLR (255, 255, 255, 255), CLR(255,0,0,255), CLR (0, 0, 0, 255))
 };
 CLR dig_colors[10];
 
@@ -541,4 +539,21 @@ bool mines_moving::update (float dt) {
 		++p;
 	}
 	return false;
+}
+
+void r_n::Norm () {
+	int mx = std::max (sqrt (abs (a)), sqrt (abs (b)))+1;
+	for (int i = 2; i <= mx; ++i) {
+		while (a % i == 0 && b % i == 0) {
+			a /= i;
+			b /= i;
+		}
+	}
+	if (b < 0) {
+		b = -b;
+		a = -a;
+	}
+	if (a == 0) {
+		b = 1;
+	}
 }

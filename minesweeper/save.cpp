@@ -59,9 +59,7 @@ void get_save_status (SV_info &s_info) {
 		FOR (j, m) {
 			read (f, rr.time);
 			read (f, rr.hints_used);
-			if (ts.wins.size () < 11) {
-				ts.wins.insert (rr);
-			}
+			ts.wins.insert (rr);
 		}
 		s_info.statistic[gp] = ts;
 		ts.wins.clear ();

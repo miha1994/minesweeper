@@ -73,7 +73,10 @@ void history::push_double_click (v2i pos) {
 	data.push_back (atom (HISTORY_ATOM_DOUBLE_CLICK, VS (pos)));
 }
 
-int history::get_rand_n () {
+int history::get_rand_n (int n) {
+	if (empty ()) {
+		return rand_n (n);
+	}
 	atom a = data.front ();
 	data.erase (data.begin ());
 	if (a.type != HISTORY_ATOM_RAND_N_RET_VAL) {

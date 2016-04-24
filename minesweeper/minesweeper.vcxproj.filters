@@ -175,5 +175,8 @@
     <Text Include="..\Release\assets\inf\hot_vars.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="out.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

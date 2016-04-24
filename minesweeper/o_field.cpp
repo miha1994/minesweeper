@@ -101,7 +101,9 @@ O_RENDER (field_render) {
 	fld->menu.draw (&window);
 	fld->sm.spr[fld->sm.state][PX_1].draw (&window);
     fld->hint.draw (&window);
-    window.draw (fld->reallocation_count.txt);
+	if (fld->b_switch_mine_moving_ability || fld->b_switch_safe_opening_ability) {
+		window.draw (fld->reallocation_count.txt);
+	}
 	
 	window.draw (fld->sec);
 	window.draw (fld->mines_left);

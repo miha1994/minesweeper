@@ -23,7 +23,7 @@ public:
 	void push_left_click (v2i pos);
 	void push_double_click (v2i pos);
 
-	int get_rand_n ();
+	int get_rand_n (int n);
 	bool is_next_click_right ();
 	bool is_next_click_left ();
 	bool is_next_click_double ();

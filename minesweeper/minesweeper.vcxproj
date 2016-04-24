@@ -138,6 +138,7 @@
     <Text Include="..\Release\assets\inf\L0.txt" />
     <Text Include="..\Release\assets\inf\main.txt" />
     <Text Include="..\Release\assets\inf\menu.txt" />
+    <Text Include="out.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,7 +24,8 @@ struct ___hot_vars {
 };
 
 extern ___hot_vars hot_vars;
-
+/*
 #define I_    hot_vars.int_
 #define D_ hot_vars.double_
 #define S_ hot_vars.string_
+*/

@@ -83,9 +83,11 @@ void table_wind::show (const table_stat &ts, float ttime, int realloc_count) {
 	quad_set_color (q, gray);
 	
 	auto p = ts.wins.begin ();
+	bool was_red = realloc_count < 0;
 	FOR (i, ts.wins.size () + 1) {
-		if (i && p->time == ttime && p->hints_used == realloc_count) {
+		if ((i && p->time == ttime && p->hints_used == realloc_count || i == 10) && !was_red) {
 			quad_set_color (q, CLR (200,50,50,255));
+			was_red = true;
 		}
 		int y = y_shift + y_step * i - ds_y;
 
@@ -119,9 +121,21 @@ void table_wind::show (const table_stat &ts, float ttime, int realloc_count) {
 	txt.origin_type.set__xy_is_top_right_point ();
 
 	int i = 0;
-
+	was_red = realloc_count < 0;
 	forset (p, end, round_results, ts.wins) {
 		int y = y_shift + y_step * (i+1);
+
+		if (p->time == ttime && p->hints_used == realloc_count) {
+			was_red = true;
+		}
+
+		if (i == 9 && !was_red) {
+			auto nxt = p;
+			while ( (++(nxt = p)) != end && ! (p->time == ttime && p->hints_used == realloc_count)) {
+				p = nxt;
+				++i;
+			}
+		}
 
 		txt.set_pos (place_x, y);
 		sprintf (str, "%d", i+1);
@@ -147,7 +161,7 @@ void table_wind::show (const table_stat &ts, float ttime, int realloc_count) {
 		wind.draw (txt.txt);
 
 		++i;
-		if (i == 11) {
+		if (i >= 10) {
 			break;
 		}
 	}
@@ -196,7 +210,7 @@ void table_wind::show (const table_stat &ts, float ttime, int realloc_count) {
 	wind.draw (txt.txt);
 
 	txt.origin_type.set__xy_is_top_right_point ();
-	sprintf (str, "wins part :");
+	sprintf (str, "percentage :");
 	txt.set_inf_value (str);
 	txt.set_pos (info_x, info_y + 2*y_step);
 	wind.draw (txt.txt);
