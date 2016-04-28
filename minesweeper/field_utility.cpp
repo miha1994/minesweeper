@@ -68,7 +68,7 @@ struct q_point {
 #include <Windows.h>
 
 inline void field_swag_upd (field *fld) {
-	if (fld->swag_time < 2) {
+	if (fld->swag_time < 3) {
 		if (fld->swag_time > 0) {
 			fld->swag_power += (3 - fld->swag_time) * 0.1;
 			fld->swag_power = Min (1, fld->swag_power);

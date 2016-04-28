@@ -140,7 +140,7 @@ void field_cells_upd (char *o, float dt, v2i double_point, v2f actual_mouse_pos)
 				}
 				quad_set_color (q, (c->flags & CELL_Q) ? CLR::Blue : unknown);
 			} else {
-				double prop = length (actual_mouse_pos - !v) / (Min(WWW, HHH)*2 / (1/0.3));
+				double prop = length (actual_mouse_pos - !v) / (Min(WWW, HHH)*2 / (1/0.16));
 				prop = Min (1, prop);
 				prop = 1 - prop * prop;
                 bool tf = 0;
@@ -153,18 +153,22 @@ void field_cells_upd (char *o, float dt, v2i double_point, v2f actual_mouse_pos)
 							td = Max (td, c->open_time);
                         }
                     }
+					if (!tf) {
+						if (swag) {
+							tf = 1;
+							td = swag;
+						}
+					}
                 } else {
                     tf = 1;
 					td = 1;
                 }
-				tf = 1;
-				td = 1;
                 if (!tf) {
                     prop = 0;
                 } else {
 					prop *= td;
 				}
-				prop *= swag;
+				prop *= Max (0.5, swag);
 				loc_unknown = CLR_ADD ((c->flags & CELL_FLAGS_MARK ? CLR (255, 0, 0) : CLR (0, 0, 255)) * prop, unknown * (1-prop));
 				if (length (v2f(double_point - v)) > 1.7 ) {
 					if (fld->game_over && v == fld->fail_choice) {
